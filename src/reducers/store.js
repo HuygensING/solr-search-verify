@@ -12,6 +12,6 @@ const logger = () => next => action => {
 
 let data = combineReducers(reducers);
 
-let store = createStore(data, applyMiddleware(logger, thunkMiddleware));
+let store = createStore(data, applyMiddleware(/*logger,*/ thunkMiddleware));
 
 export default store;
