@@ -1,35 +1,71 @@
 import React from "react";
 import { SolrFacetedSearch } from "solr-faceted-search-react";
 import { setPersonQueryFromDocumentFilters } from "../search-clients/person-search-client";
+import store from "../reducers/store";
 
-
-const WIDTH = 50;
-
+const tabStyle = {
+	marginLeft: "20px",
+	marginBottom: "-1px",
+	display: "inline-block",
+	width: "100px",
+	height: "24px",
+	lineHeight: "24px",
+	textAlign: "center",
+	border: "1px solid #aaa"
+};
 
 class App extends React.Component {
+
 	render() {
-		const { personSearch, documentSearch, personSearchClient, personComponents, documentSearchClient, documentComponents } = this.props;
+		const {
+			activeTab,
+			personSearch,
+			documentSearch,
+			personSearchClient,
+			personComponents,
+			documentSearchClient,
+			documentComponents
+		} = this.props;
 
 		return (
 			<div>
-				<div style={{width: `${WIDTH}%`, float: "left"}}>
-					<SolrFacetedSearch
-						{...personSearch}
-						{...personSearchClient.getHandlers()}
-						bootstrapCss={true}
-						customComponents={personComponents}
-						onSelectDoc={(doc) => console.log(doc)}
-					/>
+				<div className="col-md-12" style={{marginTop: "20px"}}>
+					<a onClick={() => store.dispatch({type: "SET_ACTIVE_TAB", tab: "persons"})}
+						style={{...tabStyle,
+							border: activeTab === "persons" ? "1px solid #666" : tabStyle.border,
+							fontWeight: activeTab === "persons" ? "bold" : "normal"
+						}}>
+							Persons
+					</a>
+					<a onClick={() => store.dispatch({type: "SET_ACTIVE_TAB", tab: "documents"})}
+						style={{...tabStyle,
+							marginLeft: "0",
+							border: activeTab === "documents" ? "1px solid #666" : tabStyle.border,
+							fontWeight: activeTab === "documents" ? "bold" : "normal"
+						}}>
+							Documents
+					</a>
 				</div>
-				<div style={{width: `${WIDTH}%`, float: "left"}}>
-					<SolrFacetedSearch
-						{...documentSearch}
-						{...documentSearchClient.getHandlers()}
-						bootstrapCss={true}
-						customComponents={documentComponents}
-						onPersonQueryChange={setPersonQueryFromDocumentFilters}
-						onSelectDoc={(doc) => console.log(doc)}
-					/>
+				<div>
+					<div style={{display: activeTab === "persons" ? "block" : "none"}}>
+						<SolrFacetedSearch
+							{...personSearch}
+							{...personSearchClient.getHandlers()}
+							bootstrapCss={true}
+							customComponents={personComponents}
+							onSelectDoc={(doc) => console.log(doc)}
+						/>
+					</div>
+					<div style={{display: activeTab === "documents" ? "block" : "none"}}>
+						<SolrFacetedSearch
+							{...documentSearch}
+							{...documentSearchClient.getHandlers()}
+							bootstrapCss={true}
+							customComponents={documentComponents}
+							onPersonQueryChange={setPersonQueryFromDocumentFilters}
+							onSelectDoc={(doc) => console.log(doc)}
+						/>
+					</div>
 				</div>
 			</div>
 		);
@@ -37,6 +73,7 @@ class App extends React.Component {
 }
 
 App.propTypes = {
+	activeTab: React.PropTypes.string,
 	documentComponents: React.PropTypes.object,
 	documentSearch: React.PropTypes.object,
 	documentSearchClient: React.PropTypes.object,
