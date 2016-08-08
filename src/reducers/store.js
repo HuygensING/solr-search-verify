@@ -3,15 +3,9 @@ import thunkMiddleware from "redux-thunk";
 
 import reducers from "./index";
 
-const logger = () => next => action => {
-	if (action.hasOwnProperty("type")) {
-		console.log("[REDUX]", action.type, action);
-	}
-	return next(action);
-};
-
 let data = combineReducers(reducers);
 
-let store = createStore(data, applyMiddleware(/*logger,*/ thunkMiddleware));
+let store = createStore(data, {}, applyMiddleware(thunkMiddleware),
+    window.devToolsExtension ? window.devToolsExtension() : f => f);
 
 export default store;
