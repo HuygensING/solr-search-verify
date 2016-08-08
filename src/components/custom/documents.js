@@ -9,12 +9,9 @@ const documentComponents = {
 		...defaultComponentPack.results,
 		result: (props) => (
 			<li className="list-group-item">
-				<a href={`http://test.repository.huygens.knaw.nl/v2.1/domain/wwdocuments/${props.doc.id}`} target="_blank">
-					<span style={{marginLeft: "20px", color: "#aaa", float: "right"}}>
-						({new Date(props.doc.modified_l).toString()})
-					</span>
-					{props.doc.displayName_s}
-					<span style={{marginLeft: "20px", color: "#666"}}>
+				<a href={`http://test.resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.id}`} style={{display: "flex"}}>
+					<span style={{flexGrow: 1}}>{props.doc.displayName_s}</span>
+					<span style={{color: "#666"}}>
 						{props.doc.date_i}
 					</span>
 				</a>
