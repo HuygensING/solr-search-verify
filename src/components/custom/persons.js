@@ -7,16 +7,17 @@ const personComponents = {
 		...defaultComponentPack.results,
 		result: (props) => (
 			<li className="list-group-item">
-				<a href={`http://test.repository.huygens.knaw.nl/v2.1/domain/wwpersons/${props.doc.id}`} target="_blank">
-					<span style={{marginLeft: "20px", color: "#aaa", float: "right"}}>
-						({new Date(props.doc.modified_l).toString()})
-					</span>
-
-					{props.doc.displayName_s}
-					<span style={{marginLeft: "20px", color: "#666"}}>
-						{props.doc.birthDate_i}
-						&nbsp;-&nbsp;
-						{props.doc.deathDate_i}
+				<a href={`http://test.resources.huygens.knaw.nl/womenwriters/vre/persons/${props.doc.id}`} style={{display: "flex"}}>
+					<span style={{"flexGrow": "1", whiteSpace: "nowrap", paddingRight: "1em"}}>{props.doc.displayName_s}</span>
+					{props.doc.birthDate_i || props.doc.deathDate_i
+						? <span style={{color: "#666", whiteSpace: "nowrap", paddingRight: "1em"}}>
+								{props.doc.birthDate_i || "?"}
+								&mdash;
+								{props.doc.deathDate_i || "?"}
+							</span>
+						: null}
+					<span title={props.doc.relatedLocations_ss ? props.doc.relatedLocations_ss.join(", ") : null} style={{"flexShrink": 1, color: "#aaa", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>
+						{props.doc.relatedLocations_ss ? props.doc.relatedLocations_ss.join(", ") : null}
 					</span>
 				</a>
 			</li>
