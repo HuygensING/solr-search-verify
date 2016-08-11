@@ -21,7 +21,7 @@ function onFilesChanged(event, file) {
 
 browserSync.watch(watchFiles, debounce(onFilesChanged, 300));
 
-var proxyOptions = url.parse("http://10.152.32.34:8983/solr");
+var proxyOptions = url.parse("http://10.152.32.51:8983/solr");
 proxyOptions.route = "/solr";
 
 browserSync.init({

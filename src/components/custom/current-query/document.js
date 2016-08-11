@@ -55,7 +55,7 @@ class CurrentQuery extends React.Component {
 		const searchFields = query.searchFields
 			.filter((searchField) => searchField.value && searchField.value.length > 0);
 
-		const personSearchFields = query.filters
+		const personSearchFields = query.filters || []
 			.filter((searchField) => searchField.field !== "type_s");
 
 		return (
