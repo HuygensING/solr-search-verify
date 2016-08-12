@@ -40,9 +40,9 @@ const searchClient = new SolrClient({
 
 let lastFilters = clone(documentFilters);
 
-const setDocumentFiltersFromDocumentQuery = (documentState) => {
+const setDocumentReceptionsFiltersFromDocumentQuery = (documentState) => {
 	const personFilters = documentState.query.filters
-		.filter((filter) => filter.field.match(/^\{/));
+		.filter((filter) => filter.field.match(/^\{/) || filter.field === "language_ss");
 
 	const filters = documentState.query.searchFields.concat(personFilters)
 		.filter((searchField) => searchField.value && searchField.value.length > 0)
@@ -54,12 +54,12 @@ const setDocumentFiltersFromDocumentQuery = (documentState) => {
 			type: searchField.type,
 			label: searchField.label
 		}));
-	console.log(filters);
+
 	if (!filtersAreEqual(lastFilters, filters)) {
 		lastFilters = clone(filters);
 		searchClient.setFilters(filters.concat(documentFilters));
 	}
 }
 
-export { setDocumentFiltersFromDocumentQuery };
+export { setDocumentReceptionsFiltersFromDocumentQuery };
 export default searchClient;

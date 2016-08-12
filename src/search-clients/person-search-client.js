@@ -49,7 +49,7 @@ const personSearchClient = new SolrClient({
 });
 
 const setPersonQueryFromDocumentFilters = (field, value) =>
-	personSearchClient.setSearchFieldValue(field.replace("{!parent which=type_s:document}person_", ""), value);
+	personSearchClient.setSearchFieldValue(field.replace(/\{.+\}person_/, ""), value);
 
 export { setPersonQueryFromDocumentFilters };
 

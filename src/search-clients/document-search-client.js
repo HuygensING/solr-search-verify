@@ -2,7 +2,7 @@ import { SolrClient } from "solr-faceted-search-react";
 import store from "../reducers/store";
 import clone from "../util/clone";
 import filtersAreEqual from "../util/filters-are-equal";
-import { setDocumentFiltersFromDocumentQuery } from "./document-reception-search-client";
+import { setDocumentReceptionsFiltersFromDocumentQuery } from "./document-reception-search-client";
 
 const documentFilters = [
 	{field: "type_s", value: "document"}
@@ -35,7 +35,7 @@ const documentSearchClient = new SolrClient({
 	facetSort: "count",
 	filters: documentFilters,
 	onChange: (state) => {
-		setDocumentFiltersFromDocumentQuery(state);
+		setDocumentReceptionsFiltersFromDocumentQuery(state);
 		store.dispatch({type: "SET_DOCUMENT_SEARCH_STATE", state: state});
 	}
 });
@@ -47,9 +47,7 @@ const setDocumentFiltersFromPersonQuery = (personState) => {
 	const filters = personState.query.searchFields
 		.filter((searchField) => searchField.value && searchField.value.length > 0)
 		.map((searchField) => ({
-			field: searchField.field === "language_ss" ?
-				searchField.field :
-				`{!parent which=type_s:document}person_${searchField.field}`,
+			field: `{!parent which=type_s:document}person_${searchField.field}`,
 			value: searchField.value,
 			type: searchField.type,
 			label: searchField.label
@@ -61,5 +59,8 @@ const setDocumentFiltersFromPersonQuery = (personState) => {
 	}
 };
 
-export { setDocumentFiltersFromPersonQuery };
+const setDocumentQueryFromDocumentReceptionFilters = (field, value) =>
+	documentSearchClient.setSearchFieldValue(field.replace(/^document_/, ""), value);
+
+export { setDocumentFiltersFromPersonQuery, setDocumentQueryFromDocumentReceptionFilters };
 export default documentSearchClient;

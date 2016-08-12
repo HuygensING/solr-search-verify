@@ -1,6 +1,7 @@
 import React from "react";
 import { SolrFacetedSearch } from "solr-faceted-search-react";
 import { setPersonQueryFromDocumentFilters } from "../search-clients/person-search-client";
+import { setDocumentQueryFromDocumentReceptionFilters } from "../search-clients/document-search-client";
 import store from "../reducers/store";
 
 const tabStyle = {
@@ -83,6 +84,8 @@ class App extends React.Component {
 							{...documentReceptionSearchClient.getHandlers()}
 							customComponents={documentReceptionComponents}
 							bootstrapCss={true}
+							onPersonQueryChange={setPersonQueryFromDocumentFilters}
+							onDocumentQueryChange={setDocumentQueryFromDocumentReceptionFilters}
 							onSelectDoc={(doc) => console.log(doc)}
 						/>
 					</div>

@@ -1,5 +1,5 @@
 import React from "react";
-import DocumentCurrentQuery from "./current-query/document";
+import DocumentReceptionCurrentQuery from "./current-query/document-receptions";
 import {defaultComponentPack} from "solr-faceted-search-react";
 
 
@@ -20,11 +20,11 @@ const documentComponents = {
 				</a>
 			</li>
 		)
-	}/*,
+	},
 	searchFields: {
 		...defaultComponentPack.searchFields,
-		currentQuery: DocumentCurrentQuery
-	}*/
+		currentQuery: DocumentReceptionCurrentQuery
+	}
 };
 
 documentComponents.results.result.propTypes = {

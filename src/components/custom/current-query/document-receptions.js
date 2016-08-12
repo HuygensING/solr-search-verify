@@ -23,12 +23,12 @@ class CurrentQuery extends React.Component {
 
 		switch (searchField.type) {
 			case "list-facet": return searchField.value.map((val, i) => (
-					<span className={cx({"label": bootstrapCss, "label-default": bootstrapCss})} key={i}
-						onClick={() => this.removeListFacetValue(searchField.field, searchField.value, val, changeFunc)}>
+				<span className={cx({"label": bootstrapCss, "label-default": bootstrapCss})} key={i}
+					onClick={() => this.removeListFacetValue(searchField.field, searchField.value, val, changeFunc)}>
 						{val}
-						<a>❌</a>
+					<a>❌</a>
 					</span>
-				));
+			));
 
 			case "range-facet": return (
 				<span className={cx({"label": bootstrapCss, "label-default": bootstrapCss})}
@@ -50,13 +50,15 @@ class CurrentQuery extends React.Component {
 	}
 
 	render() {
-		const { bootstrapCss, query, onPersonQueryChange } = this.props;
+		const { bootstrapCss, query, onPersonQueryChange, onDocumentQueryChange } = this.props;
 
-		const searchFields = query.searchFields
-			.filter((searchField) => searchField.value && searchField.value.length > 0);
+		const documentSearchFields = (query.filters || [])
+				.filter((searchField) => searchField.field !== "type_s")
+				.filter((searchField) => searchField.field.match(/^document_/));
 
 		const personSearchFields = (query.filters || [])
-			.filter((searchField) => searchField.field !== "type_s");
+				.filter((searchField) => searchField.field !== "type_s")
+				.filter((searchField) => searchField.field.match(/^\{/));
 
 		return (
 			<div className={cx("current-query", {"panel-body": bootstrapCss})}>
@@ -73,10 +75,10 @@ class CurrentQuery extends React.Component {
 
 					<ul className={cx({"col-md-6": bootstrapCss})}>
 						<li className={cx({"list-group-item": bootstrapCss})}>Document filters</li>
-						{searchFields.map((searchField, i) => (
+						{documentSearchFields.map((searchField, i) => (
 							<li className={cx({"list-group-item": bootstrapCss})} key={i}>
 								<label>{searchField.label}</label>
-								{this.renderFieldValues(searchField)}
+								{this.renderFieldValues(searchField, onDocumentQueryChange)}
 							</li>
 						))}
 
