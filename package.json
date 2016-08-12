@@ -11,7 +11,8 @@
   },
   "scripts": {
     "start": "scripts/server.js",
-    "watch": "scripts/watch.sh"
+    "watch": "scripts/watch.sh",
+    "build": "scripts/build.sh"
   },
   "dependencies": {
     "classnames": "^2.2.5",
