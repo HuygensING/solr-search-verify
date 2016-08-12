@@ -64,7 +64,7 @@ class CurrentQuery extends React.Component {
 			<div className={cx("current-query", {"panel-body": bootstrapCss})}>
 				<div className={cx({"row": bootstrapCss})}>
 					<ul className={cx({"col-md-6": bootstrapCss})}>
-						<li className={cx({"list-group-item": bootstrapCss})}>Person filters</li>
+						<li className={cx({"list-group-item": bootstrapCss})}>Author filters</li>
 						{personSearchFields.map((searchField, i) => (
 							<li className={cx({"list-group-item": bootstrapCss})} key={i}>
 								<label>{searchField.label}</label>
@@ -74,7 +74,7 @@ class CurrentQuery extends React.Component {
 					</ul>
 
 					<ul className={cx({"col-md-6": bootstrapCss})}>
-						<li className={cx({"list-group-item": bootstrapCss})}>Document filters</li>
+						<li className={cx({"list-group-item": bootstrapCss})}>Publication filters</li>
 						{documentSearchFields.map((searchField, i) => (
 							<li className={cx({"list-group-item": bootstrapCss})} key={i}>
 								<label>{searchField.label}</label>
