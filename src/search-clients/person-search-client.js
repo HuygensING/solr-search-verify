@@ -35,7 +35,7 @@ const personFilters = [
 ];
 
 const personSearchClient = new SolrClient({
-	url: "/solr/wwpersons/select",
+	url: "/repositorysolr/wwpersons",
 	searchFields: personFields,
 	sortFields: personSortFields,
 	rows: 25,

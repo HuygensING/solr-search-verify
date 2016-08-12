@@ -27,7 +27,7 @@ const documentFields = [
 
 
 const searchClient = new SolrClient({
-	url: "/solr/wwdocumentreceptions/select",
+	url: "/repositorysolr/wwdocumentreceptions",
 	searchFields: documentFields,
 	sortFields: documentSortFields,
 	rows: 25,
