@@ -9,7 +9,7 @@ const documentComponents = {
 		...defaultComponentPack.results,
 		result: (props) => (
 			<li className="list-group-item">
-				<a href={`http://test.resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.id}`} style={{display: "flex"}}>
+				<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.id}`} style={{display: "flex"}}>
 					<span style={{flexGrow: 1}}>{props.doc.displayName_s}</span>
 					<span style={{color: "#666"}}>
 						{props.doc.date_i}
