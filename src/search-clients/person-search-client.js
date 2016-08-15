@@ -26,7 +26,7 @@ const personFields = [
 ];
 
 const personSortFields = [
-	{label: "Name", field: "displayName_s"},
+	{label: "Name", field: "nameSort_s"},
 	{label: "Date of birth", field: "birthDate_i"},
 	{label: "Modified", field: "modified_l"},
 	{label: "Date of death", field: "deathDate_i"}

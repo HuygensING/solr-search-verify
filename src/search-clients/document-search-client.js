@@ -9,6 +9,7 @@ const documentFilters = [
 ];
 
 const documentSortFields = [
+	{label: "Author", field: "authorNameSort_s"},
 	{label: "Title", field: "displayName_s"},
 	{label: "Date", field: "date_i"},
 	{label: "Modified", field: "modified_l"}
