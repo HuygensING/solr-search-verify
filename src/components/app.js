@@ -39,7 +39,7 @@ class App extends React.Component {
 							border: activeTab === "persons" ? "1px solid #666" : tabStyle.border,
 							fontWeight: activeTab === "persons" ? "bold" : "normal"
 						}}>
-							Persons
+							Authors
 					</a>
 					<a onClick={() => store.dispatch({type: "SET_ACTIVE_TAB", tab: "documents"})}
 						style={{...tabStyle,
@@ -47,7 +47,7 @@ class App extends React.Component {
 							border: activeTab === "documents" ? "1px solid #666" : tabStyle.border,
 							fontWeight: activeTab === "documents" ? "bold" : "normal"
 						}}>
-							Documents
+							Publications
 					</a>
 					<a onClick={() => store.dispatch({type: "SET_ACTIVE_TAB", tab: "document-receptions"})}
 						style={{...tabStyle,
@@ -55,7 +55,7 @@ class App extends React.Component {
 							border: activeTab === "document-receptions" ? "1px solid #666" : tabStyle.border,
 							fontWeight: activeTab === "document-receptions" ? "bold" : "normal"
 						}}>
-							Document receptions
+							Publication receptions
 					</a>
 				</div>
 				<div>
