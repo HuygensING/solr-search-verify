@@ -32,8 +32,12 @@ store.subscribe(() => ReactDOM.render(
 
 
 document.addEventListener("DOMContentLoaded", () => {
+	// Response will trigger all searches
 	personSearchClient.initialize();
+
+	/*
 	documentSearchClient.initialize();
 	documentReceptionSearchClient.initialize();
 	personReceptionSearchClient.initialize();
+*/
 });

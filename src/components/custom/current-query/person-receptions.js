@@ -24,7 +24,7 @@ class CurrentQuery extends React.Component {
 		switch (searchField.type) {
 			case "list-facet": return searchField.value.map((val, i) => (
 				<span className={cx({"label": bootstrapCss, "label-default": bootstrapCss})} key={i}
-					onClick={() => this.removeListFacetValue(searchField.field, searchField.value, val, changeFunc)}>
+						onClick={() => this.removeListFacetValue(searchField.field, searchField.value, val, changeFunc)}>
 						{val}
 					<a>❌</a>
 					</span>
@@ -32,7 +32,7 @@ class CurrentQuery extends React.Component {
 
 			case "range-facet": return (
 				<span className={cx({"label": bootstrapCss, "label-default": bootstrapCss})}
-					onClick={() => this.removeRangeFacetValue(searchField.field, changeFunc)}>
+						onClick={() => this.removeRangeFacetValue(searchField.field, changeFunc)}>
 					{searchField.value[0]} - {searchField.value[1]}
 					<a>❌</a>
 				</span>
@@ -40,7 +40,7 @@ class CurrentQuery extends React.Component {
 
 			case "text": return (
 				<span className={cx({"label": bootstrapCss, "label-default": bootstrapCss})}
-					onClick={() => this.removeTextValue(searchField.field, changeFunc)}>
+						onClick={() => this.removeTextValue(searchField.field, changeFunc)}>
 					{searchField.value}
 					<a>❌</a>
 				</span>
@@ -50,23 +50,18 @@ class CurrentQuery extends React.Component {
 	}
 
 	render() {
-		const { bootstrapCss, query, onPersonQueryChange, onDocumentQueryChange } = this.props;
-
-		const documentSearchFields = (query.filters || [])
-				.filter((searchField) => searchField.field !== "type_s")
-				.filter((searchField) => searchField.field.match(/^document_/));
-
-		const personSearchFields = (query.filters || [])
-				.filter((searchField) => searchField.field !== "type_s")
-				.filter((searchField) => searchField.field.match(/^\{/));
+		const { bootstrapCss, query, onPersonQueryChange } = this.props;
 
 		const searchFields = query.searchFields
 			.filter((searchField) => searchField.value && searchField.value.length > 0);
 
+		const personSearchFields = (query.filters || [])
+			.filter((searchField) => searchField.field !== "type_s");
+
 		return (
 			<div className={cx("current-query", {"panel-body": bootstrapCss})}>
 				<div className={cx({"row": bootstrapCss})}>
-					<ul className={cx({"col-md-4": bootstrapCss})}>
+					<ul className={cx({"col-md-6": bootstrapCss})}>
 						<li className={cx({"list-group-item": bootstrapCss})}>Author filters</li>
 						{personSearchFields.map((searchField, i) => (
 							<li className={cx({"list-group-item": bootstrapCss})} key={i}>
@@ -76,18 +71,7 @@ class CurrentQuery extends React.Component {
 						))}
 					</ul>
 
-					<ul className={cx({"col-md-4": bootstrapCss})}>
-						<li className={cx({"list-group-item": bootstrapCss})}>Publication filters</li>
-						{documentSearchFields.map((searchField, i) => (
-							<li className={cx({"list-group-item": bootstrapCss})} key={i}>
-								<label>{searchField.label}</label>
-								{this.renderFieldValues(searchField, onDocumentQueryChange)}
-							</li>
-						))}
-
-					</ul>
-
-					<ul className={cx({"col-md-4": bootstrapCss})}>
+					<ul className={cx({"col-md-6": bootstrapCss})}>
 						<li className={cx({"list-group-item": bootstrapCss})}>Reception filters</li>
 						{searchFields.map((searchField, i) => (
 							<li className={cx({"list-group-item": bootstrapCss})} key={i}>

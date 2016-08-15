@@ -1,4 +1,5 @@
 import React from "react";
+import PersonReceptionCurrentQuery from "./current-query/person-receptions";
 import {defaultComponentPack} from "solr-faceted-search-react";
 
 
@@ -45,8 +46,8 @@ const documentComponents = {
 		}
 	},
 	searchFields: {
-		...defaultComponentPack.searchFields/*,
-		currentQuery: PersonReceptionCurrentQuery*/
+		...defaultComponentPack.searchFields,
+		currentQuery: PersonReceptionCurrentQuery
 	}
 };
 

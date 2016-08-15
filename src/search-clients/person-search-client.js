@@ -1,5 +1,7 @@
 import { SolrClient } from "solr-faceted-search-react";
 import { setDocumentFiltersFromPersonQuery } from "./document-search-client";
+import { setPersonReceptionsFiltersFromPersonQuery } from "./person-reception-search-client";
+
 import store from "../reducers/store";
 
 const personFields = [
@@ -44,6 +46,7 @@ const personSearchClient = new SolrClient({
 	filters: personFilters,
 	onChange: (state) => {
 		setDocumentFiltersFromPersonQuery(state);
+		setPersonReceptionsFiltersFromPersonQuery(state);
 		store.dispatch({type: "SET_PERSON_SEARCH_STATE", state: state});
 	}
 });
@@ -51,6 +54,10 @@ const personSearchClient = new SolrClient({
 const setPersonQueryFromDocumentFilters = (field, value) =>
 	personSearchClient.setSearchFieldValue(field.replace(/\{.+\}person_/, ""), value);
 
-export { setPersonQueryFromDocumentFilters };
+const setPersonQueryFromPersonReceptionFilters = (field, value) =>
+	personSearchClient.setSearchFieldValue(field.replace(/^person_/, ""), value);
+
+
+export { setPersonQueryFromDocumentFilters, setPersonQueryFromPersonReceptionFilters };
 
 export default personSearchClient;

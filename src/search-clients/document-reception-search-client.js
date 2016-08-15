@@ -43,7 +43,7 @@ let lastFilters = clone(documentFilters);
 
 const setDocumentReceptionsFiltersFromDocumentQuery = (documentState) => {
 	const personFilters = documentState.query.filters
-		.filter((filter) => filter.field.match(/^\{/) || filter.field === "language_ss");
+		.filter((filter) => filter.field.match(/^\{/));
 
 	const filters = documentState.query.searchFields.concat(personFilters)
 		.filter((searchField) => searchField.value && searchField.value.length > 0)

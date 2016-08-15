@@ -1,6 +1,9 @@
 import React from "react";
 import { SolrFacetedSearch } from "solr-faceted-search-react";
-import { setPersonQueryFromDocumentFilters } from "../search-clients/person-search-client";
+import {
+	setPersonQueryFromDocumentFilters,
+	setPersonQueryFromPersonReceptionFilters
+} from "../search-clients/person-search-client";
 import { setDocumentQueryFromDocumentReceptionFilters } from "../search-clients/document-search-client";
 import store from "../reducers/store";
 
@@ -94,6 +97,7 @@ class App extends React.Component {
 							{...personReceptionSearch}
 							{...personReceptionSearchClient.getHandlers()}
 							customComponents={personReceptionComponents}
+							onPersonQueryChange={setPersonQueryFromPersonReceptionFilters}
 							bootstrapCss={true}
 							onSelectDoc={(doc) => console.log(doc)}
 						/>
