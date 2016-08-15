@@ -6,19 +6,43 @@ const documentComponents = {
 	...defaultComponentPack,
 	results: {
 		...defaultComponentPack.results,
-		result: (props) => (
-			<li className="list-group-item">
-				<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.reception_id_s}`} style={{width: "33%", display: "inline-block"}}>
-					{props.doc.displayName_s}
-				</a>
-				<span style={{width: "33%", display: "inline-block"}}>
-					{props.doc.relationType_s}
-				</span>
-				<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/persons/${props.doc.person_id_s}`} style={{width: "33%", display: "inline-block"}}>
-					{props.doc.person_displayName_s}
-				</a>
-			</li>
-		)
+		result: (props) => {
+			const authorName = props.doc.authorName_ss ?
+				(<span style={{color: "#888"}}>{props.doc.authorName_ss.join("; ")}<br /></span>) :
+				null;
+			return (
+				<li className="list-group-item">
+					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
+						{authorName}
+						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.reception_id_s}`}>
+							{props.doc.displayName_s}
+						</a>
+						<br />
+						<span style={{color: "#888"}}>
+							<span style={{float: "right"}}>{props.doc.date_i}</span>
+							{(props.doc.publishLocation_ss || []).join("; ")}
+						</span>
+					</div>
+					<div style={{width: "16%", display: "inline-block", verticalAlign: "top", color: "#666"}}>
+						{props.doc.relationType_s}
+					</div>
+					<div style={{width: "42%", display: "inline-block", verticalAlign: "top"}}>
+						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/persons/${props.doc.person_id_s}`}>
+							{props.doc.person_displayName_s}
+						</a>
+						<br />
+						<span style={{color: "#666"}}>
+							{props.doc.person_birthDate_i} - {props.doc.person_deathDate_i}
+						</span>
+						<br />
+						<span style={{color: "#888"}}>
+							<span style={{float: "right"}}>{(props.doc.person_relatedLocations_ss || []).join("; ")}</span>
+							{props.doc.person_gender_s}
+						</span>
+					</div>
+				</li>
+			);
+		}
 	},
 	searchFields: {
 		...defaultComponentPack.searchFields/*,

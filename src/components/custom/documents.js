@@ -7,16 +7,28 @@ const documentComponents = {
 	...defaultComponentPack,
 	results: {
 		...defaultComponentPack.results,
-		result: (props) => (
-			<li className="list-group-item">
-				<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.id}`} style={{display: "flex"}}>
-					<span style={{flexGrow: 1}}>{props.doc.displayName_s}</span>
-					<span style={{color: "#666"}}>
+		result: (props) => {
+			const authorName = props.doc.authorName_ss ?
+				(<span style={{color: "#888"}}>{props.doc.authorName_ss.join("; ")}<br /></span>) :
+				null;
+
+			return (
+				<li className="list-group-item">
+					<span style={{display: "flex"}}>
+					<span style={{flexGrow: 1}}>
+						{authorName}
+						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.id}`} >
+							{props.doc.displayName_s}
+						</a>
+					</span>
+						<span style={{"flexShrink": 1, color: "#888", whiteSpace: "nowrap"}}>
+						{(props.doc.publishLocation_ss || []).join()}{" "}
 						{props.doc.date_i}
 					</span>
-				</a>
-			</li>
-		)
+					</span>
+				</li>
+			);
+		}
 	},
 	searchFields: {
 		...defaultComponentPack.searchFields,
