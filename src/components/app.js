@@ -22,13 +22,16 @@ class App extends React.Component {
 			activeTab,
 			personSearch,
 			documentSearch,
+			documentSearchClient,
+			documentComponents,
 			personSearchClient,
 			personComponents,
 			documentReceptionSearch,
 			documentReceptionSearchClient,
 			documentReceptionComponents,
-			documentSearchClient,
-			documentComponents
+			personReceptionSearch,
+			personReceptionSearchClient,
+			personReceptionComponents
 		} = this.props;
 
 		return (
@@ -48,6 +51,14 @@ class App extends React.Component {
 							fontWeight: activeTab === "documents" ? "bold" : "normal"
 						}}>
 							Publications
+					</a>
+					<a onClick={() => store.dispatch({type: "SET_ACTIVE_TAB", tab: "person-receptions"})}
+						style={{...tabStyle,
+							marginLeft: "0",
+							border: activeTab === "person-receptions" ? "1px solid #666" : tabStyle.border,
+							fontWeight: activeTab === "person-receptions" ? "bold" : "normal"
+						}}>
+							Author receptions
 					</a>
 					<a onClick={() => store.dispatch({type: "SET_ACTIVE_TAB", tab: "document-receptions"})}
 						style={{...tabStyle,
@@ -75,6 +86,15 @@ class App extends React.Component {
 							bootstrapCss={true}
 							customComponents={documentComponents}
 							onPersonQueryChange={setPersonQueryFromDocumentFilters}
+							onSelectDoc={(doc) => console.log(doc)}
+						/>
+					</div>
+					<div style={{display: activeTab === "person-receptions" ? "block" : "none"}}>
+						<SolrFacetedSearch
+							{...personReceptionSearch}
+							{...personReceptionSearchClient.getHandlers()}
+							customComponents={personReceptionComponents}
+							bootstrapCss={true}
 							onSelectDoc={(doc) => console.log(doc)}
 						/>
 					</div>

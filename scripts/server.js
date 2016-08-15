@@ -28,6 +28,9 @@ wwdocumentsOptions .route = "/repositorysolr/wwdocuments";
 var wwpersonsOptions = url.parse(localSolr + "/wwpersons/select");
 wwpersonsOptions.route = "/repositorysolr/wwpersons";
 
+var wwpersonreceptionsOptions = url.parse(localSolr + "/wwpersonreceptions/select");
+wwpersonreceptionsOptions.route = "/repositorysolr/wwpersonreceptions";
+
 var wwdocumentreceptionsOptions = url.parse(localSolr + "/wwdocumentreceptions/select");
 wwdocumentreceptionsOptions.route = "/repositorysolr/wwdocumentreceptions";
 
@@ -38,6 +41,7 @@ browserSync.init({
 			proxy(wwdocumentsOptions),
 			proxy(wwpersonsOptions),
 			proxy(wwdocumentreceptionsOptions),
+			proxy(wwpersonreceptionsOptions),
 			modRewrite([
 				"^/css/(.*)$ /css/$1 [L]",
 				"^/js/(.*)$ /js/$1 [L]",
