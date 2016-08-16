@@ -43,9 +43,11 @@ browserSync.init({
 			proxy(wwdocumentreceptionsOptions),
 			proxy(wwpersonreceptionsOptions),
 			modRewrite([
-				"^/css/(.*)$ /css/$1 [L]",
-				"^/js/(.*)$ /js/$1 [L]",
-				"^[^\\.]*$ /index.html [L]"
+				"^/womenwriters/vre/css/(.*)$ /css/$1 [L]",
+				"^/womenwriters/vre/js/(.*).js$ /js/$1.js [L]",
+				"^/womenwriters/vre/images/(.*)$ /images/$1 [L]",
+				"^/womenwriters/vre/fonts/(.*)$ /fonts/$1 [L]",
+				"^/womenwriters/vre/?.*$ /index.html [L]"
 			])
 		]
 	}
