@@ -1,4 +1,4 @@
 export default function actionsMaker(navigateTo, dispatch) {
-	const actions = {};
+	const actions = { };
 	return actions;
 }

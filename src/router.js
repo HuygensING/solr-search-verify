@@ -2,7 +2,7 @@ import React from "react";
 import store from "./reducers/store";
 import { Router, Route, browserHistory } from "react-router";
 import { Provider, connect } from "react-redux";
-import App from "./components/app1";
+import App from "./components/app";
 import actions from "./actions";
 import AuthorSearch from "./components/search/authors";
 import PublicationSearch from "./components/search/publications";
@@ -18,6 +18,7 @@ const urls = {
 };
 
 export { urls };
+
 export function navigateTo(key, args) {
 	browserHistory.push(urls[key].apply(null, args));
 }
