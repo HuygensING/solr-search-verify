@@ -17,6 +17,7 @@ const urls = {
 	publicationReceptionSearch: () => "/womenwriters/vre/receptions/publications"
 };
 
+export { urls };
 export function navigateTo(key, args) {
 	browserHistory.push(urls[key].apply(null, args));
 }
