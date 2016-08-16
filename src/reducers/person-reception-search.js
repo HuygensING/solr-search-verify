@@ -13,7 +13,7 @@ const initialState = {
 export default function(state=initialState, action) {
 	switch (action.type) {
 		case "SET_PERSON_RECEPTION_SEARCH_STATE":
-			return action.state;
+			return {...action.state};
 	}
 	return state;
 }
