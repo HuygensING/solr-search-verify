@@ -7,6 +7,11 @@ import { setPersonQueryFromPersonReceptionFilters } from "../../search-clients/p
 
 class AuthorReceptionSearch extends React.Component {
 
+	constructor(props) {
+		super(props);
+		searchClient.onChange = props.onAuthorReceptionSearchChange;
+	}
+
 	render() {
 		const { personReceptionSearch } = this.props;
 		return (

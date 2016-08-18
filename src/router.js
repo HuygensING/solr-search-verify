@@ -17,9 +17,8 @@ const grabQuery = (search) => ({
 const seralizeSearch = () => {
 	const { personSearch, documentSearch, personReceptionSearch, documentReceptionSearch } = store.getState();
 
-	console.log(
-		grabQuery(personSearch)
-	);
+	grabQuery(personSearch)
+
 	return "test";
 };
 

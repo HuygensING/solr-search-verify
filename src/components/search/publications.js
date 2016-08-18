@@ -6,6 +6,11 @@ import { setPersonQueryFromDocumentFilters } from "../../search-clients/person-s
 
 class PublicationSearch extends React.Component {
 
+	constructor(props) {
+		super(props);
+		searchClient.onChange = props.onPublicationSearchChange;
+	}
+
 	render() {
 		const { documentSearch } = this.props;
 		return (

@@ -8,6 +8,7 @@ class AuthorSearch extends React.Component {
 
 	constructor(props) {
 		super(props);
+		searchClient.onChange = props.onAuthorSearchChange;
 	}
 
 	shouldComponentUpdate(nextProps) {
