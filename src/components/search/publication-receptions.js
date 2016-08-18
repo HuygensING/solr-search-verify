@@ -9,6 +9,11 @@ import { setDocumentQueryFromDocumentReceptionFilters } from "../../search-clien
 
 class PublicationReceptionSearch extends React.Component {
 
+	constructor(props) {
+		super(props);
+		searchClient.onChange = props.onPublicationReceptionSearchChange;
+	}
+
 	render() {
 		const { documentReceptionSearch } = this.props;
 		return (

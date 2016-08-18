@@ -1,5 +1,5 @@
 {
-  "name": "excel-import-mockup",
+  "name": "women-writers",
   "version": "0.0.0",
   "author": {
     "name": "René van der Ark",
@@ -22,7 +22,7 @@
     "react-router": "^2.6.1",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "solr-faceted-search-react": "^0.4.3"
+    "solr-faceted-search-react": "^0.5.1"
   },
   "devDependencies": {
     "babel": "^5.8.23",
