@@ -8,11 +8,11 @@ class App extends React.Component {
 
 	render() {
 		const { location: { pathname } } = this.props;
-		const authorsIsActive = pathname === urls.authorSearch();
-		const publicationsIsActive = pathname === urls.publicationSearch();
+		const authorsIsActive = pathname === urls.authorSearch(true);
+		const publicationsIsActive = pathname === urls.publicationSearch(true);
 		const receptionsIsActive = pathname.match(/\/receptions\//);
-		const authorReceptionsIsActive = pathname === urls.authorReceptionSearch();
-		const publicationReceptionsIsActive = pathname === urls.publicationReceptionSearch();
+		const authorReceptionsIsActive = pathname === urls.authorReceptionSearch(true);
+		const publicationReceptionsIsActive = pathname === urls.publicationReceptionSearch(true);
 
 		const receptionToggle = receptionsIsActive ? (
 			<div className="btn-group">

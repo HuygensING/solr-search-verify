@@ -9,12 +9,41 @@ import PublicationSearch from "./components/search/publications";
 import AuthorReceptionSearch from "./components/search/author-receptions";
 import PublicationReceptionSearch from "./components/search/publication-receptions";
 
+const grabQuery = (search) => ({
+	searchFields: search.query.searchFields,
+	sortFields: search.query.sortFields
+});
+
+const seralizeSearch = () => {
+	const { personSearch, documentSearch, personReceptionSearch, documentReceptionSearch } = store.getState();
+
+	console.log(
+		grabQuery(personSearch)
+	);
+	return "test";
+};
+
+
 const urls = {
-	root: () => "/womenwriters/vre",
-	authorSearch: () => "/womenwriters/vre/persons",
-	publicationSearch: () => "/womenwriters/vre/documents",
-	authorReceptionSearch: () => "/womenwriters/vre/receptions/authors",
-	publicationReceptionSearch: () => "/womenwriters/vre/receptions/publications"
+	root: (useBase = false) => useBase ?
+		"/womenwriters/vre" :
+		`/womenwriters/vre?q=${seralizeSearch()}`,
+
+	authorSearch: (useBase = false) => useBase ?
+		"/womenwriters/vre/persons" :
+		`/womenwriters/vre/persons?q=${seralizeSearch()}`,
+
+	publicationSearch: (useBase = false) => useBase ?
+		"/womenwriters/vre/documents" :
+		`/womenwriters/vre/documents?q=${seralizeSearch()}`,
+
+	authorReceptionSearch: (useBase = false) => useBase ?
+		"/womenwriters/vre/receptions/authors" :
+		`/womenwriters/vre/receptions/authors?q=${seralizeSearch()}`,
+
+	publicationReceptionSearch: (useBase = false) => useBase ?
+		"/womenwriters/vre/receptions/publications" :
+		`/womenwriters/vre/receptions/publications?q=${seralizeSearch()}`
 };
 
 export { urls };
@@ -28,11 +57,11 @@ const makeContainerComponent = connect(state => state, dispatch => actions(navig
 const router = (
 	<Provider store={store}>
 		<Router history={browserHistory}>
-			<Route path={urls.root()} component={makeContainerComponent(App)}>
-				<Route path={urls.authorSearch()} component={makeContainerComponent(AuthorSearch)} />
-				<Route path={urls.publicationSearch()} component={makeContainerComponent(PublicationSearch)} />
-				<Route path={urls.authorReceptionSearch()} component={makeContainerComponent(AuthorReceptionSearch)} />
-				<Route path={urls.publicationReceptionSearch()} component={makeContainerComponent(PublicationReceptionSearch)} />
+			<Route path={urls.root(true)} component={makeContainerComponent(App)}>
+				<Route path={urls.authorSearch(true)} component={makeContainerComponent(AuthorSearch)} />
+				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
+				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
+				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
 			</Route>
 		</Router>
 	</Provider>
