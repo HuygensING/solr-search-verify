@@ -2,6 +2,7 @@ import { setDocumentFiltersFromPersonQuery } from "./search-clients/document-sea
 import { setDocumentReceptionsFiltersFromDocumentQuery } from "./search-clients/document-reception-search-client";
 import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/person-reception-search-client";
 
+
 export default function actionsMaker(navigateTo, dispatch) {
 	const actions = {
 		onAuthorSearchChange: (state) => {
@@ -16,11 +17,11 @@ export default function actionsMaker(navigateTo, dispatch) {
 		},
 
 		onAuthorReceptionSearchChange: (state) => {
-			dispatch({type: "SET_PERSON_RECEPTION_SEARCH_STATE", state: state})
+			dispatch({type: "SET_PERSON_RECEPTION_SEARCH_STATE", state: state});
 		},
 
 		onPublicationReceptionSearchChange: (state) => {
-			dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state})
+			dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state});
 		}
 	};
 	return actions;

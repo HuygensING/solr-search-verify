@@ -10,48 +10,58 @@ import AuthorReceptionSearch from "./components/search/author-receptions";
 import PublicationReceptionSearch from "./components/search/publication-receptions";
 
 const grabQuery = (search) => ({
-	searchFields: search.query.searchFields,
-	sortFields: search.query.sortFields
+	searchFields: search.query.searchFields.filter((sf) => sf.value && sf.value.length),
+	sortFields: search.query.sortFields.filter((sf) => sf.value && sf.value.length)
 });
 
-const seralizeSearch = () => {
+function seralizeSearch() {
 	const { personSearch, documentSearch, personReceptionSearch, documentReceptionSearch } = store.getState();
 
-	grabQuery(personSearch)
-
-	return "test";
-};
+	return encodeURIComponent(JSON.stringify({
+		authors: grabQuery(personSearch),
+		publications: grabQuery(documentSearch),
+		authorReceptions: grabQuery(personReceptionSearch),
+		publicationReceptions: grabQuery(documentReceptionSearch)
+	}));
+}
 
 
 const urls = {
 	root: (useBase = false) => useBase ?
 		"/womenwriters/vre" :
-		`/womenwriters/vre?q=${seralizeSearch()}`,
+		`/womenwriters/vre#q=${seralizeSearch()}`,
 
 	authorSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/persons" :
-		`/womenwriters/vre/persons?q=${seralizeSearch()}`,
+		`/womenwriters/vre/persons#q=${seralizeSearch()}`,
 
 	publicationSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/documents" :
-		`/womenwriters/vre/documents?q=${seralizeSearch()}`,
+		`/womenwriters/vre/documents#q=${seralizeSearch()}`,
 
 	authorReceptionSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/receptions/authors" :
-		`/womenwriters/vre/receptions/authors?q=${seralizeSearch()}`,
+		`/womenwriters/vre/receptions/authors#q=${seralizeSearch()}`,
 
 	publicationReceptionSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/receptions/publications" :
-		`/womenwriters/vre/receptions/publications?q=${seralizeSearch()}`
+		`/womenwriters/vre/receptions/publications#q=${seralizeSearch()}`
 };
+
+store.subscribe(() => {
+	const serialized = `${location.pathname}?#q=${seralizeSearch()}`;
+	if (location.pathname + "#" + location.hash !== serialized) {
+		browserHistory.replace(`${location.pathname}#q=${seralizeSearch()}`);
+	}
+});
 
 export { urls };
 
-export function navigateTo(key, args) {
+function navigateTo(key, args) {
 	browserHistory.push(urls[key].apply(null, args));
 }
 
-const makeContainerComponent = connect(state => state, dispatch => actions(navigateTo, dispatch));
+const makeContainerComponent = connect((state) => state, (dispatch) => actions(navigateTo, dispatch));
 
 const router = (
 	<Provider store={store}>
