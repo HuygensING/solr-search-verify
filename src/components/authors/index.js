@@ -12,8 +12,7 @@ class AuthorIndex extends React.Component {
 
 	render() {
 		const {entity, vre, onSelectAuthor} = this.props;
-		console.log(vre);
-		console.log(entity);
+
 		if (!entity.data) { return null; }
 
 		return (

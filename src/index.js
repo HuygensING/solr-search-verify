@@ -4,10 +4,11 @@ import personReceptionSearchClient from "./search-clients/person-reception-searc
 import documentReceptionSearchClient from "./search-clients/document-reception-search-client";
 import { setVre } from "./actions/vre";
 import store from "./reducers/store";
-
-
 import ReactDOM from "react-dom";
 import router from "./router";
+import { serializeSearch } from "./router";
+import { browserHistory } from "react-router";
+
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -26,8 +27,16 @@ document.addEventListener("DOMContentLoaded", () => {
 						console.log(e);
 					}
 				}
+				store.subscribe(() => {
+					const serialized = `${location.pathname}?#q=${serializeSearch()}`;
+					if (location.pathname + "#" + location.hash !== serialized) {
+						browserHistory.replace(`${location.pathname}#q=${serializeSearch()}`);
+					}
+				});
 				personSearchClient.initialize();
 			});
+
+
 			unsubscribe();
 		}
 	});

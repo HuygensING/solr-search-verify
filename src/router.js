@@ -15,7 +15,7 @@ const grabQuery = (search) => ({
 	sortFields: search.query.sortFields.filter((sf) => sf.value && sf.value.length)
 });
 
-function seralizeSearch() {
+export function serializeSearch() {
 	const { personSearch, documentSearch, personReceptionSearch, documentReceptionSearch } = store.getState();
 
 	return encodeURIComponent(JSON.stringify({
@@ -30,35 +30,30 @@ function seralizeSearch() {
 const urls = {
 	root: (useBase = false) => useBase ?
 		"/womenwriters/vre" :
-		`/womenwriters/vre#q=${seralizeSearch()}`,
+		`/womenwriters/vre#q=${serializeSearch()}`,
 
 	authorSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/persons" :
-		`/womenwriters/vre/persons#q=${seralizeSearch()}`,
+		`/womenwriters/vre/persons#q=${serializeSearch()}`,
 
 	publicationSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/documents" :
-		`/womenwriters/vre/documents#q=${seralizeSearch()}`,
+		`/womenwriters/vre/documents#q=${serializeSearch()}`,
 
 	authorReceptionSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/receptions/authors" :
-		`/womenwriters/vre/receptions/authors#q=${seralizeSearch()}`,
+		`/womenwriters/vre/receptions/authors#q=${serializeSearch()}`,
 
 	publicationReceptionSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/receptions/publications" :
-		`/womenwriters/vre/receptions/publications#q=${seralizeSearch()}`,
+		`/womenwriters/vre/receptions/publications#q=${serializeSearch()}`,
 
 	authorIndex: (id = null) => id ?
 		`/womenwriters/vre/persons/${id}`
 		: "/womenwriters/vre/persons/:id"
 };
 
-store.subscribe(() => {
-	const serialized = `${location.pathname}?#q=${seralizeSearch()}`;
-	if (location.pathname + "#" + location.hash !== serialized) {
-		browserHistory.replace(`${location.pathname}#q=${seralizeSearch()}`);
-	}
-});
+
 
 export { urls };
 
