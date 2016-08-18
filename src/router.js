@@ -8,6 +8,7 @@ import AuthorSearch from "./components/search/authors";
 import PublicationSearch from "./components/search/publications";
 import AuthorReceptionSearch from "./components/search/author-receptions";
 import PublicationReceptionSearch from "./components/search/publication-receptions";
+import AuthorIndex from "./components/authors";
 
 const grabQuery = (search) => ({
 	searchFields: search.query.searchFields.filter((sf) => sf.value && sf.value.length),
@@ -45,7 +46,11 @@ const urls = {
 
 	publicationReceptionSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/receptions/publications" :
-		`/womenwriters/vre/receptions/publications#q=${seralizeSearch()}`
+		`/womenwriters/vre/receptions/publications#q=${seralizeSearch()}`,
+
+	authorIndex: (id = null) => id ?
+		`/womenwriters/vre/persons/${id}`
+		: "/womenwriters/vre/persons/:id"
 };
 
 store.subscribe(() => {
@@ -71,6 +76,7 @@ const router = (
 				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
 				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
 				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
+				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)} />
 			</Route>
 		</Router>
 	</Provider>

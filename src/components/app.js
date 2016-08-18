@@ -8,8 +8,9 @@ class App extends React.Component {
 
 	render() {
 		const { location: { pathname } } = this.props;
-		const authorsIsActive = pathname === urls.authorSearch(true);
+		const authorsIsActive = pathname.match(/^\/womenwriters\/vre\/persons/);
 		const publicationsIsActive = pathname === urls.publicationSearch(true);
+
 		const receptionsIsActive = pathname.match(/\/receptions\//);
 		const authorReceptionsIsActive = pathname === urls.authorReceptionSearch(true);
 		const publicationReceptionsIsActive = pathname === urls.publicationReceptionSearch(true);
