@@ -16,8 +16,10 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "hire-login": "https://github.com/HuygensING/hire-login.git#react-0.14",
     "hire-forms-input": "https://github.com/Hire-Forms/hire-forms-input.git#react-0.14",
+    "hire-forms-select": "git+https://github.com/Hire-Forms/hire-forms-select.git#react-0.14",
+    "hire-forms-select-list": "git+https://github.com/Hire-Forms/hire-forms-select-list.git#react-0.14",
+    "hire-login": "https://github.com/HuygensING/hire-login.git#react-0.14",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-redux": "^4.4.5",

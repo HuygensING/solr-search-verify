@@ -2,7 +2,6 @@ import clone from "../util/clone";
 import { crud } from "./crud";
 import saveRelations from "./relation-savers";
 import config from "../config";
-import autocomplete from "./autocomplete";
 
 // Skeleton base data per field definition
 const initialData = {
@@ -40,39 +39,6 @@ const makeSkeleton = function (vre, domain) {
 	}
 };
 
-const fetchEntityList = (domain) => (dispatch, getState) => {
-	dispatch({type: "SET_PAGINATION_START", start: 0});
-	crud.fetchEntityList(domain, 0, getState().quickSearch.rows, (data) => dispatch({type: "RECEIVE_ENTITY_LIST", data: data}));
-};
-
-const paginateLeft = () => (dispatch, getState) => {
-	const newStart = getState().quickSearch.start - getState().quickSearch.rows;
-	dispatch({type: "SET_PAGINATION_START", start: newStart < 0 ? 0 : newStart});
-	crud.fetchEntityList(getState().entity.domain, newStart < 0 ? 0 : newStart, getState().quickSearch.rows, (data) => dispatch({type: "RECEIVE_ENTITY_LIST", data: data}));
-};
-
-const paginateRight = () => (dispatch, getState) => {
-	const newStart = getState().quickSearch.start + getState().quickSearch.rows;
-	dispatch({type: "SET_PAGINATION_START", start: newStart});
-	crud.fetchEntityList(getState().entity.domain, newStart, getState().quickSearch.rows, (data) => dispatch({type: "RECEIVE_ENTITY_LIST", data: data}));
-};
-
-const sendQuickSearch = () => (dispatch, getState) => {
-	const { quickSearch, entity, vre } = getState();
-	if (quickSearch.query.length) {
-		dispatch({type: "SET_PAGINATION_START", start: 0});
-		const callback = (data) => dispatch({type: "RECEIVE_ENTITY_LIST", data: data.map((d) => (
-			{
-				_id: d.key.replace(/.*\//, ""),
-				"@displayName": d.value
-			}
-		))});
-		autocomplete(`domain/${entity.domain}/autocomplete`, quickSearch.query, vre.vreId, callback);
-	} else {
-		dispatch(fetchEntityList(entity.domain));
-	}
-};
-
 // 1) Fetch entity
 // 2) Dispatch RECEIVE_ENTITY for render
 const selectEntity = (domain, entityId, errorMessage = null, successMessage = null, next = () => { }) =>
@@ -101,7 +67,6 @@ const deleteEntity = () => (dispatch, getState) => {
 		() => {
 			dispatch({type: "SUCCESS_MESSAGE", message: `Sucessfully deleted ${getState().entity.domain} with ID ${getState().entity.data._id}`});
 			dispatch(makeNewEntity(getState().entity.domain));
-			dispatch(fetchEntityList(getState().entity.domain));
 		},
 		() => dispatch(selectEntity(getState().entity.domain, getState().entity.data._id, `Failed to delete ${getState().entity.domain} with ID ${getState().entity.data._id}`)));
 };
@@ -123,7 +88,7 @@ const saveEntity = () => (dispatch, getState) => {
 			// 2) Save relations using server response for current relations to diff against relationData
 			dispatch((redispatch) => saveRelations[config.apiVersion](JSON.parse(resp.body), relationData, getState().vre.collections[getState().entity.domain].properties, getState().user.token, getState().vre.vreId, () =>
 				// 3) Refetch entity for render
-				redispatch(selectEntity(getState().entity.domain, getState().entity.data._id, null, `Succesfully saved ${getState().entity.domain} with ID ${getState().entity.data._id}`, () => dispatch(fetchEntityList(getState().entity.domain)))))), () =>
+				redispatch(selectEntity(getState().entity.domain, getState().entity.data._id, null, `Succesfully saved ${getState().entity.domain} with ID ${getState().entity.data._id}`)))), () =>
 					// 2a) Handle error by refetching and passing along an error message
 					dispatch(selectEntity(getState().entity.domain, getState().entity.data._id, `Failed to save ${getState().entity.domain} with ID ${getState().entity.data._id}`)));
 
@@ -135,11 +100,11 @@ const saveEntity = () => (dispatch, getState) => {
 				// 3) Save relations using server response for current relations to diff against relationData
 				saveRelations[config.apiVersion](data, relationData, getState().vre.collections[getState().entity.domain].properties, getState().user.token, getState().vre.vreId, () =>
 					// 4) Refetch entity for render
-					redispatch(selectEntity(getState().entity.domain, data._id, null, `Succesfully saved ${getState().entity.domain}`, () => dispatch(fetchEntityList(getState().entity.domain))))))), () =>
+					redispatch(selectEntity(getState().entity.domain, data._id, null, `Succesfully saved ${getState().entity.domain}`))))), () =>
 						// 2a) Handle error by refetching and passing along an error message
 						dispatch(makeNewEntity(getState().entity.domain, `Failed to save new ${getState().entity.domain}`)));
 	}
 };
 
 
-export { saveEntity, selectEntity, makeNewEntity, deleteEntity, fetchEntityList, paginateRight, paginateLeft, sendQuickSearch };
+export { saveEntity, selectEntity, makeNewEntity, deleteEntity };

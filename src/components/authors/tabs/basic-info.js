@@ -5,7 +5,8 @@ import TextComponent from "../../values/text";
 import Relation from "../../values/relation";
 
 import DatableField from "../../form-fields/datable";
-
+import SelectField from "../../form-fields/select";
+import MultiSelectField from "../../form-fields/multi-select";
 
 // import PersonRelation from "../../../values/relation-person";
 
@@ -19,8 +20,9 @@ class BasicInfo extends React.Component {
 
 		const pid = model["^pid"] ? <a className="link" href={model["^pid"]} target="_blank">{model["^pid"]}</a> : "-";
 
-		const { editable, onChange } = this.props;
+		const { editable, onChange, metadata } = this.props;
 
+		console.log(this.props.metadata);
 
 		return (
 			<ul className="record list-group">
@@ -34,11 +36,21 @@ class BasicInfo extends React.Component {
 				</li>
 				<li className="list-group-item">
 					<label>Person type</label>
-					<StringComponent value={model.types.join(", ")} />
+					{ editable
+						? <MultiSelectField
+							name="types" options={metadata.properties.find((p) => p.name === "types").options}
+							onChange={onChange} entity={this.props.entity}/>
+						: <StringComponent value={model.types.join(", ")}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Gender</label>
-					<StringComponent value={model.gender} />
+					{ editable
+						? <SelectField
+							name="gender" options={metadata.properties.find((p) => p.name === "gender").options}
+							onChange={onChange} entity={this.props.entity} />
+						: <StringComponent value={model.gender} />
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Birth date</label>

@@ -1,7 +1,7 @@
 import { setDocumentFiltersFromPersonQuery } from "./search-clients/document-search-client";
 import { setDocumentReceptionsFiltersFromDocumentQuery } from "./search-clients/document-reception-search-client";
 import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/person-reception-search-client";
-import { selectEntity, makeNewEntity } from "./actions/entity";
+import { selectEntity, makeNewEntity, saveEntity } from "./actions/entity";
 
 const setUser = (response) => {
 	return {
@@ -90,6 +90,11 @@ export default function actionsMaker(navigateTo, dispatch) {
 
 		onChange: (fieldPath, value) => {
 			dispatch({type: "SET_ENTITY_FIELD_VALUE", fieldPath: fieldPath, value: value});
+		},
+
+		onSave: (urlKey, id, tab) => {
+			dispatch(saveEntity());
+			navigateTo(urlKey, [id, tab]);
 		}
 
 	};

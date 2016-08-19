@@ -31,8 +31,9 @@ class AuthorEditTabs extends React.Component {
 					onSelectAuthor={this.props.onSelectAuthor}
 					onSelectPublication={this.props.onSelectPublication}
 					onSelectCollective={user && user.token ? this.props.onSelectCollective : null}
+					metadata={this.props.vre.collections.wwpersons}
 				/>
-				<SaveFooter onCancel={() => this.props.onSelectAuthor(id)} />
+				<SaveFooter onSave={() => this.props.onSave("authorTab", id, componentId)} onCancel={() => this.props.onSelectAuthor(id)} />
 			</div>
 		) : null;
 	}
