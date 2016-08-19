@@ -1,8 +1,10 @@
 import React from "react";
 import BasicInfo from "./tabs/basic-info";
+import PersonalSituation from "./tabs/personal-situation";
 
 const components = {
-	"basic-info": BasicInfo
+	"basic-info": BasicInfo,
+	"personal-situation": PersonalSituation
 };
 
 class AuthorTabs extends React.Component {
