@@ -4,17 +4,24 @@ import StringComponent from "../../values/string";
 import TextComponent from "../../values/text";
 import Relation from "../../values/relation";
 
+import DatableField from "../../form-fields/datable";
+
+
 // import PersonRelation from "../../../values/relation-person";
 
 class BasicInfo extends React.Component {
 	render() {
-		let model = this.props.author;
+		const model = this.props.entity.data;
 
-		let names = (model.names.length) ?
+		const names = (model.names.length) ?
 			model.names.map((name, index) => <li key={index}>{name.components.map((c) => c.value).join(" ")}</li>) :
 			<li>-</li>;
 
-		let pid = model["^pid"] ? <a className="link" href={model["^pid"]} target="_blank">{model["^pid"]}</a> : "-";
+		const pid = model["^pid"] ? <a className="link" href={model["^pid"]} target="_blank">{model["^pid"]}</a> : "-";
+
+		const { editable, onChange } = this.props;
+
+
 		return (
 			<ul className="record list-group">
 				<li className="list-group-item">
@@ -35,7 +42,10 @@ class BasicInfo extends React.Component {
 				</li>
 				<li className="list-group-item">
 					<label>Birth date</label>
-					<StringComponent value={model.birthDate} />
+					{ editable
+						? <DatableField name="birthDate" onChange={onChange} entity={this.props.entity} />
+						: <StringComponent value={model.birthDate}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Birth place</label>
@@ -58,7 +68,7 @@ class BasicInfo extends React.Component {
 {/*					<PersonRelation genderMap={this.props.genderMap} onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />*/}
 					<Relation
 						values={model["@relations"].isRelatedTo}
-						onSelect={this.props.onSelectAuthor}
+						onSelect=""
 					/>
 				</li>
 				<li className="list-group-item">

@@ -87,6 +87,11 @@ export default function actionsMaker(navigateTo, dispatch) {
 		onSelectCollective: (id) => {
 			console.log("onSelectCollective: ", id);
 		},
+
+		onChange: (fieldPath, value) => {
+			dispatch({type: "SET_ENTITY_FIELD_VALUE", fieldPath: fieldPath, value: value});
+		}
+
 	};
 	return actions;
 }

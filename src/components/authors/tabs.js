@@ -25,6 +25,7 @@ class AuthorTabs extends React.Component {
 		if (ChildComponent) {
 			return (<ChildComponent
 				author={this.props.entity.data}
+				entity={this.props.entity}
 				onSelectAuthor={this.props.onSelectAuthor}
 				onSelectPublication={this.props.onSelectPublication}
 				onSelectCollective={user && user.token ? this.props.onSelectCollective : null}
