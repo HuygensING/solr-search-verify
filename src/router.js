@@ -9,6 +9,7 @@ import PublicationSearch from "./components/search/publications";
 import AuthorReceptionSearch from "./components/search/author-receptions";
 import PublicationReceptionSearch from "./components/search/publication-receptions";
 import AuthorIndex from "./components/authors";
+import AuthorTabs from "./components/authors/tabs";
 
 const grabQuery = (search) => ({
 	searchFields: search.query.searchFields.filter((sf) => sf.value && sf.value.length),
@@ -50,7 +51,11 @@ const urls = {
 
 	authorIndex: (id = null) => id ?
 		`/womenwriters/vre/persons/${id}`
-		: "/womenwriters/vre/persons/:id"
+		: "/womenwriters/vre/persons/:id",
+
+	authorTab: (id = null, tab = null) => id && tab ?
+		`/womenwriters/vre/persons/${id}/${tab}`
+		: "/womenwriters/vre/persons/:id/:tab"
 };
 
 
@@ -71,7 +76,9 @@ const router = (
 				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
 				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
 				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
-				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)} />
+				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)}>
+					<Route path={urls.authorTab()} component={makeContainerComponent(AuthorTabs)} />
+				</Route>
 			</Route>
 		</Router>
 	</Provider>
