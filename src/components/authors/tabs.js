@@ -2,11 +2,13 @@ import React from "react";
 import BasicInfo from "./tabs/basic-info";
 import PersonalSituation from "./tabs/personal-situation";
 import ProfessionalSituation from "./tabs/professional-situation";
+import Publications from "./tabs/publications";
 
 const components = {
 	"basic-info": BasicInfo,
 	"personal-situation": PersonalSituation,
-	"professional-situation": ProfessionalSituation
+	"professional-situation": ProfessionalSituation,
+	"publications": Publications
 };
 
 class AuthorTabs extends React.Component {
