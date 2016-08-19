@@ -56,7 +56,10 @@ class BasicInfo extends React.Component {
 				<li className="list-group-item">
 					<label>Related to</label>
 {/*					<PersonRelation genderMap={this.props.genderMap} onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />*/}
-					<Relation values={model["@relations"].isRelatedTo} />
+					<Relation
+						values={model["@relations"].isRelatedTo}
+						onSelect={this.props.onSelectAuthor}
+					/>
 				</li>
 				<li className="list-group-item">
 					<label>Bibliography</label>

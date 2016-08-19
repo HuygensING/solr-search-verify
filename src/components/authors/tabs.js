@@ -18,12 +18,17 @@ class AuthorTabs extends React.Component {
 	render() {
 		if (this.props.children) { return (<div>{this.props.children}</div>); }
 
-		const { params: { id, tab } } = this.props;
+		const { params: { id, tab }, user } = this.props;
 		const componentId = tab || "basic-info";
 		const ChildComponent = components[componentId] || null;
 
 		if (ChildComponent) {
-			return <ChildComponent author={this.props.entity.data} />;
+			return (<ChildComponent
+				author={this.props.entity.data}
+				onSelectAuthor={this.props.onSelectAuthor}
+				onSelectPublication={this.props.onSelectPublication}
+				onSelectCollective={user && user.token ? this.props.onSelectCollective : null}
+			/>);
 		}
 		return (<div>{componentId} for {id || "new"} {}</div>);
 	}

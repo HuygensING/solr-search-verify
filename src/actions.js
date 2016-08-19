@@ -78,7 +78,15 @@ export default function actionsMaker(navigateTo, dispatch) {
 			navigateTo("authorNew");
 		},
 
-		onLoginChange: (response) => dispatch(setUser(response))
+		onLoginChange: (response) => dispatch(setUser(response)),
+
+		onSelectPublication: (id, tab = null) => {
+			console.log("onSelectPublication: ", id);
+		},
+
+		onSelectCollective: (id) => {
+			console.log("onSelectCollective: ", id);
+		},
 	};
 	return actions;
 }

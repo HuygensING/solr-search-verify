@@ -9,7 +9,7 @@ class RelationList extends React.Component {
 					<ul>
 						{this.props.relations.map((relation, i) => (
 							<li className="list-group-item" key={i}>
-								<a>{i + 1}. {relation.displayName}</a>
+								<a onClick={() => this.props.onSelect(relation.id)}>{i + 1}. {relation.displayName}</a>
 							</li>
 						))}
 					</ul>

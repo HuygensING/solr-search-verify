@@ -14,11 +14,6 @@ class Personal extends React.Component {
 					<Relation values={model["@relations"].hasMaritalStatus} />
 				</li>
 				<li className="list-group-item">
-					<label>Sibling of</label>
-{/*					<PersonRelation onNavigate={this.props.onNavigate} values={model["@relations"].isSiblingOf} />*/}
-					<Relation values={model["@relations"].isSiblingOf} />
-				</li>
-				<li className="list-group-item">
 					<label>Children</label>
 					<StringComponent value={model.children} />
 				</li>

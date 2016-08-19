@@ -8,7 +8,11 @@ class Publications extends React.Component {
 
 		return publications.length ? (
 			<ul className="list-group">
-				<RelationList label="Author of" relations={publications} />
+				<RelationList
+					label="Author of"
+					relations={publications}
+					onSelect={this.props.onSelectPublication}
+				/>
 			</ul>
 		) : <div>The list is empty</div>;
 	}

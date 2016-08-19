@@ -17,8 +17,12 @@ class Receptions extends React.Component {
 						.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 					return receptions.length ? (
-						<RelationList key={j} label={authorReceptionDefinitions.overviewLabels[receptionType]}
-									relations={receptions} />
+						<RelationList
+							key={j}
+							label={authorReceptionDefinitions.overviewLabels[receptionType]}
+							relations={receptions}
+							onSelect={this.props.onSelectPublication}
+						/>
 					) : null;
 				})}
 			</ul>

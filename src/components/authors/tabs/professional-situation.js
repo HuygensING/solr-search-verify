@@ -6,18 +6,6 @@ class Public extends React.Component {
 	render() {
 		let model = this.props.author;
 
-/*		let memberships = model["@relations"].isMemberOf ?(
-			<li>
-				<label>Memberships</label>
-				<span><ul className="relation">
-					{model["@relations"].isMemberOf.map((r, i) =>
-						<li key={i} >
-							<Link to={"collectives/" + r.key.replace(/.*\//, "")} onNavigate={this.props.onNavigate} value={r.value} />
-						</li>
-					)}
-				</ul></span>
-			</li>) : <li><label>Memberships</label>-</li>;*/
-
 		return (
 			<ul className="record list-group">
 				<li className="list-group-item">
@@ -33,8 +21,8 @@ class Public extends React.Component {
 					<Relation values={model["@relations"].isCollaboratorOf} />
 				</li>
 				<li className="list-group-item">
-					<label>Membershipts</label>
-					<Relation values={model["@relations"].isMemberOf} />
+					<label>Memberships</label>
+					<Relation values={model["@relations"].isMemberOf} onSelect={this.props.onSelectCollective} />
 				</li>
 			</ul>
 		);

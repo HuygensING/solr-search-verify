@@ -3,7 +3,12 @@ import React from "react";
 class Relation extends React.Component {
 	render() {
 		let values = (this.props.values.length) ?
-			<ul className="relation">{this.props.values.map((v, index) => <li key={index}>{v.displayName || null}</li>)}</ul> :
+			<ul className="relation">{this.props.values.map((v, index) => this.props.onSelect ? (
+				<li key={index}><a onClick={() => this.props.onSelect(v.id)}>{v.displayName}</a></li>
+			)
+				: (
+				<li key={index}>{v.displayName}</li>
+			))}</ul> :
 			"-";
 
 		return (
