@@ -111,7 +111,7 @@
 
 		.overview label + span {
 			display: inline-block;
-			max-width: calc(100% - 200px);
+			width: calc(100% - 200px);
 		}
 
 		.overview label + span ul {
@@ -121,10 +121,17 @@
 		}
 
 		.hire-select {
-			border: 1px solid #aaa
+			border: 1px solid #aaa;
+			width: 226px;
 		}
 		.hire-select .input-container .input {
 			display: inline-block;
+			width: 200px;
+		}
+		.hire-select .hire-options {
+			position: absolute;
+			background-color: white;
+			z-index: 100;
 			width: 200px;
 		}
 		.hire-select .hire-options li {
@@ -134,7 +141,61 @@
 			background-color: #ddd
 		}
 
+		.names-form > ul > li {
+			display: inline-block;
+			width: 247px;
+			border-radius: 4px;
+			margin-right: 12px;
+			border: 1px solid #ccc;
+			margin-bottom: 12px;
+			padding: 10px;
+			float: left;
+			height: 70px;
+		}
 
+		.names-form > ul > li > div:nth-of-type(1) {
+			height: 20px;
+		}
+
+
+		.names-form > ul > li button.hire-remove-form {
+			width: 24px;
+			border-radius: 2px;
+			border: 1px solid #ccc;
+			margin-right: 8px;
+			position: relative;
+			top: -4px;
+		}
+
+		.names-form > ul > li button.hire-remove-form:hover {
+			background-color: #f2dede;
+			border-color: #ebccd1;
+			color: #a94442;
+		}
+		.hire-multi-form > .form-list > .form {
+			margin-top: 20px;
+			border: 1px solid #f0f0f0;
+			border-radius: 4px;
+			padding: 12px;
+		}
+
+		.hire-multi-form > .form-list > .form  > .hire-forms-form {
+			width: calc(100% - 60px);
+			display: inline-block;
+		}
+
+		.hire-multi-form > .form-list > .form > button.hire-remove-form {
+			float: right;
+		}
+
+		.hire-multi-form > .form-list > .form > button.hire-remove-form:hover {
+			background-color: #f2dede;
+			border-color: #ebccd1;
+			color: #a94442;
+		}
+		.hire-forms-autocomplete-list .hire-list-item {
+			width: 350px;
+		}
 	</style>
 </head>
 <body>

@@ -8,6 +8,7 @@ import DatableField from "../../form-fields/datable";
 import SelectField from "../../form-fields/select";
 import MultiSelectField from "../../form-fields/multi-select";
 import RelationField from "../../form-fields/relation";
+import NamesField from "../../form-fields/names";
 
 class BasicInfo extends React.Component {
 	render() {
@@ -27,7 +28,12 @@ class BasicInfo extends React.Component {
 			<ul className="record list-group">
 				<li className="list-group-item">
 					<label>Name variations / spellings</label>
-					<span><ul>{names}</ul></span>
+					{ editable
+						? <NamesField
+							name="names" options={metadata.properties.find((p) => p.name === "names").options}
+							onChange={onChange} entity={this.props.entity}/>
+						: <span><ul>{names}</ul></span>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Pseudonyms</label>
