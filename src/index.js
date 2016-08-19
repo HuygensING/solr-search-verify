@@ -6,9 +6,8 @@ import { setVre } from "./actions/vre";
 import store from "./reducers/store";
 import ReactDOM from "react-dom";
 import router from "./router";
-import { serializeSearch } from "./router";
+import { serializeSearch, urls } from "./router";
 import { browserHistory } from "react-router";
-
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -28,6 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
 					}
 				}
 				store.subscribe(() => {
+					if (location.pathname !== urls.authorSearch(true) &&
+						location.pathname !== urls.publicationSearch(true) &&
+						location.pathname !== urls.authorReceptionSearch(true) &&
+						location.pathname !== urls.publicationReceptionSearch(true)) {
+						return;
+					}
+
 					const serialized = `${location.pathname}?#q=${serializeSearch()}`;
 					if (location.pathname + "#" + location.hash !== serialized) {
 						browserHistory.replace(`${location.pathname}#q=${serializeSearch()}`);

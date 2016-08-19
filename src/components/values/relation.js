@@ -3,7 +3,9 @@ import React from "react";
 class Relation extends React.Component {
 	render() {
 		let values = (this.props.values.length) ?
-			<ul className="relation">{this.props.values.map((v, index) => this.props.onSelect ? (
+			<ul className="relation">{this.props.values
+				.sort((a, b) => a.displayName.localeCompare(b.displayName))
+				.map((v, index) => this.props.onSelect ? (
 				<li key={index}><a onClick={() => this.props.onSelect(v.id)}>{v.displayName}</a></li>
 			)
 				: (

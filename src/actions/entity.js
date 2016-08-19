@@ -43,7 +43,9 @@ const makeSkeleton = function (vre, domain) {
 // 2) Dispatch RECEIVE_ENTITY for render
 const selectEntity = (domain, entityId, errorMessage = null, successMessage = null, next = () => { }) =>
 	(dispatch) => {
+		dispatch({type: "TRANSACTION_PENDING"});
 		crud.fetchEntity(`${config.apiUrl[config.apiVersion]}/domain/${domain}/${entityId}`, (data) => {
+			dispatch({type: "TRANSACTION_COMPLETE"});
 			dispatch({type: "RECEIVE_ENTITY", domain: domain, data: data, errorMessage: errorMessage});
 			if (successMessage !== null) {
 				dispatch({type: "SUCCESS_MESSAGE", message: successMessage});
@@ -81,6 +83,7 @@ const saveEntity = () => (dispatch, getState) => {
 	let relationData = clone(saveData["@relations"]) || {};
 	// Delete the relation data from the saveData as it is not expected by the server
 	delete saveData["@relations"];
+	dispatch({type: "TRANSACTION_PENDING"});
 
 	if (getState().entity.data._id) {
 		// 1) Update the entity with saveData

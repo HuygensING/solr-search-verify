@@ -65,12 +65,14 @@ export default function actionsMaker(navigateTo, dispatch) {
 		},
 
 		onSelectAuthor: (id, tab = null) => {
-			dispatch(selectEntity("wwpersons", id));
-			if (tab) {
-				navigateTo("authorTab", [id, tab]);
-			} else {
-				navigateTo("authorIndex", [id]);
-			}
+			dispatch(makeNewEntity("wwpersons"));
+			dispatch(selectEntity("wwpersons", id, null, null, () => {
+				if (tab) {
+					navigateTo("authorTab", [id, tab]);
+				} else {
+					navigateTo("authorIndex", [id]);
+				}
+			}));
 		},
 
 		onNewAuthor: () => {

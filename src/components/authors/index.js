@@ -19,6 +19,12 @@ class AuthorIndex extends React.Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		const { params: { id }, onSelectAuthor, entity } = nextProps;
+		if (entity.data && entity.data._id && id !== entity.data._id) {
+			onSelectAuthor(id);
+		}
+	}
 
 	render() {
 		const {entity, onSelectAuthor, location: { pathname }, params: { tab }, user} = this.props;
@@ -28,7 +34,7 @@ class AuthorIndex extends React.Component {
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;
 
-		const editing = loggedIn && pathname.match(/\/edit$/);
+		const editing = !entity.transactionPending && loggedIn && pathname.match(/\/edit$/);
 
 		const editButton = loggedIn && id && !editing ?
 			<Link className="btn btn-default" to={urls.authorEdit(id, tab || "basic-info")}>
@@ -67,7 +73,7 @@ class AuthorIndex extends React.Component {
 		) : null;
 
 		return (
-			<div className="author overview">
+			<div className={cx("author", "overview", {"transaction-pending": entity.transactionPending})}>
 				<div className="row m-b-1">
 					<div className="col-md-2">
 						<Link className="btn btn-default" to={urls.authorSearch()}>◂ Results</Link>

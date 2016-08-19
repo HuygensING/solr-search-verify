@@ -22,8 +22,6 @@ class BasicInfo extends React.Component {
 
 		const { editable, onChange, metadata } = this.props;
 
-		console.log(this.props.metadata);
-
 		return (
 			<ul className="record list-group">
 				<li className="list-group-item">
@@ -41,7 +39,7 @@ class BasicInfo extends React.Component {
 						? <RelationField
 							name="hasPseudonym" path={metadata.properties.find((p) => p.name === "hasPseudonym").quicksearch}
 							onChange={onChange} entity={this.props.entity}/>
-						: <Relation values={model["@relations"].hasPseudonym}/>
+						: <Relation values={model["@relations"].hasPseudonym} onSelect={this.props.onSelectAuthor} />
 					}
 				</li>
 				<li className="list-group-item">
@@ -71,15 +69,28 @@ class BasicInfo extends React.Component {
 				</li>
 				<li className="list-group-item">
 					<label>Birth place</label>
-					<Relation values={model["@relations"].hasBirthPlace} />
+					{ editable
+						? <RelationField
+						name="hasBirthPlace" path={metadata.properties.find((p) => p.name === "hasBirthPlace").quicksearch}
+						onChange={onChange} entity={this.props.entity}/>
+						: <Relation values={model["@relations"].hasBirthPlace}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Lived in</label>
-					<Relation values={model["@relations"].hasResidenceLocation} />
+					{ editable
+						? <RelationField
+							name="hasResidenceLocation" path={metadata.properties.find((p) => p.name === "hasResidenceLocation").quicksearch}
+							onChange={onChange} entity={this.props.entity}/>
+						: <Relation values={model["@relations"].hasResidenceLocation}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Death date</label>
-					<StringComponent value={model.deathDate} />
+					{ editable
+						? <DatableField name="deathDate" onChange={onChange} entity={this.props.entity} />
+						: <StringComponent value={model.deathDate}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Death place</label>
@@ -89,7 +100,7 @@ class BasicInfo extends React.Component {
 					<label>Related to</label>
 					<Relation
 						values={model["@relations"].isRelatedTo}
-						onSelect=""
+						onSelect={this.props.onSelectAuthor}
 					/>
 				</li>
 				<li className="list-group-item">

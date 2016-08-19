@@ -3,7 +3,8 @@ import setIn from "../util/set-in";
 let initialState = {
 	data: null,
 	domain: null,
-	errorMessage: null
+	errorMessage: null,
+	transactionPending: false
 };
 
 export default function(state=initialState, action) {
@@ -25,6 +26,12 @@ export default function(state=initialState, action) {
 				data: null,
 				errorMessage: action.errorMessage
 			}};
+
+		case "TRANSACTION_PENDING":
+			return {...state, transactionPending: true };
+
+		case "TRANSACTION_COMPLETE":
+			return {...state, transactionPending: false };
 
 		case "SET_VRE": {
 			return initialState;
