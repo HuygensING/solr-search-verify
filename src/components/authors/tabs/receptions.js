@@ -1,5 +1,6 @@
 import authorReceptionDefinitions from "../../../definitions/author-receptions";
 import React from "react";
+import RelationList from "../../values/relation-list";
 
 class Receptions extends React.Component {
 	render() {
@@ -16,18 +17,8 @@ class Receptions extends React.Component {
 						.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 					return receptions.length ? (
-						<li className="list-group-item" key={j}>
-							<label>{authorReceptionDefinitions.overviewLabels[receptionType]}</label>
-							<span>
-								<ul>
-									{receptions.map((relation, i) => (
-										<li className="list-group-item" key={i}>
-											<a>{i + 1}. {relation.displayName}</a>
-										</li>
-									))}
-								</ul>
-							</span>
-						</li>
+						<RelationList key={j} label={authorReceptionDefinitions.overviewLabels[receptionType]}
+									relations={receptions} />
 					) : null;
 				})}
 			</ul>

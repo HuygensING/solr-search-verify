@@ -1,4 +1,5 @@
 import React from "react";
+import RelationList from "../../values/relation-list";
 
 class Publications extends React.Component {
 	render() {
@@ -7,18 +8,7 @@ class Publications extends React.Component {
 
 		return publications.length ? (
 			<ul className="list-group">
-				<li className="list-group-item">
-					<label>Author of</label>
-					<span>
-						<ul className="record list-group">
-							{publications.map((relation, i) => (
-								<li className="list-group-item" key={i}>
-									<a>{i + 1}. {relation.displayName}</a>
-								</li>
-							))}
-						</ul>
-					</span>
-				</li>
+				<RelationList label="Author of" relations={publications} />
 			</ul>
 		) : <div>The list is empty</div>;
 	}
