@@ -6,7 +6,7 @@ class AuthorTabs extends React.Component {
 	render() {
 		const { params: { id, tab } } = this.props;
 
-		return (<div>{tab} for {id}</div>);
+		return (<div>{tab || "Basic info"} for {id || "new"}</div>);
 	}
 }
 

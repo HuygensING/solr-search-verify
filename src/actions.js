@@ -1,7 +1,14 @@
 import { setDocumentFiltersFromPersonQuery } from "./search-clients/document-search-client";
 import { setDocumentReceptionsFiltersFromDocumentQuery } from "./search-clients/document-reception-search-client";
 import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/person-reception-search-client";
-import { selectEntity } from "./actions/entity";
+import { selectEntity, makeNewEntity } from "./actions/entity";
+
+const setUser = (response) => {
+	return {
+		type: "SET_USER",
+		user: response
+	};
+};
 
 /*
 
@@ -57,10 +64,21 @@ export default function actionsMaker(navigateTo, dispatch) {
 			dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state});
 		},
 
-		onSelectAuthor: (id) => {
+		onSelectAuthor: (id, tab = null) => {
 			dispatch(selectEntity("wwpersons", id));
-			navigateTo("authorIndex", [id]);
-		}
+			if (tab) {
+				navigateTo("authorTab", [id, tab]);
+			} else {
+				navigateTo("authorIndex", [id]);
+			}
+		},
+
+		onNewAuthor: () => {
+			dispatch(makeNewEntity("wwpersons"));
+			navigateTo("authorNew");
+		},
+
+		onLoginChange: (response) => dispatch(setUser(response))
 	};
 	return actions;
 }

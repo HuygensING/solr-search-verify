@@ -2,16 +2,19 @@ import React from "react";
 import { Link } from "react-router";
 import { urls } from "../router";
 import cx from "classnames";
+import { Login, Federated, Basic } from "hire-login";
+import config from "../config";
 
 class App extends React.Component {
 
 
 	render() {
-		const { location: { pathname } } = this.props;
+		const { location: { pathname }, user } = this.props;
+
+		const loggedIn = user && user.token;
 		const authorsIsActive = pathname.match(/^\/womenwriters\/vre\/persons/);
 		const publicationsIsActive = pathname === urls.publicationSearch(true);
-
-		const receptionsIsActive = pathname.match(/\/receptions\//);
+		const receptionsIsActive = pathname.match(/receptions\/(authors|publications)\/?$/);
 		const authorReceptionsIsActive = pathname === urls.authorReceptionSearch(true);
 		const publicationReceptionsIsActive = pathname === urls.publicationReceptionSearch(true);
 
@@ -25,9 +28,21 @@ class App extends React.Component {
 			<Link to={pathname}>Receptions</Link> :
 			<Link to={urls.publicationReceptionSearch()}>Receptions</Link>;
 
+		const newAuthorButton = loggedIn ? <button onClick={this.props.onNewAuthor}>New author</button> : null;
 		return (
 			<div>
 				<header>
+					<div>
+						<Login
+							appId="WomenWriters"
+							headers={{VRE_ID: "WomenWriters"}}
+							onChange={(this.props.onLoginChange)}
+							userUrl={config.userUrl}>
+							<Federated url={config.federatedAuthenticateUrl} />
+							<Basic url={config.basicAuthenticateUrl} />
+						</Login>
+						{newAuthorButton}
+					</div>
 					<nav className="navbar navbar-default">
 						<ul className="nav navbar-nav">
 							<li className={cx({active: authorsIsActive})}>

@@ -10,16 +10,61 @@ import ModifiedBy from "../values/modified-by";
 class AuthorIndex extends React.Component {
 
 	componentDidMount() {
-		const { entity, onSelectAuthor } = this.props;
-		if (!entity.data) {
-			onSelectAuthor(this.props.params.id);
+		const {entity, onSelectAuthor, onNewAuthor, params: { tab, id }} = this.props;
+
+		if (!entity.data && id) {
+			onSelectAuthor(id, tab);
+		} else if (!id) {
+			onNewAuthor();
 		}
 	}
 
+
 	render() {
-		const {entity, onSelectAuthor, params: { id, tab }} = this.props;
+		const {entity, onSelectAuthor, location: { pathname }, params: { tab }, user} = this.props;
 
 		if (!entity.data) { return null; }
+
+		const loggedIn = user && user.token;
+		const id = entity.data._id || null;
+
+		const editing = loggedIn && pathname.match(/\/edit$/);
+
+		const editButton = loggedIn && id && !editing ?
+			<Link className="btn btn-default" to={urls.authorEdit(id, tab || "basic-info")}>
+				Edit
+			</Link> : null;
+
+		const tabRoute = (toTab) => editing ? urls.authorEdit(id, toTab) : urls.authorTab(id, toTab);
+
+		const tabLinks = id ? (
+			<div className="list-group">
+				<Link className={cx("list-group-item", {active: !tab || tab === "basic-info"})} to={tabRoute("basic-info")}>
+					Basic info
+				</Link>
+				<Link className={cx("list-group-item", {active: tab === "personal-situation"})} to={tabRoute("personal-situation")}>
+					Personal situation
+				</Link>
+				<Link className={cx("list-group-item", {active: tab === "professional-situation"})} to={tabRoute("professional-situation")}>
+					Professional situation
+				</Link>
+				<Link className={cx("list-group-item", {active: tab === "publications"})} to={tabRoute("publications")}>
+					Publications of this author
+				</Link>
+				<Link className={cx("list-group-item", {active: tab === "receptions"})} to={tabRoute("receptions")}>
+					Receptions
+				</Link>
+				<Link className={cx("list-group-item", {active: tab === "links"})} to={tabRoute("links")}>
+					Links to relevant projects and sites
+				</Link>
+			</div>
+		) : loggedIn ? (
+			<div className="list-group">
+				<Link className={cx("list-group-item", {active: !tab || tab === "basic-info"})} to={urls.authorNew()}>
+					Basic info
+				</Link>
+			</div>
+		) : null;
 
 		return (
 			<div className="author overview">
@@ -35,28 +80,10 @@ class AuthorIndex extends React.Component {
 				</div>
 				<div className="row">
 					<div className="col-md-2">
-						<div className="list-group">
-							<Link className={cx("list-group-item", {active: !tab})} to={urls.authorIndex(id)}>
-								Basic info
-							</Link>
-							<Link className={cx("list-group-item", {active: tab === "personal-situation"})} to={urls.authorTab(id, "personal-situation")}>
-								Personal situation
-							</Link>
-							<Link className={cx("list-group-item", {active: tab === "professional-situation"})} to={urls.authorTab(id, "professional-situation")}>
-								Professional situation
-							</Link>
-							<Link className={cx("list-group-item", {active: tab === "publications"})} to={urls.authorTab(id, "publications")}>
-								Publications of this author
-							</Link>
-							<Link className={cx("list-group-item", {active: tab === "receptions"})} to={urls.authorTab(id, "receptions")}>
-								Receptions
-							</Link>
-							<Link className={cx("list-group-item", {active: tab === "links"})} to={urls.authorTab(id, "links")}>
-								Links to relevant projects and sites
-							</Link>
-						</div>
+						{tabLinks}
 						<ModifiedBy label="Created by" {...entity.data["^created"]} />
 						<ModifiedBy label="Modified by" {...entity.data["^modified"]} />
+						{editButton}
 					</div>
 					<div className="col-md-10">
 						{!tab ? <AuthorTabs {...this.props} /> : this.props.children}

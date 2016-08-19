@@ -55,7 +55,13 @@ const urls = {
 
 	authorTab: (id = null, tab = null) => id && tab ?
 		`/womenwriters/vre/persons/${id}/${tab}`
-		: "/womenwriters/vre/persons/:id/:tab"
+		: "/womenwriters/vre/persons/:id/:tab",
+
+	authorEdit: (id = null, tab = null) => id && tab ?
+		`/womenwriters/vre/persons/${id}/${tab}/edit`
+		: "/womenwriters/vre/persons/:id/:tab/edit",
+
+	authorNew: () => "/womenwriters/vre/persons/new"
 };
 
 
@@ -76,9 +82,14 @@ const router = (
 				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
 				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
 				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
+				<Route path={urls.authorNew()} component={makeContainerComponent(AuthorIndex)} />
+
 				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)}>
-					<Route path={urls.authorTab()} component={makeContainerComponent(AuthorTabs)} />
+					<Route path={urls.authorTab()} component={makeContainerComponent(AuthorTabs)}>
+						<Route path={urls.authorEdit()} component={() => (<div>author edit</div>)} />
+					</Route>
 				</Route>
+
 			</Route>
 		</Router>
 	</Provider>

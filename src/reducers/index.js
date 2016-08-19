@@ -4,6 +4,7 @@ import documentReceptionSearch from "./document-reception-search";
 import personReceptionSearch from "./person-reception-search";
 import entity from "./entity";
 import vre from "./vre";
+import user from "./user";
 
 export default {
 	personSearch: personSearch,
@@ -11,5 +12,6 @@ export default {
 	documentReceptionSearch: documentReceptionSearch,
 	personReceptionSearch: personReceptionSearch,
 	entity: entity,
+	user: user,
 	vre: vre
 };
