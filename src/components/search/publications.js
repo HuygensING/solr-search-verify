@@ -11,6 +11,11 @@ class PublicationSearch extends React.Component {
 		searchClient.onChange = props.onPublicationSearchChange;
 	}
 
+
+	shouldComponentUpdate(nextProps) {
+		return nextProps.documentSearch !== this.props.documentSearch;
+	}
+
 	render() {
 		const { documentSearch } = this.props;
 		return (

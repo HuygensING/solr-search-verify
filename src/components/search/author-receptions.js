@@ -12,6 +12,10 @@ class AuthorReceptionSearch extends React.Component {
 		searchClient.onChange = props.onAuthorReceptionSearchChange;
 	}
 
+	shouldComponentUpdate(nextProps) {
+		return nextProps.personReceptionSearch !== this.props.personReceptionSearch;
+	}
+
 	render() {
 		const { personReceptionSearch } = this.props;
 		return (

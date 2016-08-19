@@ -7,8 +7,7 @@ import Relation from "../../values/relation";
 import DatableField from "../../form-fields/datable";
 import SelectField from "../../form-fields/select";
 import MultiSelectField from "../../form-fields/multi-select";
-
-// import PersonRelation from "../../../values/relation-person";
+import RelationField from "../../form-fields/relation";
 
 class BasicInfo extends React.Component {
 	render() {
@@ -32,7 +31,12 @@ class BasicInfo extends React.Component {
 				</li>
 				<li className="list-group-item">
 					<label>Pseudonyms</label>
-					<Relation values={model["@relations"].hasPseudonym} />
+					{ editable
+						? <RelationField
+							name="hasPseudonym" path={metadata.properties.find((p) => p.name === "hasPseudonym").quicksearch}
+							onChange={onChange} entity={this.props.entity}/>
+						: <Relation values={model["@relations"].hasPseudonym}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Person type</label>
@@ -77,7 +81,6 @@ class BasicInfo extends React.Component {
 				</li>
 				<li className="list-group-item">
 					<label>Related to</label>
-{/*					<PersonRelation genderMap={this.props.genderMap} onNavigate={this.props.onNavigate} values={model["@relations"].isRelatedTo} />*/}
 					<Relation
 						values={model["@relations"].isRelatedTo}
 						onSelect=""
