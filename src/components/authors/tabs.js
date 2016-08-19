@@ -3,12 +3,14 @@ import BasicInfo from "./tabs/basic-info";
 import PersonalSituation from "./tabs/personal-situation";
 import ProfessionalSituation from "./tabs/professional-situation";
 import Publications from "./tabs/publications";
+import Receptions from "./tabs/receptions";
 
 const components = {
 	"basic-info": BasicInfo,
 	"personal-situation": PersonalSituation,
 	"professional-situation": ProfessionalSituation,
-	"publications": Publications
+	"publications": Publications,
+	"receptions": Receptions
 };
 
 class AuthorTabs extends React.Component {
@@ -23,7 +25,7 @@ class AuthorTabs extends React.Component {
 		if (ChildComponent) {
 			return <ChildComponent author={this.props.entity.data} />;
 		}
-		return  (<div>{componentId} for {id || "new"} {}</div>);
+		return (<div>{componentId} for {id || "new"} {}</div>);
 	}
 }
 

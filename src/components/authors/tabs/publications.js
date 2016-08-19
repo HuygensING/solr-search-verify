@@ -6,18 +6,20 @@ class Publications extends React.Component {
 			.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
 		return publications.length ? (
-			<div>
-				<label>Author of</label>
-				<span>
-					<ul className="record list-group">
-						{publications.map((relation, i) => (
-							<li className="list-group-item" key={i}>
-								<a>{i + 1}. {relation.displayName}</a>
-							</li>
-						))}
-					</ul>
-				</span>
-			</div>
+			<ul className="list-group">
+				<li className="list-group-item">
+					<label>Author of</label>
+					<span>
+						<ul className="record list-group">
+							{publications.map((relation, i) => (
+								<li className="list-group-item" key={i}>
+									<a>{i + 1}. {relation.displayName}</a>
+								</li>
+							))}
+						</ul>
+					</span>
+				</li>
+			</ul>
 		) : <div>The list is empty</div>;
 	}
 }
