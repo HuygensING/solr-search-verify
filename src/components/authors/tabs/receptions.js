@@ -1,8 +1,10 @@
 import authorReceptionDefinitions from "../../../definitions/author-receptions";
 import React from "react";
 import RelationList from "../../values/relation-list";
+import RelationField from "../../form-fields/relation";
 
 class Receptions extends React.Component {
+
 	render() {
 
 		const listIsEmpty = authorReceptionDefinitions.outBound
@@ -10,23 +12,44 @@ class Receptions extends React.Component {
 			.filter((receptions) => receptions.length > 0)
 			.length === 0;
 
-		return listIsEmpty ? (<div>The list is empty</div>) : (
-			<ul className="list-group">
-				{authorReceptionDefinitions.outBound.map((receptionType, j) => {
-					const receptions = (this.props.author["@relations"][receptionType] || [])
-						.sort((a, b) => a.displayName.localeCompare(b.displayName));
+		const { editable, onChange, metadata } = this.props;
 
-					return receptions.length ? (
-						<RelationList
-							key={j}
-							label={authorReceptionDefinitions.overviewLabels[receptionType]}
-							relations={receptions}
-							onSelect={this.props.onSelectPublication}
-						/>
-					) : null;
-				})}
-			</ul>
-		);
+		if (editable) {
+			return (
+				<ul className="list-group">
+					{authorReceptionDefinitions.outBound.map((receptionType, i) => (
+						<li className="list-group-item" key={i}>
+							<label>{authorReceptionDefinitions.overviewLabels[receptionType]}</label>
+							<RelationField name={receptionType}
+								path={metadata.properties.find((p) => p.name === receptionType).quicksearch}
+								onChange={onChange} entity={this.props.entity}
+							/>
+						</li>
+					))}
+				</ul>
+			);
+		} else {
+			return listIsEmpty ? (
+				<ul className="list-group">
+					<li className="list-group-item">The list is empty</li>
+				</ul>
+			) : (
+				<ul className="list-group">
+					{authorReceptionDefinitions.outBound.map((receptionType, j) => {
+						const receptions = (this.props.author["@relations"][receptionType] || [])
+							.sort((a, b) => a.displayName.localeCompare(b.displayName));
+						return receptions.length ? (
+							<RelationList
+								key={j}
+								label={authorReceptionDefinitions.overviewLabels[receptionType]}
+								relations={receptions}
+								onSelect={this.props.onSelectPublication}
+							/>
+						) : null;
+					})}
+				</ul>
+			);
+		}
 	}
 }
 
