@@ -4,6 +4,7 @@ import { urls } from "../router";
 import cx from "classnames";
 import { Login, Federated, Basic } from "hire-login";
 import config from "../config";
+import Messages from "./messages";
 
 class App extends React.Component {
 
@@ -57,6 +58,7 @@ class App extends React.Component {
 						</ul>
 					</nav>
 				</header>
+				<Messages types={["SUCCESS_MESSAGE", "ERROR_MESSAGE"]} messages={this.props.messages} onDismissMessage={this.props.onDismissMessage} />
 				<main>
 					{receptionToggle}
 					{this.props.children}

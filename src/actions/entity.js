@@ -48,7 +48,9 @@ const selectEntity = (domain, entityId, errorMessage = null, successMessage = nu
 			dispatch({type: "TRANSACTION_COMPLETE"});
 			dispatch({type: "RECEIVE_ENTITY", domain: domain, data: data, errorMessage: errorMessage});
 			if (successMessage !== null) {
-				dispatch({type: "SUCCESS_MESSAGE", message: successMessage});
+				const ts = new Date().getTime();
+				dispatch({type: "SUCCESS_MESSAGE", message: successMessage, ts: ts});
+				setTimeout(() => dispatch({type: "DISMISS_MESSAGE_BY_TIMESTAMP", ts: ts}), 5000);
 			}
 			next(entityId);
 		}, () => {
@@ -70,13 +72,15 @@ const makeNewEntity = (domain, errorMessage = null, next = () => {}) => (dispatc
 	next();
 };
 
-const deleteEntity = () => (dispatch, getState) => {
+const deleteEntity = (onSuccess = () => {}, onError = () => {}) => (dispatch, getState) => {
 	crud.deleteEntity(getState().entity.domain, getState().entity.data._id, getState().user.token, getState().vre.vreId,
 		() => {
-			dispatch({type: "SUCCESS_MESSAGE", message: `Sucessfully deleted ${getState().entity.domain} with ID ${getState().entity.data._id}`});
-			dispatch(makeNewEntity(getState().entity.domain));
+			const ts = new Date().getTime();
+			dispatch({type: "SUCCESS_MESSAGE", message: `Sucessfully deleted ${getState().entity.domain} with ID ${getState().entity.data._id}`, ts: ts});
+			setTimeout(() => dispatch({type: "DISMISS_MESSAGE_BY_TIMESTAMP", ts: ts}), 5000);
+			onSuccess();
 		},
-		() => dispatch(selectEntity(getState().entity.domain, getState().entity.data._id, `Failed to delete ${getState().entity.domain} with ID ${getState().entity.data._id}`)));
+		() => dispatch(selectEntity(getState().entity.domain, getState().entity.data._id, `Failed to delete ${getState().entity.domain} with ID ${getState().entity.data._id}`, onError)));
 };
 
 // 1) Save an entity

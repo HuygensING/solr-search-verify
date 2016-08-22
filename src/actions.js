@@ -1,7 +1,7 @@
 import { setDocumentFiltersFromPersonQuery } from "./search-clients/document-search-client";
 import { setDocumentReceptionsFiltersFromDocumentQuery } from "./search-clients/document-reception-search-client";
 import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/person-reception-search-client";
-import { selectEntity, makeNewEntity, saveEntity } from "./actions/entity";
+import { selectEntity, makeNewEntity, saveEntity, deleteEntity } from "./actions/entity";
 
 const setUser = (response) => {
 	return {
@@ -53,6 +53,9 @@ export default function actionsMaker(navigateTo, dispatch) {
 		onChange: (fieldPath, value) => {
 			dispatch({type: "SET_ENTITY_FIELD_VALUE", fieldPath: fieldPath, value: value});
 		},
+
+		onDismissMessage: (messageIndex) => dispatch({type: "DISMISS_MESSAGE", messageIndex: messageIndex}),
+
 
 		/** SEARCHES **/
 		onAuthorSearchChange: (state) => {
@@ -106,6 +109,13 @@ export default function actionsMaker(navigateTo, dispatch) {
 			} else {
 				navigateTo("authorSearch");
 			}
+		},
+
+		onDeleteAuthor: (id, tab) => {
+			dispatch(deleteEntity(
+				() => { console.log("delete success"); navigateTo("authorSearch"); },
+				() => { console.log("delete error"); navigateTo("authorTab", [id, tab]); }
+			));
 		}
 	};
 	return actions;
