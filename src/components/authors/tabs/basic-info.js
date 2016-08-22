@@ -9,6 +9,7 @@ import SelectField from "../../form-fields/select";
 import MultiSelectField from "../../form-fields/multi-select";
 import RelationField from "../../form-fields/relation";
 import NamesField from "../../form-fields/names";
+import TextField from "../../form-fields/text";
 
 class BasicInfo extends React.Component {
 	render() {
@@ -93,23 +94,35 @@ class BasicInfo extends React.Component {
 					}
 				</li>
 				<li className="list-group-item">
+
 					<label>Death place</label>
-					<Relation values={model["@relations"].hasDeathPlace} />
+					{ editable
+						? <RelationField name="hasDeathPlace" path={metadata.properties.find((p) => p.name === "hasDeathPlace").quicksearch}
+							onChange={onChange} entity={this.props.entity} />
+						: <Relation values={model["@relations"].hasDeathPlace}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Related to</label>
-					<Relation
-						values={model["@relations"].isRelatedTo}
-						onSelect={this.props.onSelectAuthor}
-					/>
+					{ editable
+						? <RelationField name="isRelatedTo" path={metadata.properties.find((p) => p.name === "isRelatedTo").quicksearch}
+							onChange={onChange} entity={this.props.entity} />
+						: <Relation values={model["@relations"].isRelatedTo} onSelect={this.props.onSelectAuthor}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Bibliography</label>
-					<TextComponent value={model.bibliography} />
+					{ editable
+						? <TextField name="bibliography" onChange={onChange} entity={this.props.entity} />
+						: <TextComponent value={model.bibliography}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Provisional Notes</label>
-					<TextComponent value={model.notes} />
+					{ editable
+						? <TextField name="notes" onChange={onChange} entity={this.props.entity} />
+						: <TextComponent value={model.notes}/>
+					}
 				</li>
 				<li className="list-group-item">
 					<label>Persistent ID</label>
