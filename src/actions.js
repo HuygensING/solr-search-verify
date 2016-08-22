@@ -64,16 +64,20 @@ export default function actionsMaker(navigateTo, dispatch) {
 			dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state});
 		},
 
-		onSelectAuthor: (id, tab = null) => {
+		onSelectAuthor: (id, tab = null, suppressNavigation = false) => {
+			const navigateCallback = suppressNavigation ? () => {} :
+				() => {
+					if (tab) {
+						navigateTo("authorTab", [id, tab]);
+					} else {
+						navigateTo("authorIndex", [id]);
+					}
+				};
+
 			dispatch(makeNewEntity("wwpersons"));
-			dispatch(selectEntity("wwpersons", id, null, null, () => {
-				if (tab) {
-					navigateTo("authorTab", [id, tab]);
-				} else {
-					navigateTo("authorIndex", [id]);
-				}
-			}));
+			dispatch(selectEntity("wwpersons", id, null, null, navigateCallback));
 		},
+
 
 		onNewAuthor: () => {
 			dispatch(makeNewEntity("wwpersons"));
@@ -94,10 +98,23 @@ export default function actionsMaker(navigateTo, dispatch) {
 			dispatch({type: "SET_ENTITY_FIELD_VALUE", fieldPath: fieldPath, value: value});
 		},
 
-		onSave: (urlKey, id, tab) => {
-			dispatch(saveEntity());
-			navigateTo(urlKey, [id, tab]);
-		}
+		onSaveAuthor: (id, tab) => {
+			dispatch(saveEntity((savedId) =>
+				navigateTo("authorIndex", [savedId, tab])
+			), (savedId) =>
+				navigateTo("authorIndex", [savedId, tab])
+			);
+		},
+
+		onSaveNewAuthor: () => {
+			dispatch(saveEntity((savedId) =>
+					navigateTo("authorIndex", [savedId])
+				), () =>
+					navigateTo("authorNew")
+			);
+		},
+
+		onCancelNewAuthor: () => navigateTo("authorSearch")
 
 	};
 	return actions;

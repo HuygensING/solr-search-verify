@@ -5,6 +5,8 @@ import ProfessionalSituation from "./tabs/professional-situation";
 import Publications from "./tabs/publications";
 import Receptions from "./tabs/receptions";
 import Links from "./tabs/links";
+import SaveFooter from "../save-footer";
+
 
 const components = {
 	"basic-info": BasicInfo,
@@ -24,14 +26,29 @@ class AuthorTabs extends React.Component {
 		const componentId = tab || "basic-info";
 		const ChildComponent = components[componentId] || null;
 
+		const saveFooter = this.props.editable
+			? (<SaveFooter
+				onSave={this.props.onSaveNewAuthor}
+				onCancel={this.props.onCancelNewAuthor}
+			/>) : null;
+
 		if (ChildComponent) {
-			return (<ChildComponent
-				entity={this.props.entity}
-				onSelectAuthor={this.props.onSelectAuthor}
-				onSelectPublication={this.props.onSelectPublication}
-				onSelectCollective={user && user.token ? this.props.onSelectCollective : null}
-			/>);
+			return (
+				<div>
+					<ChildComponent
+						entity={this.props.entity}
+						editable={this.props.editable}
+						onChange={this.props.onChange}
+						onSelectAuthor={this.props.onSelectAuthor}
+						onSelectPublication={this.props.onSelectPublication}
+						onSelectCollective={user && user.token ? this.props.onSelectCollective : null}
+						metadata={this.props.vre.collections.wwpersons}
+					/>
+					{saveFooter}
+			</div>
+			);
 		}
+
 		return (<div>{componentId} for {id || "new"} {}</div>);
 	}
 }

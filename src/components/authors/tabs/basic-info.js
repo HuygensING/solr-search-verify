@@ -62,6 +62,15 @@ class BasicInfo extends React.Component {
 					}
 				</li>
 				<li className="list-group-item">
+					<label>Children</label>
+					{ editable
+						? <SelectField
+						name="children" options={metadata.properties.find((p) => p.name === "children").options}
+						onChange={onChange} entity={this.props.entity} />
+						: <StringComponent value={model.children}/>
+					}
+				</li>
+				<li className="list-group-item">
 					<label>Birth date</label>
 					{ editable
 						? <DatableField name="birthDate" onChange={onChange} entity={this.props.entity} />

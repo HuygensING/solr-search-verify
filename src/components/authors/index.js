@@ -11,9 +11,8 @@ class AuthorIndex extends React.Component {
 
 	componentDidMount() {
 		const {entity, onSelectAuthor, onNewAuthor, params: { tab, id }} = this.props;
-
 		if (!entity.data && id) {
-			onSelectAuthor(id, tab);
+			onSelectAuthor(id, tab, true);
 		} else if (!id) {
 			onNewAuthor();
 		}
@@ -21,10 +20,12 @@ class AuthorIndex extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		const { params: { id }, onSelectAuthor, entity } = nextProps;
-		if (entity.data && entity.data._id && id !== entity.data._id) {
-			onSelectAuthor(id);
+
+		if (id && !this.props.entity.transactionPending && entity.data && entity.data._id && id !== entity.data._id) {
+			onSelectAuthor(id, null, true);
 		}
 	}
+
 
 	render() {
 		const {entity, onSelectAuthor, location: { pathname }, params: { tab }, user} = this.props;
@@ -34,7 +35,7 @@ class AuthorIndex extends React.Component {
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;
 
-		const editing = !entity.transactionPending && loggedIn && pathname.match(/\/edit$/);
+		const editing = !entity.transactionPending && loggedIn && (pathname.match(/\/edit$/) || pathname.match(/\/new$/));
 
 		const editButton = loggedIn && id && !editing ?
 			<Link className="btn btn-default" to={urls.authorEdit(id, tab || "basic-info")}>
@@ -92,7 +93,7 @@ class AuthorIndex extends React.Component {
 						{editButton}
 					</div>
 					<div className="col-md-10">
-						{!tab ? <AuthorTabs {...this.props} /> : this.props.children}
+						{!tab ? <AuthorTabs {...this.props} editable={editing ? true : false} /> : this.props.children}
 					</div>
 				</div>
 			</div>
