@@ -1,6 +1,6 @@
 import React from "react";
-
-// import RelationAuthor from "../../values/relation-person";
+import { urls } from "../../router";
+import { Link }from "react-router";
 
 class AuthorHeader extends React.Component {
 	render() {
@@ -33,7 +33,7 @@ class AuthorHeader extends React.Component {
 				<small className="pseudonyms">
 					Pseudonyms
 					{model["@relations"].hasPseudonym.map((x, i) => (
-						<a onClick={() => this.props.onSelectAuthor(x.id)} key={i}>{x.displayName}</a>
+						<Link to={urls.authorIndex(x.id)} key={i}>{x.displayName}</Link>
 					))}
 				</small>
 			);
@@ -43,9 +43,8 @@ class AuthorHeader extends React.Component {
 				<small className="pseudonyms">
 					Is pseudonym of
 					{model["@relations"].isPseudonymOf.map((x, i) => (
-						<a onClick={() => this.props.onSelectAuthor(x.id)} key={i}>{x.displayName}</a>
+						<Link to={urls.authorIndex(x.id)} key={i}>{x.displayName}</Link>
 					))}
-					{/*<RelationAuthor onNavigate={this.props.onNavigate} values={model["@relations"].isPseudonymOf} />*/}
 				</small>
 			);
 		}
@@ -64,8 +63,7 @@ class AuthorHeader extends React.Component {
 }
 
 AuthorHeader.propTypes = {
-	author: React.PropTypes.object,
-	onSelectAuthor: React.PropTypes.func
+	author: React.PropTypes.object
 };
 
 export default AuthorHeader;

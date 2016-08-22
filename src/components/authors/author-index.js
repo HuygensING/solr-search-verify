@@ -33,7 +33,7 @@ class AuthorIndex extends React.Component {
 
 
 	render() {
-		const {entity, onSelectAuthor, location: { pathname }, params: { tab }, user} = this.props;
+		const {entity, location: { pathname }, params: { tab }, user} = this.props;
 
 		if (!entity.data) { return null; }
 
@@ -85,7 +85,7 @@ class AuthorIndex extends React.Component {
 						<Link className="btn btn-default" to={urls.authorSearch()}>◂ Results</Link>
 					</div>
 					<div className="col-md-6">
-						<AuthorHeader author={entity.data} onSelectAuthor={onSelectAuthor} />
+						<AuthorHeader author={entity.data} />
 					</div>
 					<div className="col-md-3">
 					</div>
