@@ -11,7 +11,10 @@ class AuthorIndex extends React.Component {
 
 	componentDidMount() {
 		const {entity, onFetchAuthorFromRoute, onNewAuthor, params: { id }} = this.props;
-		if (!entity.data && id) {
+
+		// If the requested id from the route does not match the data, or if there is no data
+		if ((!entity.data && id) || (id && entity.data && entity.data._id !== id) ) {
+			// Fetch the correct author based on the id.
 			onFetchAuthorFromRoute(id);
 		} else if (!id) {
 			onNewAuthor();
@@ -19,10 +22,11 @@ class AuthorIndex extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { params: { id }, onFetchAuthorFromRoute, entity } = nextProps;
+		const { onFetchAuthorFromRoute } = this.props;
 
-		if (id && !this.props.entity.transactionPending && entity.data && entity.data._id && id !== entity.data._id) {
-			onFetchAuthorFromRoute(id);
+		// Handles back- and forward button navigation when no remount happened
+		if (this.props.params.id !== nextProps.params.id) {
+			onFetchAuthorFromRoute(nextProps.params.id);
 		}
 	}
 

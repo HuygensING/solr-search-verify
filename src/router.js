@@ -8,7 +8,7 @@ import AuthorSearch from "./components/search/authors";
 import PublicationSearch from "./components/search/publications";
 import AuthorReceptionSearch from "./components/search/author-receptions";
 import PublicationReceptionSearch from "./components/search/publication-receptions";
-import AuthorIndex from "./components/authors";
+import AuthorIndex from "./components/authors/author-index";
 import AuthorTabs from "./components/authors/tabs";
 import AuthorEditTabs from "./components/authors/edit-tabs";
 
@@ -55,8 +55,8 @@ const urls = {
 		: "/womenwriters/vre/persons/:id",
 
 	authorTab: (id = null, tab = null) => id && tab ?
-		`/womenwriters/vre/persons/${id}/${tab}`
-		: "/womenwriters/vre/persons/:id/:tab",
+		`/womenwriters/vre/persons/${id}/${tab}` : id ?
+		`/womenwriters/vre/persons/${id}` : "/womenwriters/vre/persons/:id/:tab",
 
 	authorEdit: (id = null, tab = null) => id && tab ?
 		`/womenwriters/vre/persons/${id}/${tab}/edit`

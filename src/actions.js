@@ -45,6 +45,16 @@ const setUser = (response) => {
 
 export default function actionsMaker(navigateTo, dispatch) {
 	const actions = {
+
+		/** GENERAL **/
+		onLoginChange: (response) => dispatch(setUser(response)),
+
+		// Sets the value of a field in a wwdocument, wwperson, or wwcollective
+		onChange: (fieldPath, value) => {
+			dispatch({type: "SET_ENTITY_FIELD_VALUE", fieldPath: fieldPath, value: value});
+		},
+
+		/** SEARCHES **/
 		onAuthorSearchChange: (state) => {
 			setDocumentFiltersFromPersonQuery(state);
 			setPersonReceptionsFiltersFromPersonQuery(state);
@@ -64,50 +74,27 @@ export default function actionsMaker(navigateTo, dispatch) {
 			dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state});
 		},
 
+		/** AUTHORS **/
 		onSelectAuthor: (id, tab = null) => {
-			const navigateCallback =
-				() => {
-					if (tab) {
-						navigateTo("authorTab", [id, tab]);
-					} else {
-						navigateTo("authorIndex", [id]);
-					}
-				};
-
 			dispatch(makeNewEntity("wwpersons"));
-			dispatch(selectEntity("wwpersons", id, null, null, navigateCallback));
+			dispatch(selectEntity("wwpersons", id, null, null, () => navigateTo("authorTab", [id, tab])));
 		},
 
+		// Fetches an author without navigation (on order to correctly handle routing)
 		onFetchAuthorFromRoute: (id) => {
 			dispatch(makeNewEntity("wwpersons"));
 			dispatch(selectEntity("wwpersons", id));
 		},
 
-
 		onNewAuthor: () => {
-			dispatch(makeNewEntity("wwpersons"));
-			navigateTo("authorNew");
-		},
-
-		onLoginChange: (response) => dispatch(setUser(response)),
-
-		onSelectPublication: (id, tab = null) => {
-			console.log("onSelectPublication: ", id);
-		},
-
-		onSelectCollective: (id) => {
-			console.log("onSelectCollective: ", id);
-		},
-
-		onChange: (fieldPath, value) => {
-			dispatch({type: "SET_ENTITY_FIELD_VALUE", fieldPath: fieldPath, value: value});
+			dispatch(makeNewEntity("wwpersons", null, () => navigateTo("authorNew")));
 		},
 
 		onSaveAuthor: (id, tab) => {
 			dispatch(saveEntity((savedId) =>
-				navigateTo("authorIndex", [savedId, tab])
+				navigateTo("authorTab", [savedId, tab])
 			), (savedId) =>
-				navigateTo("authorIndex", [savedId, tab])
+				navigateTo("authorTab", [savedId, tab])
 			);
 		},
 
@@ -119,7 +106,17 @@ export default function actionsMaker(navigateTo, dispatch) {
 			);
 		},
 
-		onCancelNewAuthor: () => navigateTo("authorSearch")
+		onCancelNewAuthor: () => navigateTo("authorSearch"),
+
+		/** PUBLICATIONS **/
+		onSelectPublication: (id, tab = null) => {
+			console.log("onSelectPublication: ", id);
+		},
+
+		/** COLLECTIVES **/
+		onSelectCollective: (id) => {
+			console.log("onSelectCollective: ", id);
+		},
 
 	};
 	return actions;
