@@ -71,9 +71,8 @@ class BasicInfo extends React.Component {
 				<li className="list-group-item">
 					<label>Birth place</label>
 					{ editable
-						? <RelationField
-						name="hasBirthPlace" path={metadata.properties.find((p) => p.name === "hasBirthPlace").quicksearch}
-						onChange={onChange} entity={this.props.entity}/>
+						? <RelationField name="hasBirthPlace" path={metadata.properties.find((p) => p.name === "hasBirthPlace").quicksearch}
+							onChange={onChange} entity={this.props.entity}/>
 						: <Relation values={model["@relations"].hasBirthPlace}/>
 					}
 				</li>
