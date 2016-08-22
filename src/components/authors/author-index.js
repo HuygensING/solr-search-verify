@@ -80,24 +80,24 @@ class AuthorIndex extends React.Component {
 
 		return (
 			<div className={cx("author", "overview", {"transaction-pending": entity.transactionPending})}>
-				<div className="row m-b-1">
-					<div className="col-md-2">
+				<div className="col-md-12 row m-b-1">
+					<div className="col-md-3">
 						<Link className="btn btn-default" to={urls.authorSearch()}>◂ Results</Link>
 					</div>
-					<div className="col-md-8">
+					<div className="col-md-6">
 						<AuthorHeader author={entity.data} onSelectAuthor={onSelectAuthor} />
 					</div>
-					<div className="col-md-2">
+					<div className="col-md-3">
 					</div>
 				</div>
-				<div className="row">
-					<div className="col-md-2">
+				<div className="col-md-12 row">
+					<div className="col-md-3">
 						{tabLinks}
 						<ModifiedBy label="Created by" {...entity.data["^created"]} />
 						<ModifiedBy label="Modified by" {...entity.data["^modified"]} />
 						{editButton}
 					</div>
-					<div className="col-md-10">
+					<div className="col-md-9">
 						{!tab ? <AuthorTabs {...this.props} editable={editing ? true : false} /> : this.props.children}
 					</div>
 				</div>

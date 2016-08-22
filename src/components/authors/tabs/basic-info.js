@@ -24,119 +24,153 @@ class BasicInfo extends React.Component {
 		const { editable, onChange, metadata } = this.props;
 
 		return (
-			<ul className="record list-group">
-				<li className="list-group-item">
-					<label>Name variations / spellings</label>
-					{ editable
-						? <NamesField
-							name="names" options={metadata.properties.find((p) => p.name === "names").options}
-							onChange={onChange} entity={this.props.entity}/>
-						: <span><ul>{names}</ul></span>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Pseudonyms</label>
-					{ editable
-						? <RelationField
-							name="hasPseudonym" path={metadata.properties.find((p) => p.name === "hasPseudonym").quicksearch}
-							onChange={onChange} entity={this.props.entity}/>
-						: <Relation values={model["@relations"].hasPseudonym} onSelect={this.props.onSelectAuthor} />
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Person type</label>
-					{ editable
-						? <MultiSelectField
-							name="types" options={metadata.properties.find((p) => p.name === "types").options}
-							onChange={onChange} entity={this.props.entity}/>
-						: <StringComponent value={model.types.join(", ")}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Gender</label>
-					{ editable
-						? <SelectField
-							name="gender" options={metadata.properties.find((p) => p.name === "gender").options}
+			<div>
+				<ul className="record list-group">
+					<li className="list-group-item">
+						<label>Name variations / spellings</label>
+						{ editable
+							? <NamesField
+								name="names" options={metadata.properties.find((p) => p.name === "names").options}
+								onChange={onChange} entity={this.props.entity}/>
+							: <span><ul>{names}</ul></span>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Pseudonyms</label>
+						{ editable
+							? <RelationField
+								name="hasPseudonym" path={metadata.properties.find((p) => p.name === "hasPseudonym").quicksearch}
+								onChange={onChange} entity={this.props.entity}/>
+							: <Relation values={model["@relations"].hasPseudonym} onSelect={this.props.onSelectAuthor} />
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Person type</label>
+						{ editable
+							? <MultiSelectField
+								name="types" options={metadata.properties.find((p) => p.name === "types").options}
+								onChange={onChange} entity={this.props.entity}/>
+							: <StringComponent value={model.types.join(", ")}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Gender</label>
+						{ editable
+							? <SelectField
+								name="gender" options={metadata.properties.find((p) => p.name === "gender").options}
+								onChange={onChange} entity={this.props.entity} />
+							: <StringComponent value={model.gender} />
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Children</label>
+						{ editable
+							? <SelectField
+							name="children" options={metadata.properties.find((p) => p.name === "children").options}
 							onChange={onChange} entity={this.props.entity} />
-						: <StringComponent value={model.gender} />
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Children</label>
-					{ editable
-						? <SelectField
-						name="children" options={metadata.properties.find((p) => p.name === "children").options}
-						onChange={onChange} entity={this.props.entity} />
-						: <StringComponent value={model.children}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Birth date</label>
-					{ editable
-						? <DatableField name="birthDate" onChange={onChange} entity={this.props.entity} />
-						: <StringComponent value={model.birthDate}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Birth place</label>
-					{ editable
-						? <RelationField name="hasBirthPlace" path={metadata.properties.find((p) => p.name === "hasBirthPlace").quicksearch}
-							onChange={onChange} entity={this.props.entity}/>
-						: <Relation values={model["@relations"].hasBirthPlace}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Lived in</label>
-					{ editable
-						? <RelationField
-							name="hasResidenceLocation" path={metadata.properties.find((p) => p.name === "hasResidenceLocation").quicksearch}
-							onChange={onChange} entity={this.props.entity}/>
-						: <Relation values={model["@relations"].hasResidenceLocation}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Death date</label>
-					{ editable
-						? <DatableField name="deathDate" onChange={onChange} entity={this.props.entity} />
-						: <StringComponent value={model.deathDate}/>
-					}
-				</li>
-				<li className="list-group-item">
-
-					<label>Death place</label>
-					{ editable
-						? <RelationField name="hasDeathPlace" path={metadata.properties.find((p) => p.name === "hasDeathPlace").quicksearch}
-							onChange={onChange} entity={this.props.entity} />
-						: <Relation values={model["@relations"].hasDeathPlace}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Related to</label>
-					{ editable
-						? <RelationField name="isRelatedTo" path={metadata.properties.find((p) => p.name === "isRelatedTo").quicksearch}
-							onChange={onChange} entity={this.props.entity} />
-						: <Relation values={model["@relations"].isRelatedTo} onSelect={this.props.onSelectAuthor}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Bibliography</label>
-					{ editable
-						? <TextField name="bibliography" onChange={onChange} entity={this.props.entity} />
-						: <TextComponent value={model.bibliography}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Provisional Notes</label>
-					{ editable
-						? <TextField name="notes" onChange={onChange} entity={this.props.entity} />
-						: <TextComponent value={model.notes}/>
-					}
-				</li>
-				<li className="list-group-item">
-					<label>Persistent ID</label>
-					{pid}
-				</li>
-			</ul>
+							: <StringComponent value={model.children}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Birth date</label>
+						{ editable
+							? <DatableField name="birthDate" onChange={onChange} entity={this.props.entity} />
+							: <StringComponent value={model.birthDate}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Birth place</label>
+						{ editable
+							? <RelationField name="hasBirthPlace" path={metadata.properties.find((p) => p.name === "hasBirthPlace").quicksearch}
+								onChange={onChange} entity={this.props.entity}/>
+							: <Relation values={model["@relations"].hasBirthPlace}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Lived in</label>
+						{ editable
+							? <RelationField
+								name="hasResidenceLocation" path={metadata.properties.find((p) => p.name === "hasResidenceLocation").quicksearch}
+								onChange={onChange} entity={this.props.entity}/>
+							: <Relation values={model["@relations"].hasResidenceLocation}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Death date</label>
+						{ editable
+							? <DatableField name="deathDate" onChange={onChange} entity={this.props.entity} />
+							: <StringComponent value={model.deathDate}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Death place</label>
+						{ editable
+							? <RelationField name="hasDeathPlace" path={metadata.properties.find((p) => p.name === "hasDeathPlace").quicksearch}
+								onChange={onChange} entity={this.props.entity} />
+							: <Relation values={model["@relations"].hasDeathPlace}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Related to</label>
+						{ editable
+							? <RelationField name="isRelatedTo" path={metadata.properties.find((p) => p.name === "isRelatedTo").quicksearch}
+								onChange={onChange} entity={this.props.entity} />
+							: <Relation values={model["@relations"].isRelatedTo} onSelect={this.props.onSelectAuthor}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Bibliography</label>
+						{ editable
+							? <TextField name="bibliography" onChange={onChange} entity={this.props.entity} />
+							: <TextComponent value={model.bibliography}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Provisional Notes</label>
+						{ editable
+							? <TextField name="notes" onChange={onChange} entity={this.props.entity} />
+							: <TextComponent value={model.notes}/>
+						}
+					</li>
+					<li className="list-group-item">
+						<label>Persistent ID</label>
+						{pid}
+					</li>
+				</ul>
+				<div className="temp-data panel panel-default">
+					<h2 className="panel-heading">Temporary data</h2>
+					<ul className="list-group">
+						<li className="list-group-item">
+							<label>Old ID</label>
+							<span>{model.tempOldId}</span>
+						</li>
+						<li className="list-group-item">
+							<label>Name</label>
+							<span>{model.tempName}</span>
+						</li>
+						<li className="list-group-item">
+							<label>Spouse</label>
+							<span>{model.tempSpouse}</span>
+						</li>
+						<li className="list-group-item">
+							<label>Pseudonyms</label>
+							<span>{model.tempPseudonyms}</span>
+						</li>
+						<li className="list-group-item">
+							<label>Birth Place</label>
+							<span>{model.tempBirthPlace}</span>
+						</li>
+						<li className="list-group-item">
+							<label>Place Of Birth</label>
+							<span>{model.tempPlaceOfBirth}</span>
+						</li>
+						<li className="list-group-item">
+							<label>Death Place</label>
+							<span>{model.tempDeathPlace}</span>
+						</li>
+					</ul>
+				</div>
+			</div>
 		);
 	}
 }
