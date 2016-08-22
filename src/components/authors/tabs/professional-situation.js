@@ -35,7 +35,7 @@ class Public extends React.Component {
 					{ editable
 						? <RelationField name="isCollaboratorOf"
 							path={metadata.properties.find((p) => p.name === "isCollaboratorOf").quicksearch}
-							onChange={onChange} entity={this.props.entity}/>
+							onChange={onChange} entity={this.props.entity} />
 						: <Relation values={model["@relations"].isCollaboratorOf} onSelect={this.props.onSelectAuthor} />
 					}
 				</li>
@@ -44,7 +44,7 @@ class Public extends React.Component {
 					{ editable
 						? <RelationField name="isMemberOf"
 							path={metadata.properties.find((p) => p.name === "isMemberOf").quicksearch}
-							onChange={onChange} entity={this.props.entity}/>
+							onChange={onChange} entity={this.props.entity} />
 						: <Relation values={model["@relations"].isMemberOf} onSelect={this.props.onSelectCollective}/>
 					}
 				</li>
