@@ -64,8 +64,8 @@ export default function actionsMaker(navigateTo, dispatch) {
 			dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state});
 		},
 
-		onSelectAuthor: (id, tab = null, suppressNavigation = false) => {
-			const navigateCallback = suppressNavigation ? () => {} :
+		onSelectAuthor: (id, tab = null) => {
+			const navigateCallback =
 				() => {
 					if (tab) {
 						navigateTo("authorTab", [id, tab]);
@@ -76,6 +76,11 @@ export default function actionsMaker(navigateTo, dispatch) {
 
 			dispatch(makeNewEntity("wwpersons"));
 			dispatch(selectEntity("wwpersons", id, null, null, navigateCallback));
+		},
+
+		onFetchAuthorFromRoute: (id) => {
+			dispatch(makeNewEntity("wwpersons"));
+			dispatch(selectEntity("wwpersons", id));
 		},
 
 

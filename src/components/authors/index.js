@@ -10,19 +10,19 @@ import ModifiedBy from "../values/modified-by";
 class AuthorIndex extends React.Component {
 
 	componentDidMount() {
-		const {entity, onSelectAuthor, onNewAuthor, params: { tab, id }} = this.props;
+		const {entity, onFetchAuthorFromRoute, onNewAuthor, params: { id }} = this.props;
 		if (!entity.data && id) {
-			onSelectAuthor(id, tab, true);
+			onFetchAuthorFromRoute(id);
 		} else if (!id) {
 			onNewAuthor();
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { params: { id }, onSelectAuthor, entity } = nextProps;
+		const { params: { id }, onFetchAuthorFromRoute, entity } = nextProps;
 
 		if (id && !this.props.entity.transactionPending && entity.data && entity.data._id && id !== entity.data._id) {
-			onSelectAuthor(id, null, true);
+			onFetchAuthorFromRoute(id);
 		}
 	}
 
