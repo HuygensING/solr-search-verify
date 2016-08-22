@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router";
+import { urls } from "../../router";
 
 class RelationList extends React.Component {
 	render() {
@@ -9,7 +11,7 @@ class RelationList extends React.Component {
 					<ul>
 						{this.props.relations.map((relation, i) => (
 							<li className="list-group-item" key={i}>
-								<a onClick={() => this.props.onSelect(relation.id)}>{i + 1}. {relation.displayName}</a>
+								<Link to={urls[this.props.linkTo](relation.id)}>{i + 1}. {relation.displayName}</Link>
 							</li>
 						))}
 					</ul>

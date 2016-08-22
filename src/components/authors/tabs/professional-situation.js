@@ -8,7 +8,7 @@ class Public extends React.Component {
 	render() {
 		let model = this.props.entity.data;
 
-		const { editable, onChange, metadata } = this.props;
+		const { editable, onChange, metadata, authorized } = this.props;
 
 		return (
 			<div>
@@ -37,7 +37,7 @@ class Public extends React.Component {
 							? <RelationField name="isCollaboratorOf"
 								path={metadata.properties.find((p) => p.name === "isCollaboratorOf").quicksearch}
 								onChange={onChange} entity={this.props.entity} />
-							: <Relation values={model["@relations"].isCollaboratorOf} onSelect={this.props.onSelectAuthor} />
+							: <Relation values={model["@relations"].isCollaboratorOf} linkTo="authorIndex" />
 						}
 					</li>
 					<li className="list-group-item">
@@ -46,7 +46,7 @@ class Public extends React.Component {
 							? <RelationField name="isMemberOf"
 								path={metadata.properties.find((p) => p.name === "isMemberOf").quicksearch}
 								onChange={onChange} entity={this.props.entity} />
-							: <Relation values={model["@relations"].isMemberOf} onSelect={this.props.onSelectCollective}/>
+							: <Relation values={model["@relations"].isMemberOf} linkTo={authorized ? "collectiveIndex" : null} />
 						}
 					</li>
 				</ul>

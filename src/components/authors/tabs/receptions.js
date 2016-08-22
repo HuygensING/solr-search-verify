@@ -43,7 +43,7 @@ class Receptions extends React.Component {
 								key={j}
 								label={authorReceptionDefinitions.overviewLabels[receptionType]}
 								relations={receptions}
-								onSelect={this.props.onSelectPublication}
+								linkTo="publicationIndex"
 							/>
 						) : null;
 					})}

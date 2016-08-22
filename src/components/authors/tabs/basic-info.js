@@ -42,7 +42,7 @@ class BasicInfo extends React.Component {
 							? <RelationField
 								name="hasPseudonym" path={metadata.properties.find((p) => p.name === "hasPseudonym").quicksearch}
 								onChange={onChange} entity={this.props.entity}/>
-							: <Relation values={model["@relations"].hasPseudonym} onSelect={this.props.onSelectAuthor} />
+							: <Relation values={model["@relations"].hasPseudonym} linkTo="authorIndex" />
 						}
 					</li>
 					<li className="list-group-item">
@@ -116,7 +116,7 @@ class BasicInfo extends React.Component {
 						{ editable
 							? <RelationField name="isRelatedTo" path={metadata.properties.find((p) => p.name === "isRelatedTo").quicksearch}
 								onChange={onChange} entity={this.props.entity} />
-							: <Relation values={model["@relations"].isRelatedTo} onSelect={this.props.onSelectAuthor}/>
+							: <Relation values={model["@relations"].isRelatedTo} linkTo="authorIndex" />
 						}
 					</li>
 					<li className="list-group-item">

@@ -16,7 +16,7 @@ class AuthorSearch extends React.Component {
 	}
 
 	render() {
-		const { personSearch, onSelectAuthor } = this.props;
+		const { personSearch } = this.props;
 		return (
 			<SolrFacetedSearch
 				{...personSearch}
@@ -24,7 +24,7 @@ class AuthorSearch extends React.Component {
 				bootstrapCss={true}
 				customComponents={customComponents}
 				truncateFacetListsAt={20}
-				onSelectDoc={(id) => onSelectAuthor(id)}
+				onSelectDoc={() => {}}
 			/>
 		);
 	}

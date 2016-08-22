@@ -75,8 +75,6 @@ export default function actionsMaker(navigateTo, dispatch) {
 		},
 
 		/** AUTHORS **/
-		onSelectAuthor: (id, tab = null) => navigateTo("authorTab", [id, tab]),
-
 		onFetchAuthor: (id) => {
 			dispatch(selectEntity("wwpersons", id));
 		},
@@ -101,18 +99,14 @@ export default function actionsMaker(navigateTo, dispatch) {
 			);
 		},
 
-		onCancelNewAuthor: () => navigateTo("authorSearch"),
-
-		/** PUBLICATIONS **/
-		onSelectPublication: (id, tab = null) => {
-			console.log("onSelectPublication: ", id);
-		},
-
-		/** COLLECTIVES **/
-		onSelectCollective: (id) => {
-			console.log("onSelectCollective: ", id);
-		},
-
+		onCancelAuthor: (id, tab) => {
+			if (id) {
+				dispatch(selectEntity("wwpersons", id));
+				navigateTo("authorTab", [id, tab]);
+			} else {
+				navigateTo("authorSearch");
+			}
+		}
 	};
 	return actions;
 }

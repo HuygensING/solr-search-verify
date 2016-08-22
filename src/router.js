@@ -62,14 +62,22 @@ const urls = {
 		`/womenwriters/vre/persons/${id}/${tab}/edit`
 		: "/womenwriters/vre/persons/:id/:tab/edit",
 
-	authorNew: () => "/womenwriters/vre/persons/new"
+	authorNew: () => "/womenwriters/vre/persons/new",
+
+	publicationIndex: (id = null) => id ?
+		`/womenwriters/vre/documents/${id}`
+		: "/womenwriters/vre/documents/:id",
+
+	collectiveIndex: (id = null) => id ?
+		`/womenwriters/vre/collectives/${id}`
+		: "/womenwriters/vre/collectives/:id",
 };
 
 
 
 export { urls };
 
-function navigateTo(key, args) {
+export function navigateTo(key, args) {
 	browserHistory.push(urls[key].apply(null, args));
 }
 
