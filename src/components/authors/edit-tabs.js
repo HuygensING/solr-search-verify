@@ -5,13 +5,15 @@ import PersonalSituation from "./tabs/personal-situation";
 import ProfessionalSituation from "./tabs/professional-situation";
 import Publications from "./tabs/publications";
 import Receptions from "./tabs/receptions";
+import Links from "./tabs/links";
 
 const components = {
 	"basic-info": BasicInfo,
 	"personal-situation": PersonalSituation,
 	"professional-situation": ProfessionalSituation,
 	"publications": Publications,
-	"receptions": Receptions
+	"receptions": Receptions,
+	"links": Links
 };
 
 class AuthorEditTabs extends React.Component {
@@ -24,7 +26,6 @@ class AuthorEditTabs extends React.Component {
 
 		return ChildComponent ? (<div>
 				<ChildComponent
-					author={this.props.entity.data}
 					entity={this.props.entity}
 					editable={true}
 					onChange={this.props.onChange}

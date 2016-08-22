@@ -8,7 +8,7 @@ class Receptions extends React.Component {
 	render() {
 
 		const listIsEmpty = authorReceptionDefinitions.outBound
-			.map((receptionType) => (this.props.author["@relations"][receptionType] || []))
+			.map((receptionType) => (this.props.entity.data["@relations"][receptionType] || []))
 			.filter((receptions) => receptions.length > 0)
 			.length === 0;
 
@@ -36,7 +36,7 @@ class Receptions extends React.Component {
 			) : (
 				<ul className="list-group">
 					{authorReceptionDefinitions.outBound.map((receptionType, j) => {
-						const receptions = (this.props.author["@relations"][receptionType] || [])
+						const receptions = (this.props.entity.data["@relations"][receptionType] || [])
 							.sort((a, b) => a.displayName.localeCompare(b.displayName));
 						return receptions.length ? (
 							<RelationList
@@ -52,5 +52,6 @@ class Receptions extends React.Component {
 		}
 	}
 }
+
 
 export default Receptions;
