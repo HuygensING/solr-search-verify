@@ -10,23 +10,24 @@ import ModifiedBy from "../values/modified-by";
 class AuthorIndex extends React.Component {
 
 	componentDidMount() {
-		const {entity, onFetchAuthorFromRoute, onNewAuthor, params: { id }} = this.props;
+		const {entity, onFetchAuthor, onNewAuthor, params: { id }} = this.props;
 
 		// If the requested id from the route does not match the data, or if there is no data
+		console.log("componentDidMount");
 		if ((!entity.data && id) || (id && entity.data && entity.data._id !== id) ) {
 			// Fetch the correct author based on the id.
-			onFetchAuthorFromRoute(id);
+			onFetchAuthor(id);
 		} else if (!id) {
 			onNewAuthor();
 		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { onFetchAuthorFromRoute } = this.props;
+		const { onFetchAuthor } = this.props;
 
-		// Handles back- and forward button navigation when no remount happened
+		// Triggers fetch data from server based on id from route.
 		if (this.props.params.id !== nextProps.params.id) {
-			onFetchAuthorFromRoute(nextProps.params.id);
+			onFetchAuthor(nextProps.params.id);
 		}
 	}
 

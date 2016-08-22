@@ -75,14 +75,9 @@ export default function actionsMaker(navigateTo, dispatch) {
 		},
 
 		/** AUTHORS **/
-		onSelectAuthor: (id, tab = null) => {
-			dispatch(makeNewEntity("wwpersons"));
-			dispatch(selectEntity("wwpersons", id, null, null, () => navigateTo("authorTab", [id, tab])));
-		},
+		onSelectAuthor: (id, tab = null) => navigateTo("authorTab", [id, tab]),
 
-		// Fetches an author without navigation (on order to correctly handle routing)
-		onFetchAuthorFromRoute: (id) => {
-			dispatch(makeNewEntity("wwpersons"));
+		onFetchAuthor: (id) => {
 			dispatch(selectEntity("wwpersons", id));
 		},
 
