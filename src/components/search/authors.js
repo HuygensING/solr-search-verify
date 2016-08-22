@@ -1,7 +1,7 @@
 import React from "react";
 import SolrFacetedSearch from "solr-faceted-search-react";
 import searchClient from "../../search-clients/person-search-client";
-import customComponents from "../custom/persons";
+import customComponents from "./custom/persons";
 
 
 class AuthorSearch extends React.Component {

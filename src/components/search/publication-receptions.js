@@ -1,7 +1,7 @@
 import React from "react";
 import SolrFacetedSearch from "solr-faceted-search-react";
 import searchClient from "../../search-clients/document-reception-search-client";
-import customComponents from "../custom/document-receptions";
+import customComponents from "./custom/document-receptions";
 
 import { setPersonQueryFromDocumentFilters } from "../../search-clients/person-search-client";
 import { setDocumentQueryFromDocumentReceptionFilters } from "../../search-clients/document-search-client";

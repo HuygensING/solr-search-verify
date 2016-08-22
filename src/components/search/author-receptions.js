@@ -1,6 +1,6 @@
 import React from "react";
 import SolrFacetedSearch from "solr-faceted-search-react";
-import customComponents from "../custom/person-receptions";
+import customComponents from "./custom/person-receptions";
 import searchClient from "../../search-clients/person-reception-search-client";
 
 import { setPersonQueryFromPersonReceptionFilters } from "../../search-clients/person-search-client";

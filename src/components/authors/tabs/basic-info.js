@@ -23,6 +23,7 @@ class BasicInfo extends React.Component {
 
 		const { editable, onChange, metadata } = this.props;
 
+
 		return (
 			<div>
 				<ul className="record list-group">
