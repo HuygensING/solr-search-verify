@@ -26,7 +26,7 @@ class KeywordField extends React.Component {
 			<span>
 				<SelectList
 					onChange={this.onChange.bind(this)}
-					options={this.props.fieldDefinition.options}
+					options={this.props.options}
 					values={values.filter((val) => val.accepted).map((val) => { return { value: val.displayName, key: val.id}; })}
 				/>
 			</span>
@@ -36,7 +36,7 @@ class KeywordField extends React.Component {
 
 KeywordField.propTypes = {
 	entity: React.PropTypes.object,
-	fieldDefinition: React.PropTypes.object,
+	options: React.PropTypes.array,
 	name: React.PropTypes.string,
 	onChange: React.PropTypes.func
 };
