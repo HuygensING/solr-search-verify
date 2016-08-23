@@ -6,6 +6,7 @@ import PublicationTabs from "./tabs";
 import PublicationHeader from "./header";
 import PublicationPageLinks from "./pagelinks/publication";
 import PublicationReceptionPageLinks from "./pagelinks/publication-reception"
+import AuthorReceptionPageLinks from "./pagelinks/author-reception";
 import ModifiedBy from "../values/modified-by";
 
 
@@ -37,7 +38,7 @@ class PublicationIndex extends React.Component {
 			location: { pathname },
 			params: { tab },
 			user,
-			pagination: { publicationPages, publicationReceptionPages }
+			pagination: { publicationPages, publicationReceptionPages, authorReceptionPages }
 		} = this.props;
 
 
@@ -71,6 +72,8 @@ class PublicationIndex extends React.Component {
 
 		const pageLinks = inPublicationReceptions
 			? <PublicationReceptionPageLinks entity={entity} publicationReceptionPages={publicationReceptionPages} />
+			: inAuthorReceptions
+			? <AuthorReceptionPageLinks entity={entity} authorReceptionPages={authorReceptionPages} />
 			: <PublicationPageLinks entity={entity} publicationPages={publicationPages} />
 
 

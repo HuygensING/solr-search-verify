@@ -62,4 +62,25 @@ const setPublicationReceptionPages = (state) => (redispatch, getState) => {
 	});
 };
 
-export { setAuthorPages, setPublicationPages, setPublicationReceptionPages };
+const setAuthorReceptionPages = (state) => (redispatch, getState) => {
+	const { query } = state;
+	const newQuery = solrPaginationQuery(query, ["reception_id_s"]);
+	const lastQuery = solrPaginationQuery(getState().personReceptionSearch.query, ["reception_id_s"]);
+	if (newQuery === lastQuery) { return; }
+
+	server.fastXhr({
+		url: "/repositorysolr/wwpersonreceptions",
+		method: "POST",
+		data: newQuery,
+		headers: {
+			"Content-type": "application/x-www-form-urlencoded"
+		}
+	}, (err, resp, body) => {
+		redispatch({
+			type: "SET_AUTHOR_RECEPTION_PAGES",
+			ids: JSON.parse(body).response.docs.map((doc) => doc.reception_id_s)
+		});
+	});
+};
+
+export { setAuthorPages, setPublicationPages, setPublicationReceptionPages, setAuthorReceptionPages };
