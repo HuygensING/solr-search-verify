@@ -113,8 +113,8 @@ export default function actionsMaker(navigateTo, dispatch) {
 
 		onDeleteAuthor: (id, tab) => {
 			dispatch(deleteEntity(
-				() => { console.log("delete success"); navigateTo("authorSearch"); },
-				() => { console.log("delete error"); navigateTo("authorTab", [id, tab]); }
+				() => { navigateTo("authorSearch"); },
+				() => { navigateTo("authorTab", [id, tab]); }
 			));
 		},
 
@@ -126,6 +126,39 @@ export default function actionsMaker(navigateTo, dispatch) {
 		onNewPublication: () => {
 			dispatch(makeNewEntity("wwdocuments", null, () => navigateTo("publicationNew")));
 		},
+
+		onSavePublication: (id, tab) => {
+			dispatch(saveEntity((savedId) =>
+					navigateTo("publicationTab", [savedId, tab])
+				), (savedId) =>
+					navigateTo("publicationTab", [savedId, tab])
+			);
+		},
+
+		onSaveNewPublication: () => {
+			dispatch(saveEntity((savedId) =>
+					navigateTo("publicationIndex", [savedId])
+				), () =>
+					navigateTo("publicationNew")
+			);
+		},
+
+		onCancelPublication: (id, tab) => {
+			if (id) {
+				dispatch(selectEntity("wwdocuments", id));
+				navigateTo("publicationTab", [id, tab]);
+			} else {
+				navigateTo("publicationSearch");
+			}
+		},
+
+		onDeletePublication: (id, tab) => {
+			dispatch(deleteEntity(
+				() => { navigateTo("publicationSearch"); },
+				() => { navigateTo("publicationTab", [id, tab]); }
+			));
+		},
+
 	};
 	return actions;
 }
