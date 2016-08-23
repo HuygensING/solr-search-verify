@@ -13,7 +13,6 @@ class AuthorIndex extends React.Component {
 		const {entity, onFetchAuthor, onNewAuthor, params: { id }} = this.props;
 
 		// If the requested id from the route does not match the data, or if there is no data
-		console.log("componentDidMount");
 		if ((!entity.data && id) || (id && entity.data && entity.data._id !== id) ) {
 			// Fetch the correct author based on the id.
 			onFetchAuthor(id);
@@ -35,7 +34,7 @@ class AuthorIndex extends React.Component {
 	render() {
 		const {entity, location: { pathname }, params: { tab }, user} = this.props;
 
-		if (!entity.data) { return null; }
+		if (!entity.data || entity.data["@type"] !== "wwperson") { return null; }
 
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;

@@ -167,10 +167,4 @@ class BasicInfo extends React.Component {
 	}
 }
 
-BasicInfo.propTypes = {
-	author: React.PropTypes.object,
-	genderMap: React.PropTypes.object,
-	onNavigate: React.PropTypes.func
-};
-
 export default BasicInfo;
