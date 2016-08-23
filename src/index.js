@@ -11,42 +11,36 @@ import { browserHistory } from "react-router";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-	const unsubscribe = store.subscribe(() => {
-		if(store.getState().vre.vreId) {
-			ReactDOM.render(router, document.getElementById("app"), () => {
-				// Response will trigger all searches
-				if (location.hash.length > 0) {
-					try {
-						const initialSearchState = JSON.parse(decodeURIComponent(location.hash.replace(/^#q=/, "")));
-						personSearchClient.setInitialQuery(initialSearchState.authors || {});
-						documentSearchClient.setInitialQuery(initialSearchState.publications || {});
-						personReceptionSearchClient.setInitialQuery(initialSearchState.authorReceptions || {})
-						documentReceptionSearchClient.setInitialQuery(initialSearchState.publicationReceptions || {});
-					} catch (e) {
-						console.log(e);
-					}
-				}
-				store.subscribe(() => {
-					if (location.pathname !== urls.authorSearch(true) &&
-						location.pathname !== urls.publicationSearch(true) &&
-						location.pathname !== urls.authorReceptionSearch(true) &&
-						location.pathname !== urls.publicationReceptionSearch(true)) {
-						return;
-					}
+	const afterInit = () => {
+		ReactDOM.render(router, document.getElementById("app"));
+		store.subscribe(() => {
+			if (location.pathname !== urls.authorSearch(true) &&
+				location.pathname !== urls.publicationSearch(true) &&
+				location.pathname !== urls.authorReceptionSearch(true) &&
+				location.pathname !== urls.publicationReceptionSearch(true)) {
+				return;
+			}
 
-					const serialized = `${location.pathname}?#q=${serializeSearch()}`;
-					if (location.pathname + "#" + location.hash !== serialized) {
-						browserHistory.replace(`${location.pathname}#q=${serializeSearch()}`);
-					}
-				});
-				personSearchClient.initialize();
-			});
+			const serialized = `${location.pathname}?#q=${serializeSearch()}`;
+			if (location.pathname + "#" + location.hash !== serialized) {
+				browserHistory.replace(`${location.pathname}#q=${serializeSearch()}`);
+			}
+		});
+	};
 
-
-			unsubscribe();
+	if (location.hash.length > 0) {
+		try {
+			const initialSearchState = JSON.parse(decodeURIComponent(location.hash.replace(/^#q=/, "")));
+			personSearchClient.setInitialQuery(initialSearchState.authors || {});
+			documentSearchClient.setInitialQuery(initialSearchState.publications || {});
+			personReceptionSearchClient.setInitialQuery(initialSearchState.authorReceptions || {})
+			documentReceptionSearchClient.setInitialQuery(initialSearchState.publicationReceptions || {});
+		} catch (e) {
+			console.log(e);
 		}
-	});
+	}
 
-	store.dispatch(setVre("WomenWriters"));
+	personSearchClient.initialize();
+	store.dispatch(setVre("WomenWriters", afterInit));
 
 });

@@ -3,6 +3,7 @@ import store from "../reducers/store";
 import clone from "../util/clone";
 import filtersAreEqual from "../util/filters-are-equal";
 import { setDocumentReceptionsFiltersFromDocumentQuery } from "./document-reception-search-client";
+import { setPublicationPages } from "../actions/pagination";
 
 const documentFilters = [
 	{field: "type_s", value: "document"}
@@ -37,6 +38,7 @@ const documentSearchClient = new SolrClient({
 	filters: documentFilters,
 	onChange: (state) => {
 		setDocumentReceptionsFiltersFromDocumentQuery(state);
+		store.dispatch(setPublicationPages(state));
 		store.dispatch({type: "SET_DOCUMENT_SEARCH_STATE", state: state});
 	}
 });

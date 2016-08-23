@@ -2,7 +2,7 @@ import server from "./server";
 import config from "../config";
 import keywords from "../definitions/keywords";
 
-const setVre = (vreId) => (dispatch) =>
+const setVre = (vreId, afterInit) => (dispatch) =>
 	server.performXhr({
 		method: "GET",
 		headers: {
@@ -52,6 +52,7 @@ const setVre = (vreId) => (dispatch) =>
 			// Dispatch SET_VRE only after all keywords are resolved from the server.
 			Promise.all(promises).then(() => {
 				dispatch({type: "SET_VRE", vreId: vreId, collections: collectionMetadata});
+				afterInit();
 			});
 		}
 	}, () => dispatch({type: "SET_VRE", vreId: vreId, collections: {}}), `Fetch VRE description for ${vreId}`);
