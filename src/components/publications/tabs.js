@@ -1,9 +1,11 @@
 import React from "react";
 import SaveFooter from "../save-footer";
 import BasicInfo from "./tabs/basic-info";
+import Receptions from "./tabs/receptions";
 
 const components = {
 	"basic-info": BasicInfo,
+	"receptions": Receptions,
 };
 
 class PublicationTabs extends React.Component {
