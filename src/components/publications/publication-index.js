@@ -30,10 +30,18 @@ class PublicationIndex extends React.Component {
 
 
 	render() {
-		const {entity, location: { pathname }, params: { tab }, user} = this.props;
+		const {
+			entity,
+			location: { pathname },
+			params: { tab },
+			user,
+			pagination: { publicationPages }
+		} = this.props;
 
 
 		if (!entity.data || entity.data["@type"] !== "wwdocument") { return null; }
+
+
 
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;
@@ -59,6 +67,14 @@ class PublicationIndex extends React.Component {
 			}
 			return toEdit ? urls.publicationEdit(id, toTab) : urls.publicationTab(id, toTab);
 		};
+
+
+		const pageIndex = publicationPages.indexOf(entity.data._id);
+		const nextPublication = pageIndex > -1 && pageIndex < publicationPages.length - 1 ?
+			<Link className="btn btn-default pull-right" to={urls.publicationIndex(publicationPages[pageIndex + 1])}>Next ▸</Link> : null;
+
+		const prevPublication = pageIndex > -1 && pageIndex > 0 ?
+			<Link className="btn btn-default pull-right" to={urls.publicationIndex(publicationPages[pageIndex - 1])}>◂ Previous</Link> : null;
 
 		const editButton = loggedIn && id && !editing ?
 			<Link className="btn btn-default" to={tabRoute(tab || "basic-info", true)}>
@@ -103,6 +119,8 @@ class PublicationIndex extends React.Component {
 						/>
 					</div>
 					<div className="col-md-3">
+						{nextPublication}
+						{prevPublication}
 					</div>
 				</div>
 
