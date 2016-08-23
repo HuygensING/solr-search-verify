@@ -29,6 +29,7 @@ class AuthorTabs extends React.Component {
 		const saveFooter = this.props.editable
 			? (<SaveFooter
 				onSave={this.props.onSaveNewAuthor}
+				onDelete={() => this.props.onCancelAuthor()}
 				onCancel={() => this.props.onCancelAuthor()}
 			/>) : null;
 
