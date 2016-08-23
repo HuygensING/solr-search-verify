@@ -6,6 +6,7 @@ import entity from "./entity";
 import vre from "./vre";
 import user from "./user";
 import messages from "./messages";
+import pagination from "./pagination";
 
 export default {
 	personSearch: personSearch,
@@ -13,6 +14,7 @@ export default {
 	documentReceptionSearch: documentReceptionSearch,
 	messages: messages,
 	personReceptionSearch: personReceptionSearch,
+	pagination: pagination,
 	entity: entity,
 	user: user,
 	vre: vre

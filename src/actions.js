@@ -2,6 +2,7 @@ import { setDocumentFiltersFromPersonQuery } from "./search-clients/document-sea
 import { setDocumentReceptionsFiltersFromDocumentQuery } from "./search-clients/document-reception-search-client";
 import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/person-reception-search-client";
 import { selectEntity, makeNewEntity, saveEntity, deleteEntity } from "./actions/entity";
+import { setAuthorPages } from "./actions/pagination";
 
 const setUser = (response) => {
 	return {
@@ -28,6 +29,7 @@ export default function actionsMaker(navigateTo, dispatch) {
 		onAuthorSearchChange: (state) => {
 			setDocumentFiltersFromPersonQuery(state);
 			setPersonReceptionsFiltersFromPersonQuery(state);
+			dispatch(setAuthorPages(state));
 			dispatch({type: "SET_PERSON_SEARCH_STATE", state: state});
 		},
 

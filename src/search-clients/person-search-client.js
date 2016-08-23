@@ -1,6 +1,7 @@
 import { SolrClient } from "solr-faceted-search-react";
 import { setDocumentFiltersFromPersonQuery } from "./document-search-client";
 import { setPersonReceptionsFiltersFromPersonQuery } from "./person-reception-search-client";
+import { setAuthorPages } from "../actions/pagination";
 
 import store from "../reducers/store";
 
@@ -47,6 +48,7 @@ const personSearchClient = new SolrClient({
 	onChange: (state) => {
 		setDocumentFiltersFromPersonQuery(state);
 		setPersonReceptionsFiltersFromPersonQuery(state);
+		store.dispatch(setAuthorPages(state));
 		store.dispatch({type: "SET_PERSON_SEARCH_STATE", state: state});
 	}
 });

@@ -32,9 +32,22 @@ class AuthorIndex extends React.Component {
 
 
 	render() {
-		const {entity, location: { pathname }, params: { tab }, user} = this.props;
+		const {
+			entity,
+			location: { pathname },
+			params: { tab },
+			user,
+			pagination: { authorPages }
+		} = this.props;
 
 		if (!entity.data || entity.data["@type"] !== "wwperson") { return null; }
+
+		const pageIndex = authorPages.indexOf(entity.data._id);
+		const nextAuthor = pageIndex > -1 && pageIndex < authorPages.length - 1 ?
+			<Link className="btn btn-default pull-right" to={urls.authorIndex(authorPages[pageIndex + 1])}>Next ▸</Link> : null;
+
+		const prevAuthor = pageIndex > -1 && pageIndex > 0 ?
+			<Link className="btn btn-default pull-right" to={urls.authorIndex(authorPages[pageIndex - 1])}>◂ Previous</Link> : null;
 
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;
@@ -79,7 +92,7 @@ class AuthorIndex extends React.Component {
 
 		return (
 			<div className={cx("author", "overview", {"transaction-pending": entity.transactionPending})}>
-				<div className="col-md-12 row m-b-1">
+				<div className="col-md-12 row">
 					<div className="col-md-3">
 						<Link className="btn btn-default" to={urls.authorSearch()}>◂ Results</Link>
 					</div>
@@ -87,6 +100,8 @@ class AuthorIndex extends React.Component {
 						<AuthorHeader author={entity.data} />
 					</div>
 					<div className="col-md-3">
+						{nextAuthor}
+						{prevAuthor}
 					</div>
 				</div>
 				<div className="col-md-12 row">
