@@ -14,7 +14,7 @@ class App extends React.Component {
 
 		const loggedIn = user && user.token;
 		const authorsIsActive = pathname.match(/^\/womenwriters\/vre\/persons/);
-		const publicationsIsActive = pathname === urls.publicationSearch(true);
+		const publicationsIsActive = pathname.match(/^\/womenwriters\/vre\/documents/);
 		const receptionsIsActive = pathname.match(/receptions\/(authors|publications)\/?$/);
 		const authorReceptionsIsActive = pathname === urls.authorReceptionSearch(true);
 		const publicationReceptionsIsActive = pathname === urls.publicationReceptionSearch(true);
