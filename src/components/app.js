@@ -30,6 +30,7 @@ class App extends React.Component {
 			<Link to={urls.publicationReceptionSearch()}>Receptions</Link>;
 
 		const newAuthorButton = loggedIn ? <button onClick={this.props.onNewAuthor}>New author</button> : null;
+		const newPublicationButton = loggedIn ? <button onClick={this.props.onNewPublication}>New publication</button> : null;
 		return (
 			<div>
 				<header>
@@ -43,6 +44,7 @@ class App extends React.Component {
 							<Basic url={config.basicAuthenticateUrl} />
 						</Login>
 						{newAuthorButton}
+						{newPublicationButton}
 					</div>
 					<nav className="navbar navbar-default">
 						<ul className="nav navbar-nav">
