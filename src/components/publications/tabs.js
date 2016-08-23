@@ -15,9 +15,11 @@ class PublicationTabs extends React.Component {
 	render() {
 		if (this.props.children) { return (<div>{this.props.children}</div>); }
 
-		const { params: { id, tab }, user } = this.props;
+		const { params: { id, tab }, user, location: { pathname } } = this.props;
 		const componentId = tab || "basic-info";
 		const ChildComponent = components[componentId] || null;
+
+		const inPublicationReceptions = pathname.match(/\/receptions\/publications\//);
 
 		const saveFooter = this.props.editable
 			? (<SaveFooter
@@ -33,6 +35,7 @@ class PublicationTabs extends React.Component {
 						authorized={user && user.token}
 						entity={this.props.entity}
 						editable={this.props.editable}
+						linkToView={inPublicationReceptions ? "publicationReceptionIndex" : "publicationIndex"}
 						onChange={this.props.onChange}
 						metadata={this.props.vre.collections.wwdocuments}
 					/>

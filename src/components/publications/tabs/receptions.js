@@ -6,6 +6,8 @@ import RelationField from "../../form-fields/relation";
 class Receptions extends React.Component {
 
 	renderReceptionList(inboundOrOutboundReceptions) {
+		const { linkToView } = this.props;
+
 		return inboundOrOutboundReceptions.map((receptionType, j) => {
 			const receptions = (this.props.entity.data["@relations"][receptionType] || [])
 				.sort((a, b) => a.displayName.localeCompare(b.displayName));
@@ -14,7 +16,7 @@ class Receptions extends React.Component {
 					key={j}
 					label={publicationReceptionDefinitions.overviewLabels[receptionType]}
 					relations={receptions}
-					linkTo="publicationIndex"
+					linkTo={linkToView}
 				/>
 			) : null;
 		});

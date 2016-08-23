@@ -8,6 +8,7 @@ const receptionOfRelations = publicationReceptionDefinitions.inBound;
 
 class PublicationHeader extends React.Component {
 	render() {
+		const { linkToView } = this.props;
 		const receptionOf = Object.keys(this.props.publication["@relations"]).filter((relName) => receptionOfRelations.indexOf(relName) > -1);
 		const receptions = receptionOf.length ? receptionOf
 			.map((relName) => this.props.publication["@relations"][relName])
@@ -18,7 +19,7 @@ class PublicationHeader extends React.Component {
 			<small className="receptions">
 				<span>Reception on</span>
 				{ receptions.map((reception, i) => (
-					<Link key={i} to={urls.publicationIndex(reception.id)}>
+					<Link key={i} to={urls[linkToView](reception.id)}>
 						{reception.displayName}
 					</Link>
 				))}

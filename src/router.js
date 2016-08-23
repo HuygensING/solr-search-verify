@@ -84,6 +84,18 @@ const urls = {
 
 	publicationNew: () => "/womenwriters/vre/documents/new",
 
+	publicationReceptionIndex: (id = null) => id ?
+		`/womenwriters/vre/receptions/publications/${id}`
+		: "/womenwriters/vre/receptions/publications/:id",
+
+	publicationReceptionTab: (id = null, tab = null) => id && tab ?
+		`/womenwriters/vre/receptions/publications/${id}/${tab}` : id ?
+		`/womenwriters/vre/receptions/publications/${id}` : "/womenwriters/vre/receptions/publications/:id/:tab",
+
+	publicationReceptionEdit: (id = null, tab = null) => id && tab ?
+		`/womenwriters/vre/receptions/publications/${id}/${tab}/edit`
+		: "/womenwriters/vre/receptions/publications/:id/:tab/edit",
+
 	collectiveIndex: (id = null) => id ?
 		`/womenwriters/vre/collectives/${id}`
 		: "/womenwriters/vre/collectives/:id",
@@ -122,6 +134,11 @@ const router = (
 					</Route>
 				</Route>
 
+				<Route path={urls.publicationReceptionIndex()} component={makeContainerComponent(PublicationIndex)}>
+					<Route path={urls.publicationReceptionTab()} component={makeContainerComponent(PublicationTabs)}>
+						<Route path={urls.publicationReceptionEdit()} component={makeContainerComponent(PublicationEditTabs)} />
+					</Route>
+				</Route>
 			</Route>
 		</Router>
 	</Provider>

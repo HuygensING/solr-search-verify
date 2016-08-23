@@ -39,13 +39,25 @@ class PublicationIndex extends React.Component {
 		const id = entity.data._id || null;
 
 		const editing = !entity.transactionPending && loggedIn && (pathname.match(/\/edit$/) || pathname.match(/\/new$/));
+		const inPublicationReceptions = pathname.match(/\/receptions\/publications\//);
+
+		const resultLocation = inPublicationReceptions
+			? urls.publicationReceptionSearch()
+			: urls.publicationSearch();
+
+		const tabRoute = (toTab, setToEdit = false) => {
+			const toEdit = setToEdit ? true : editing;
+
+			if (inPublicationReceptions) {
+				return toEdit ? urls.publicationReceptionEdit(id, toTab) : urls.publicationReceptionTab(id, toTab);
+			}
+			return toEdit ? urls.publicationEdit(id, toTab) : urls.publicationTab(id, toTab);
+		};
 
 		const editButton = loggedIn && id && !editing ?
-			<Link className="btn btn-default" to={urls.publicationEdit(id, tab || "basic-info")}>
+			<Link className="btn btn-default" to={tabRoute(tab || "basic-info", true)}>
 				Edit
 			</Link> : null;
-
-		const tabRoute = (toTab) => editing ? urls.publicationEdit(id, toTab) : urls.publicationTab(id, toTab);
 
 		const tabLinks = id ? (
 			<div className="list-group">
@@ -72,10 +84,10 @@ class PublicationIndex extends React.Component {
 
 				<div className="col-md-12 row m-b-1">
 					<div className="col-md-3">
-						<Link className="btn btn-default" to={urls.publicationSearch()}>◂ Results</Link>
+						<Link className="btn btn-default" to={resultLocation}>◂ Results</Link>
 					</div>
 					<div className="col-md-6">
-						<PublicationHeader publication={entity.data} />
+						<PublicationHeader publication={entity.data} linkToView={inPublicationReceptions ? "publicationReceptionIndex" : "publicationIndex"} />
 					</div>
 					<div className="col-md-3">
 					</div>

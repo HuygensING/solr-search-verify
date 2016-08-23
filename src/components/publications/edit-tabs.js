@@ -13,22 +13,35 @@ const components = {
 class PublicationEditTabs extends React.Component {
 
 	render() {
-		const { params: { id, tab }, user } = this.props;
+		const { params: { id, tab }, user, location: { pathname } } = this.props;
 
 		const componentId = tab || "basic-info";
 		const ChildComponent = components[componentId] || null;
+
+		const inPublicationReceptions = pathname.match(/\/receptions\/publications\//);
+
+		const { onSave, onDelete, onCancel } = {
+			onSave: inPublicationReceptions
+				? () => this.props.onSavePublication(id, componentId, "publicationReception")
+				: () => this.props.onSavePublication(id, componentId),
+			onDelete: inPublicationReceptions
+				? () => this.props.onDeletePublication(id, componentId, "publicationReception")
+				: () => this.props.onDeletePublication(id, componentId),
+			onCancel: inPublicationReceptions
+				? () => this.props.onCancelPublication(id, componentId, "publicationReception")
+				: () => this.props.onCancelPublication(id, componentId)
+		};
 
 		return ChildComponent ? (<div>
 				<ChildComponent
 					authorized={user && user.token}
 					entity={this.props.entity}
 					editable={true}
+					linkToView={inPublicationReceptions ? "publicationReceptionIndex" : "publicationIndex"}
 					onChange={this.props.onChange}
 					metadata={this.props.vre.collections.wwdocuments}
 				/>
-				<SaveFooter onSave={() => this.props.onSavePublication(id, componentId)}
-							onDelete={() => this.props.onDeletePublication(id, componentId)}
-							onCancel={() => this.props.onCancelPublication(id, componentId)} />
+				<SaveFooter onSave={onSave} onDelete={onDelete} onCancel={onCancel} />
 			</div>
 		) : null;
 	}
