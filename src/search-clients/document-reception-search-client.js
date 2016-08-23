@@ -2,6 +2,7 @@ import { SolrClient } from "solr-faceted-search-react";
 import store from "../reducers/store";
 import clone from "../util/clone";
 import filtersAreEqual from "../util/filters-are-equal";
+import { setPublicationReceptionPages } from "../actions/pagination";
 
 const documentFilters = [
 	{field: "type_s", value: "document_reception"}
@@ -36,7 +37,10 @@ const searchClient = new SolrClient({
 	pageStrategy: "paginate",
 	facetSort: "count",
 	filters: documentFilters,
-	onChange: (state) => store.dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state})
+	onChange: (state) => {
+		store.dispatch(setPublicationReceptionPages(state));
+		store.dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state});
+	}
 });
 
 

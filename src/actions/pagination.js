@@ -40,4 +40,26 @@ const setPublicationPages = (state) => (redispatch, getState) => {
 	});
 };
 
-export { setAuthorPages, setPublicationPages };
+const setPublicationReceptionPages = (state) => (redispatch, getState) => {
+	const { query } = state;
+	const newQuery = solrPaginationQuery(query, ["reception_id_s", "document_id_s"]);
+	const lastQuery = solrPaginationQuery(getState().documentReceptionSearch.query, ["reception_id_s", "document_id_s"]);
+	if (newQuery === lastQuery) { return; }
+
+	server.fastXhr({
+		url: "/repositorysolr/wwdocumentreceptions",
+		method: "POST",
+		data: newQuery,
+		headers: {
+			"Content-type": "application/x-www-form-urlencoded"
+		}
+	}, (err, resp, body) => {
+		redispatch({
+			type: "SET_PUBLICATION_RECEPTION_PAGES",
+			receptionIds: JSON.parse(body).response.docs.map((doc) => doc.reception_id_s),
+			documentIds: JSON.parse(body).response.docs.map((doc) => doc.document_id_s)
+		});
+	});
+};
+
+export { setAuthorPages, setPublicationPages, setPublicationReceptionPages };

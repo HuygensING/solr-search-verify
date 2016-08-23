@@ -1,6 +1,10 @@
 const initialState = {
 	authorPages: [],
-	publicationPages: []
+	publicationPages: [],
+	publicationReceptionPages: {
+		documentIds: [],
+		receptionIds: []
+	}
 };
 
 
@@ -10,6 +14,14 @@ export default function(state=initialState, action) {
 			return {...state, authorPages: action.ids};
 		case "SET_PUBLICATION_PAGES":
 			return {...state, publicationPages: action.ids};
+		case "SET_PUBLICATION_RECEPTION_PAGES":
+			return {
+				...state,
+				publicationReceptionPages: {
+					documentIds: action.documentIds,
+					receptionIds: action.receptionIds
+				}
+			};
 	}
 	return state;
 }

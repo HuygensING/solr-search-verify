@@ -47,7 +47,7 @@ const buildSort = (sortFields) => sortFields
 	.map((sortField) => encodeURIComponent(`${sortField.field} ${sortField.value}`))
 	.join(",");
 
-const buildPaginationQuery = (query) => {
+const buildPaginationQuery = (query, idFields = ["id"]) => {
 	const {
 		searchFields,
 		sortFields
@@ -60,7 +60,7 @@ const buildPaginationQuery = (query) => {
 	return `q=*:*&${queryParams.length > 0 ? queryParams : ""}` +
 		`${sortParam.length > 0 ? `&sort=${sortParam}` : ""}` +
 		`&rows=100000` +
-		`&fl=id` +
+		`&fl=${idFields.join(",")}` +
 		"&wt=json";
 };
 
