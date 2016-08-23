@@ -13,6 +13,11 @@ const setVre = (vreId) => (dispatch) =>
 		if (resp.statusCode === 200) {
 			var collectionMetadata = JSON.parse(resp.body);
 
+			// Add default value for author gender and children
+			collectionMetadata.wwpersons.properties = collectionMetadata.wwpersons.properties.map((prop) =>
+				prop.name === "gender" || prop.name === "children" ? {...prop, defaultValue: "UNKNOWN"} : prop
+			);
+
 			// Add all keyword values as options to the metadata
 			const promises = Object.keys(collectionMetadata)
 				// Make a flat list of all property definitions from metadata (with a back reference* to the collection key)
