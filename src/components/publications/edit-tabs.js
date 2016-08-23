@@ -1,13 +1,9 @@
 import React from "react";
 import SaveFooter from "../save-footer";
+import BasicInfo from "./tabs/basic-info";
 
 const components = {
-/*	"basic-info": BasicInfo,
-	"personal-situation": PersonalSituation,
-	"professional-situation": ProfessionalSituation,
-	"publications": Publications,
-	"receptions": Receptions,
-	"links": Links*/
+	"basic-info": BasicInfo,
 };
 
 class PublicationEditTabs extends React.Component {

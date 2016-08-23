@@ -33,7 +33,7 @@ class PublicationIndex extends React.Component {
 		const {entity, location: { pathname }, params: { tab }, user} = this.props;
 
 
-		if (!entity.data) { return null; }
+		if (!entity.data || entity.data["@type"] !== "wwdocument") { return null; }
 
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;
