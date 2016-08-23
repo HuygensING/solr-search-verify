@@ -1,7 +1,8 @@
 import React from "react";
 import DocumentCurrentQuery from "./current-query/document";
 import { defaultComponentPack } from "solr-faceted-search-react";
-
+import { Link } from "react-router";
+import { urls } from "../../../router";
 
 const documentComponents = {
 	...defaultComponentPack,
@@ -17,9 +18,9 @@ const documentComponents = {
 					<span style={{display: "flex"}}>
 					<span style={{flexGrow: 1}}>
 						{authorName}
-						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.id}`} >
+						<Link to={urls.publicationIndex(props.doc.id)}>
 							{props.doc.displayName_s}
-						</a>
+						</Link>
 					</span>
 						<span style={{"flexShrink": 1, color: "#888", whiteSpace: "nowrap"}}>
 						{(props.doc.publishLocation_ss || []).join()}{" "}

@@ -1,6 +1,8 @@
 import React from "react";
 import DocumentReceptionCurrentQuery from "./current-query/document-receptions";
 import {defaultComponentPack} from "solr-faceted-search-react";
+import { Link } from "react-router";
+import { urls } from "../../../router";
 
 
 const documentComponents = {
@@ -18,9 +20,9 @@ const documentComponents = {
 				<li className="list-group-item">
 					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
 						{authorName}
-						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.reception_id_s}`}>
+						<Link to={urls.publicationIndex(props.doc.reception_id_s)}>
 							{props.doc.displayName_s}
-						</a>
+						</Link>
 						<br />
 						<span style={{color: "#888"}}>
 							<span style={{float: "right"}}>{props.doc.date_i}</span>
@@ -32,9 +34,9 @@ const documentComponents = {
 					</div>
 					<div style={{width: "42%", display: "inline-block", verticalAlign: "top"}}>
 						{authorName1}
-						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.document_id_s}`}>
+						<Link to={urls.publicationIndex(props.doc.document_id_s)}>
 							{props.doc.document_displayName_s}
-						</a>
+						</Link>
 						<br />
 						<span style={{color: "#888"}}>
 							<span style={{float: "right"}}>{props.doc.document_date_i}</span>

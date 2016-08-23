@@ -1,6 +1,8 @@
 import React from "react";
 import PersonReceptionCurrentQuery from "./current-query/person-receptions";
 import {defaultComponentPack} from "solr-faceted-search-react";
+import { Link } from "react-router";
+import { urls } from "../../../router";
 
 
 const documentComponents = {
@@ -15,9 +17,9 @@ const documentComponents = {
 				<li className="list-group-item">
 					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
 						{authorName}
-						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/documents/${props.doc.reception_id_s}`}>
+						<Link to={urls.publicationIndex(props.doc.reception_id_s)}>
 							{props.doc.displayName_s}
-						</a>
+						</Link>
 						<br />
 						<span style={{color: "#888"}}>
 							<span style={{float: "right"}}>{props.doc.date_i}</span>
@@ -28,9 +30,9 @@ const documentComponents = {
 						{props.doc.relationType_s}
 					</div>
 					<div style={{width: "42%", display: "inline-block", verticalAlign: "top"}}>
-						<a href={`http://resources.huygens.knaw.nl/womenwriters/vre/persons/${props.doc.person_id_s}`}>
+						<Link to={urls.authorIndex(props.doc.person_id_s)}>
 							{props.doc.person_displayName_s}
-						</a>
+						</Link>
 						<br />
 						<span style={{color: "#666"}}>
 							{props.doc.person_birthDate_i} - {props.doc.person_deathDate_i}

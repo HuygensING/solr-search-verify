@@ -4,13 +4,19 @@ import { Router, Route, browserHistory } from "react-router";
 import { Provider, connect } from "react-redux";
 import App from "./components/app";
 import actions from "./actions";
+
 import AuthorSearch from "./components/search/authors";
 import PublicationSearch from "./components/search/publications";
 import AuthorReceptionSearch from "./components/search/author-receptions";
 import PublicationReceptionSearch from "./components/search/publication-receptions";
+
 import AuthorIndex from "./components/authors/author-index";
 import AuthorTabs from "./components/authors/tabs";
 import AuthorEditTabs from "./components/authors/edit-tabs";
+
+import PublicationIndex from "./components/publications/publication-index";
+import PublicationTabs from "./components/publications/tabs";
+import PublicationEditTabs from "./components/publications/edit-tabs";
 
 const grabQuery = (search) => ({
 	searchFields: search.query.searchFields.filter((sf) => sf.value && sf.value.length),
@@ -68,6 +74,16 @@ const urls = {
 		`/womenwriters/vre/documents/${id}`
 		: "/womenwriters/vre/documents/:id",
 
+	publicationTab: (id = null, tab = null) => id && tab ?
+		`/womenwriters/vre/documents/${id}/${tab}` : id ?
+		`/womenwriters/vre/documents/${id}` : "/womenwriters/vre/documents/:id/:tab",
+
+	publicationEdit: (id = null, tab = null) => id && tab ?
+		`/womenwriters/vre/documents/${id}/${tab}/edit`
+		: "/womenwriters/vre/documents/:id/:tab/edit",
+
+	publicationNew: () => "/womenwriters/vre/documents/new",
+
 	collectiveIndex: (id = null) => id ?
 		`/womenwriters/vre/collectives/${id}`
 		: "/womenwriters/vre/collectives/:id",
@@ -91,11 +107,18 @@ const router = (
 				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
 				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
 				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
-				<Route path={urls.authorNew()} component={makeContainerComponent(AuthorIndex)} />
 
+				<Route path={urls.authorNew()} component={makeContainerComponent(AuthorIndex)} />
 				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)}>
 					<Route path={urls.authorTab()} component={makeContainerComponent(AuthorTabs)}>
 						<Route path={urls.authorEdit()} component={makeContainerComponent(AuthorEditTabs)} />
+					</Route>
+				</Route>
+
+				<Route path={urls.publicationNew()} component={makeContainerComponent(PublicationIndex)} />
+				<Route path={urls.publicationIndex()} component={makeContainerComponent(PublicationIndex)}>
+					<Route path={urls.publicationTab()} component={makeContainerComponent(PublicationTabs)}>
+						<Route path={urls.publicationEdit()} component={makeContainerComponent(PublicationEditTabs)} />
 					</Route>
 				</Route>
 

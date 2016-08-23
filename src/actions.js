@@ -116,7 +116,16 @@ export default function actionsMaker(navigateTo, dispatch) {
 				() => { console.log("delete success"); navigateTo("authorSearch"); },
 				() => { console.log("delete error"); navigateTo("authorTab", [id, tab]); }
 			));
-		}
+		},
+
+		/** PUBLICATIONS **/
+		onFetchPublication: (id) => {
+			dispatch(selectEntity("wwdocuments", id));
+		},
+
+		onNewPublication: () => {
+			dispatch(makeNewEntity("wwdocuments", null, () => navigateTo("publicationNew")));
+		},
 	};
 	return actions;
 }
