@@ -28,13 +28,16 @@ class AuthorEditTabs extends React.Component {
 				<ChildComponent
 					authorized={user && user.token}
 					entity={this.props.entity}
-					editable={true}
+					editable={user && user.token}
 					onChange={this.props.onChange}
 					metadata={this.props.vre.collections.wwpersons}
 				/>
-				<SaveFooter onSave={() => this.props.onSaveAuthor(id, componentId)}
-							onDelete={() => this.props.onDeleteAuthor(id, componentId)}
-							onCancel={() => this.props.onCancelAuthor(id, componentId)} />
+				{ user && user.token
+					? <SaveFooter onSave={() => this.props.onSaveAuthor(id, componentId)}
+						onDelete={() => this.props.onDeleteAuthor(id, componentId)}
+						onCancel={() => this.props.onCancelAuthor(id, componentId)} />
+					: null
+				}
 			</div>
 		) : null;
 	}

@@ -43,7 +43,7 @@ class PublicationEditTabs extends React.Component {
 				<ChildComponent
 					authorized={user && user.token}
 					entity={this.props.entity}
-					editable={true}
+					editable={user && user.token}
 					linkToView={
 						inPublicationReceptions ? "publicationReceptionIndex"
 							: inAuthorReceptions ? "authorReceptionIndex"
@@ -52,7 +52,10 @@ class PublicationEditTabs extends React.Component {
 					onChange={this.props.onChange}
 					metadata={this.props.vre.collections.wwdocuments}
 				/>
-				<SaveFooter onSave={onSave} onDelete={onDelete} onCancel={onCancel} />
+				{ user && user.token
+					? <SaveFooter onSave={onSave} onDelete={onDelete} onCancel={onCancel}/>
+					: null
+				}
 			</div>
 		) : null;
 	}
