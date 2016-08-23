@@ -2,10 +2,12 @@ import React from "react";
 import SaveFooter from "../save-footer";
 import BasicInfo from "./tabs/basic-info";
 import Receptions from "./tabs/receptions";
+import Links from "./tabs/links";
 
 const components = {
 	"basic-info": BasicInfo,
 	"receptions": Receptions,
+	"links": Links
 };
 
 class PublicationEditTabs extends React.Component {

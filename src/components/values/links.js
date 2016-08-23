@@ -6,11 +6,17 @@ class Links extends React.Component {
 
 		if (this.props.values.length) {
 
-			links = this.props.values.map((link, index) =>
-				<li key={link.url + index} className="list-group-item">
-					<a href={link.url}>{link.label}</a>
-				</li>
-			);
+			links = this.props.values.map((link, index) => {
+				let { url, label } = link;
+				if(!url.match(/^http/)) {
+					url = `http://${url}`;
+				}
+				return (
+					<li key={link.url + index} className="list-group-item">
+						<a href={url} target="_blank">{label}</a>
+					</li>
+				);
+			});
 
 			links = <ul className="list-group">{links}</ul>;
 		} else {
