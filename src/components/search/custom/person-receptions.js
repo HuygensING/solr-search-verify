@@ -17,7 +17,7 @@ const documentComponents = {
 				<li className="list-group-item">
 					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
 						{authorName}
-						<Link to={urls.publicationIndex(props.doc.reception_id_s)}>
+						<Link to={urls.authorReceptionIndex(props.doc.reception_id_s)}>
 							{props.doc.displayName_s}
 						</Link>
 						<br />

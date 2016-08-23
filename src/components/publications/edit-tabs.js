@@ -19,16 +19,23 @@ class PublicationEditTabs extends React.Component {
 		const ChildComponent = components[componentId] || null;
 
 		const inPublicationReceptions = pathname.match(/\/receptions\/publications\//);
+		const inAuthorReceptions = pathname.match(/\/receptions\/authors\//);
 
 		const { onSave, onDelete, onCancel } = {
 			onSave: inPublicationReceptions
 				? () => this.props.onSavePublication(id, componentId, "publicationReception")
+				: inAuthorReceptions
+				? () => this.props.onSavePublication(id, componentId, "authorReception")
 				: () => this.props.onSavePublication(id, componentId),
 			onDelete: inPublicationReceptions
 				? () => this.props.onDeletePublication(id, componentId, "publicationReception")
+				: inAuthorReceptions
+				? () => this.props.onDeletePublication(id, componentId, "authorReception")
 				: () => this.props.onDeletePublication(id, componentId),
 			onCancel: inPublicationReceptions
 				? () => this.props.onCancelPublication(id, componentId, "publicationReception")
+				: inAuthorReceptions
+				? () => this.props.onCancelPublication(id, componentId, "authorReception")
 				: () => this.props.onCancelPublication(id, componentId)
 		};
 
@@ -37,7 +44,11 @@ class PublicationEditTabs extends React.Component {
 					authorized={user && user.token}
 					entity={this.props.entity}
 					editable={true}
-					linkToView={inPublicationReceptions ? "publicationReceptionIndex" : "publicationIndex"}
+					linkToView={
+						inPublicationReceptions ? "publicationReceptionIndex"
+							: inAuthorReceptions ? "authorReceptionIndex"
+							: "publicationIndex"
+					}
 					onChange={this.props.onChange}
 					metadata={this.props.vre.collections.wwdocuments}
 				/>
