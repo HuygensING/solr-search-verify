@@ -116,7 +116,11 @@ const urls = {
 		: "/womenwriters/vre/collectives/:id",
 };
 
-
+const filterAuthorized = (redirectTo) => (nextState, replace) => {
+	if (!localStorage.getItem("WomenWriters-auth-token")) {
+		replace(redirectTo);
+	}
+}
 
 export { urls };
 
@@ -134,7 +138,7 @@ const router = (
 				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
 				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
 				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
-				<Route path={urls.modifiedSearch()} component={makeContainerComponent(ModifiedSearch)} />
+				<Route path={urls.modifiedSearch()} component={makeContainerComponent(ModifiedSearch)} onEnter={filterAuthorized(urls.authorSearch())} />
 				<Route path={urls.authorNew()} component={makeContainerComponent(AuthorIndex)} />
 				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)}>
 					<Route path={urls.authorTab()} component={makeContainerComponent(AuthorTabs)}>
