@@ -28,7 +28,7 @@ const fetchEntity = (location, next, fail) =>
 	server.performXhr({
 		method: "GET",
 		headers: {"Accept": "application/json"},
-		url: location
+		url: location.replace("/domain/", "/womenwritersdomain/")
 	}, (err, resp) => {
 		const data = JSON.parse(resp.body);
 		next(data);
