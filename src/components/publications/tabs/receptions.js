@@ -1,11 +1,12 @@
 import publicationReceptionDefinitions from "../../../definitions/publication-receptions";
+import authorReceptionDefinitions from "../../../definitions/author-receptions";
 import React from "react";
 import RelationList from "../../values/relation-list";
 import RelationField from "../../form-fields/relation";
 
 class Receptions extends React.Component {
 
-	renderReceptionList(inboundOrOutboundReceptions) {
+	renderReceptionList(inboundOrOutboundReceptions, labels) {
 		const { linkToView } = this.props;
 
 		return inboundOrOutboundReceptions.map((receptionType, j) => {
@@ -14,7 +15,7 @@ class Receptions extends React.Component {
 			return receptions.length ? (
 				<RelationList
 					key={j}
-					label={publicationReceptionDefinitions.overviewLabels[receptionType]}
+					label={labels[receptionType]}
 					relations={receptions}
 					linkTo={linkToView}
 				/>
@@ -22,12 +23,12 @@ class Receptions extends React.Component {
 		});
 	}
 
-	renderReceptionEdit(inboundOrOutboundReceptions) {
+	renderReceptionEdit(inboundOrOutboundReceptions, labels) {
 		const { onChange, metadata } = this.props;
 
 		return inboundOrOutboundReceptions.map((receptionType, i) => (
 			<li className="list-group-item" key={i}>
-				<label>{publicationReceptionDefinitions.overviewLabels[receptionType]}</label>
+				<label>{labels[receptionType]}</label>
 				<RelationField name={receptionType}
 							   path={metadata.properties.find((p) => p.name === receptionType).quicksearch}
 							   onChange={onChange} entity={this.props.entity}
@@ -38,10 +39,27 @@ class Receptions extends React.Component {
 
 	render() {
 
-		const listIsEmpty = publicationReceptionDefinitions.outBound.concat(publicationReceptionDefinitions.inBound)
+		const listIsEmpty = publicationReceptionDefinitions.outBound
+				.concat(publicationReceptionDefinitions.inBound)
+				.concat(authorReceptionDefinitions.inBound)
 				.map((receptionType) => (this.props.entity.data["@relations"][receptionType] || []))
 				.filter((receptions) => receptions.length > 0)
 				.length === 0;
+
+		const hasOutBound = publicationReceptionDefinitions.outBound
+				.map((receptionType) => (this.props.entity.data["@relations"][receptionType] || []))
+				.filter((receptions) => receptions.length > 0)
+				.length > 0;
+
+		const hasInbound = publicationReceptionDefinitions.inBound
+				.map((receptionType) => (this.props.entity.data["@relations"][receptionType] || []))
+				.filter((receptions) => receptions.length > 0)
+				.length > 0;
+
+		const hasAuthorInbound = authorReceptionDefinitions.inBound
+				.map((receptionType) => (this.props.entity.data["@relations"][receptionType] || []))
+				.filter((receptions) => receptions.length > 0)
+				.length > 0;
 
 		const { editable } = this.props;
 
@@ -51,11 +69,15 @@ class Receptions extends React.Component {
 					<li className="list-group-item">
 						<h3>Publication has receptions</h3>
 					</li>
-					{this.renderReceptionEdit(publicationReceptionDefinitions.outBound)}
+					{this.renderReceptionEdit(publicationReceptionDefinitions.outBound, publicationReceptionDefinitions.overviewLabels)}
 					<li className="list-group-item">
 						<h3>Publication is a reception of</h3>
 					</li>
-					{this.renderReceptionEdit(publicationReceptionDefinitions.inBound)}
+					{this.renderReceptionEdit(publicationReceptionDefinitions.inBound, publicationReceptionDefinitions.overviewLabels)}
+					<li className="list-group-item">
+						<h3>Publication is a reception of author</h3>
+					</li>
+					{this.renderReceptionEdit(authorReceptionDefinitions.inBound, authorReceptionDefinitions.overviewLabels)}
 				</ul>
 			);
 		} else {
@@ -65,8 +87,24 @@ class Receptions extends React.Component {
 				</ul>
 			) : (
 				<ul className="list-group">
-					{this.renderReceptionList(publicationReceptionDefinitions.outBound)}
-					{this.renderReceptionList(publicationReceptionDefinitions.inBound)}
+					{hasOutBound ? (
+						<li className="list-group-item">
+							<h3>Publication has receptions</h3>
+						</li>
+					) : null }
+					{this.renderReceptionList(publicationReceptionDefinitions.outBound, publicationReceptionDefinitions.overviewLabels)}
+					{hasInbound ? (
+						<li className="list-group-item">
+							<h3>Publication is a reception of</h3>
+						</li>
+					) : null }
+					{this.renderReceptionList(publicationReceptionDefinitions.inBound, publicationReceptionDefinitions.overviewLabels)}
+					{hasAuthorInbound ? (
+						<li className="list-group-item">
+							<h3>Publication is a reception of author</h3>
+						</li>
+					) : null }
+					{this.renderReceptionList(authorReceptionDefinitions.inBound, authorReceptionDefinitions.overviewLabels)}
 				</ul>
 			);
 		}

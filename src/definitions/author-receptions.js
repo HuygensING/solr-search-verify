@@ -30,6 +30,16 @@ export default {
 		"isPersonMentionedIn": "Mentioned in",
 		"hasObituary": "Obituary",
 		"isPersonQuotedIn": "Quoted in",
-		"isPersonReferencedIn": "Referenced in"
+		"isPersonReferencedIn": "Referenced in",
+
+		"isBiographyOf": "Is a biography of",
+		"commentsOnPerson": "Is a comment on",
+		"isDedicatedTo": "Is dedicated to",
+		"isAwardForPerson": "Awards",
+		"listsPerson": "Lists",
+		"mentionsPerson": "Mentions",
+		"isObituaryOf": "Is an obituary of",
+		"quotesPerson": "Quotes",
+		"referencesPerson": "References"
 	}
 };
