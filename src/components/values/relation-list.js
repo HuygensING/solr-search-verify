@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router";
 import { urls } from "../../router";
+import authorReceptionDefinitions from "../../definitions/author-receptions";
+
 
 const genderMap = {
 	"FEMALE": " ♀",
@@ -14,18 +16,23 @@ class RelationList extends React.Component {
 				<label>{this.props.label}</label>
 				<span>
 					<ul>
-						{this.props.relations.map((relation, i) => (
-							<li className="list-group-item" key={i}>
-								<div>
-									<Link to={urls[this.props.linkTo](relation.id)}>
-										{i + 1}. {relation.displayName}
-									</Link>
-								</div>
-								{relation.authors.map((author, j) => <span className="relation-author" key={j}>
-									{author.displayName}{author.gender ? genderMap[author.gender] : ""}
-								</span> )}
-							</li>
-						))}
+						{this.props.relations.map((relation, i) => {
+							const url = authorReceptionDefinitions.inBound.indexOf(relation.relationType) > -1 ?
+								urls.authorIndex(relation.id) : urls[this.props.linkTo](relation.id);
+
+							return (
+								<li className="list-group-item" key={i}>
+									<div>
+										<Link to={url}>
+											{i + 1}. {relation.displayName}
+										</Link>
+									</div>
+									{relation.authors.map((author, j) => <span className="relation-author" key={j}>
+										{author.displayName}{author.gender ? genderMap[author.gender] : ""}
+									</span> )}
+								</li>
+							);
+						})}
 					</ul>
 				</span>
 			</li>
