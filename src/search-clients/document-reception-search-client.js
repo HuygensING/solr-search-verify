@@ -9,10 +9,11 @@ const documentFilters = [
 ];
 
 const documentSortFields = [
-	{label: "Author", field: "authorNameSort_s"},
-	{label: "Title", field: "displayName_s"},
-	{label: "Date", field: "date_i"},
-	{label: "Modified", field: "modified_l"}
+	{label: "Publication title", field: "document_displayName_s"},
+	{label: "Publication author", field: "document_authorNameSort_s"},
+	{label: "Reception author", field: "authorNameSort_s"},
+	{label: "Reception title", field: "displayName_s"},
+	{label: "Reception date", field: "date_i"}
 ];
 
 const documentFields = [
