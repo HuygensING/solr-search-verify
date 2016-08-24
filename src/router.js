@@ -9,6 +9,7 @@ import AuthorSearch from "./components/search/authors";
 import PublicationSearch from "./components/search/publications";
 import AuthorReceptionSearch from "./components/search/author-receptions";
 import PublicationReceptionSearch from "./components/search/publication-receptions";
+import ModifiedSearch from "./components/search/modified";
 
 import AuthorIndex from "./components/authors/author-index";
 import AuthorTabs from "./components/authors/tabs";
@@ -55,6 +56,8 @@ const urls = {
 	publicationReceptionSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/receptions/publications" :
 		`/womenwriters/vre/receptions/publications#q=${serializeSearch()}`,
+
+	modifiedSearch: () => "/womenwriters/vre/modified",
 
 	authorIndex: (id = null) => id ?
 		`/womenwriters/vre/persons/${id}`
@@ -131,7 +134,7 @@ const router = (
 				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
 				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
 				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
-
+				<Route path={urls.modifiedSearch()} component={makeContainerComponent(ModifiedSearch)} />
 				<Route path={urls.authorNew()} component={makeContainerComponent(AuthorIndex)} />
 				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)}>
 					<Route path={urls.authorTab()} component={makeContainerComponent(AuthorTabs)}>

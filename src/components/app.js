@@ -18,6 +18,7 @@ class App extends React.Component {
 		const receptionsIsActive = pathname.match(/receptions\/(authors|publications)\/?/);
 		const authorReceptionsIsActive = pathname === urls.authorReceptionSearch(true);
 		const publicationReceptionsIsActive = pathname === urls.publicationReceptionSearch(true);
+		const modifiedIsActive = pathname === urls.modifiedSearch();
 
 		const receptionToggle = authorReceptionsIsActive || publicationReceptionsIsActive ? (
 			<div className="btn-group">
@@ -31,6 +32,7 @@ class App extends React.Component {
 
 		const newAuthorButton = loggedIn ? <button onClick={this.props.onNewAuthor}>New author</button> : null;
 		const newPublicationButton = loggedIn ? <button onClick={this.props.onNewPublication}>New publication</button> : null;
+
 		return (
 			<div>
 				<header>
@@ -57,6 +59,12 @@ class App extends React.Component {
 							<li className={cx({active: receptionsIsActive})}>
 								{receptionLink}
 							</li>
+							{ loggedIn ? (
+								<li className={cx({active: modifiedIsActive})}>
+									<Link to={urls.modifiedSearch()}>Last modifications</Link>
+								</li>
+								) : null
+							}
 						</ul>
 					</nav>
 				</header>

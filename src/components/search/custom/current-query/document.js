@@ -41,7 +41,7 @@ class CurrentQuery extends React.Component {
 			case "text": return (
 				<span className={cx({"label": bootstrapCss, "label-default": bootstrapCss})}
 					onClick={() => this.removeTextValue(searchField.field, changeFunc)}>
-					{searchField.value}
+					{searchField.value.replace(/^\(/, "").replace(/\)$/, "")}
 					<a>❌</a>
 				</span>
 			);

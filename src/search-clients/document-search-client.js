@@ -51,7 +51,7 @@ const setDocumentFiltersFromPersonQuery = (personState) => {
 		.filter((searchField) => searchField.value && searchField.value.length > 0)
 		.map((searchField) => ({
 			field: `{!parent which=type_s:document}person_${searchField.field}`,
-			value: searchField.value,
+			value: searchField.field.match(/_t$/) ? `(${searchField.value})` : searchField.value,
 			type: searchField.type,
 			label: searchField.label
 		}));
