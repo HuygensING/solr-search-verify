@@ -15,7 +15,7 @@ class D3Graph extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		const { onFetchGraph} = this.props;
+		const { onFetchGraph } = this.props;
 		// Triggers fetch data from server based on id from route.
 		if (this.props.params.id !== nextProps.params.id) {
 			onFetchGraph(nextProps.params.collection, nextProps.params.id);
@@ -23,17 +23,13 @@ class D3Graph extends React.Component {
 	}
 
 	render() {
-		const { graph: { data, table }, onSelectGraph } = this.props;
-
-		console.log(data);
-
+		const { graph: { data, table }, onSelectGraph, onFetchGraphTable } = this.props;
 		if (!data) { return null; }
-
 		return (
 			<div style={{height: window.innerHeight}}>
 				<GraphTable data={table} />
 				<ForceDirectedGraph data={data}
-									onEntityClick={(...args) => console.log("ENT", args)}
+									onEntityClick={(node) => onFetchGraphTable(node.type + "s", node.key.replace(/.*\//, ""))}
 									onNodeClick={(node) => onSelectGraph(node.type + "s", node.key.replace(/.*\//, ""))}/>
 			</div>
 		);

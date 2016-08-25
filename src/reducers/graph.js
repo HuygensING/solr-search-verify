@@ -16,12 +16,6 @@ export default function(state=initialState, action) {
 				data: action.response
 			};
 		case "RECEIVE_GRAPH_TABLE":
-		/*
-		 type: "RECEIVE_GRAPH_TABLE",
-		 response: JSON.parse(body),
-		 id: id,
-		 collection: collection
-		 */
 			return {
 				...state,
 				table: {

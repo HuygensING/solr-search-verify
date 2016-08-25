@@ -8,7 +8,7 @@ const allTypes = authorReceptionDefinitions.outBound.concat(publicationReception
 
 
 
-const fetchDomainMetadata = (collection, id, dispatch) => {
+const fetchGraphTable = (collection, id, dispatch) => {
 	server.fastXhr(`${config.apiUrl["v2.1"]}/domain/ww${collection}/${id}`, (err, resp, body) => {
 			dispatch({
 				type: "RECEIVE_GRAPH_TABLE",
@@ -29,6 +29,7 @@ const parseIncomingGraph = function(data) {
 };
 
 const fetchGraph = (collection, id, types = null) => (dispatch) => {
+	dispatch({type: "REQUEST_GRAPH"});
 	server.fastXhr(`${config.graphUrl}/ww${collection}/${id}?depth=2&types=${(types || allTypes).join("&types=")}`, (err, resp, body) =>
 		dispatch({
 			type: "RECEIVE_GRAPH",
@@ -37,7 +38,7 @@ const fetchGraph = (collection, id, types = null) => (dispatch) => {
 			id: id
 		})
 	);
-	fetchDomainMetadata(collection, id, dispatch);
+	fetchGraphTable(collection, id, dispatch);
 };
 
 
@@ -56,4 +57,4 @@ export function fetchGraphTable(domain, id) {
 	};
 }*/
 
-export { fetchGraph }
+export { fetchGraph, fetchGraphTable }

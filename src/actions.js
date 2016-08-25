@@ -3,7 +3,7 @@ import { setDocumentReceptionsFiltersFromDocumentQuery } from "./search-clients/
 import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/person-reception-search-client";
 import { selectEntity, makeNewEntity, saveEntity, deleteEntity } from "./actions/entity";
 import { setAuthorPages, setPublicationPages, setPublicationReceptionPages, setAuthorReceptionPages } from "./actions/pagination";
-import { fetchGraph } from "./actions/graph";
+import { fetchGraph, fetchGraphTable } from "./actions/graph";
 
 const setUser = (response) => {
 	return {
@@ -139,6 +139,10 @@ export default function actionsMaker(navigateTo, dispatch) {
 
 		onSelectGraph: (collection, id) => {
 			navigateTo("graph", [collection, id]);
+		},
+
+		onFetchGraphTable: (collection, id) => {
+			fetchGraphTable(collection, id, dispatch);
 		}
 	};
 	return actions;
