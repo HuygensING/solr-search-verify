@@ -93,6 +93,9 @@ class PublicationIndex extends React.Component {
 				<Link className={cx("list-group-item", {active: tab === "links"})} to={tabRoute("links")}>
 					Links to online text
 				</Link>
+				<Link className={cx("list-group-item")} to={urls.graph("documents", id)}>
+					Graph
+				</Link>
 			</div>
 		) : loggedIn ? (
 			<div className="list-group">

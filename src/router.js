@@ -19,6 +19,8 @@ import PublicationIndex from "./components/publications/publication-index";
 import PublicationTabs from "./components/publications/tabs";
 import PublicationEditTabs from "./components/publications/edit-tabs";
 
+import D3Graph from "./components/d3-graph/d3-graph";
+
 const grabQuery = (search) => ({
 	searchFields: search.query.searchFields.filter((sf) => sf.value && sf.value.length),
 	sortFields: search.query.sortFields.filter((sf) => sf.value && sf.value.length)
@@ -114,13 +116,17 @@ const urls = {
 	collectiveIndex: (id = null) => id ?
 		`/womenwriters/vre/collectives/${id}`
 		: "/womenwriters/vre/collectives/:id",
+
+	graph: (collection, id) => id && collection ?
+		`/womenwriters/vre/graph/${collection}/${id}`
+		: "/womenwriters/vre/graph/:collection/:id"
 };
 
 const filterAuthorized = (redirectTo) => (nextState, replace) => {
 	if (!localStorage.getItem("WomenWriters-auth-token")) {
 		replace(redirectTo);
 	}
-}
+};
 
 export { urls };
 
@@ -164,6 +170,8 @@ const router = (
 						<Route path={urls.authorReceptionEdit()} component={makeContainerComponent(PublicationEditTabs)} />
 					</Route>
 				</Route>
+
+				<Route path={urls.graph()} component={makeContainerComponent(D3Graph)} />
 			</Route>
 		</Router>
 	</Provider>

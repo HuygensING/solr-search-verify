@@ -3,6 +3,7 @@ import { setDocumentReceptionsFiltersFromDocumentQuery } from "./search-clients/
 import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/person-reception-search-client";
 import { selectEntity, makeNewEntity, saveEntity, deleteEntity } from "./actions/entity";
 import { setAuthorPages, setPublicationPages, setPublicationReceptionPages, setAuthorReceptionPages } from "./actions/pagination";
+import { fetchGraph } from "./actions/graph";
 
 const setUser = (response) => {
 	return {
@@ -131,6 +132,11 @@ export default function actionsMaker(navigateTo, dispatch) {
 			));
 		},
 
+		/** D3 graph **/
+		onFetchGraph: (collection, id) => {
+			dispatch(fetchGraph(collection, id));
+/*			console.log(`go fetch graph ${collection}/${id}`);*/
+		}
 	};
 	return actions;
 }

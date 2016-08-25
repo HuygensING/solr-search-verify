@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "hire-force-directed-graph": "^1.1.1",
     "hire-forms-autocomplete-list": "git+https://github.com/Hire-Forms/hire-forms-autocomplete-list.git#react-0.14",
     "hire-forms-form": "git+https://github.com/Hire-Forms/hire-forms-form.git#react-0.14",
     "hire-forms-input": "https://github.com/Hire-Forms/hire-forms-input.git#react-0.14",
