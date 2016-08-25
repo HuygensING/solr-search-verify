@@ -33,6 +33,7 @@ class App extends React.Component {
 
 		const newAuthorButton = loggedIn ? <button onClick={this.props.onNewAuthor}>New author</button> : null;
 		const newPublicationButton = loggedIn ? <button onClick={this.props.onNewPublication}>New publication</button> : null;
+		const newCollectiveButton = loggedIn ? <button onClick={this.props.onNewCollective}>New collective</button> : null;
 
 		return (
 			<div>
@@ -48,6 +49,7 @@ class App extends React.Component {
 						</Login>
 						{newAuthorButton}
 						{newPublicationButton}
+						{newCollectiveButton}
 					</div>
 					<nav className="navbar navbar-default">
 						<ul className="nav navbar-nav">

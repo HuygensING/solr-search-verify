@@ -54,9 +54,13 @@ class CollectiveIndex extends React.Component {
 
 
 		const saveFooter = editing ?
-			<SaveFooter onSave={() => this.props.onSaveCollective()}
-						onDelete={() => this.props.onDeleteCollective(id)}
-						onCancel={() => this.props.onCancelCollective(id)} /> : null;
+			(pathname.match(/\/new$/)
+			? <SaveFooter onSave={() => this.props.onSaveCollective()}
+						  onDelete={() => this.props.onCancelCollective()}
+						  onCancel={() => this.props.onCancelCollective()} />
+			: <SaveFooter onSave={() => this.props.onSaveCollective()}
+					onDelete={() => this.props.onDeleteCollective(id)}
+					onCancel={() => this.props.onCancelCollective(id)} />) : null;
 
 		const editButton = loggedIn && id && !editing ?
 			<Link className="btn btn-default" to={urls.collectiveEdit(id)}>

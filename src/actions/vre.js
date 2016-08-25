@@ -23,6 +23,11 @@ const setVre = (vreId, afterInit) => (dispatch) =>
 				prop.name === "documentType" ? {...prop, defaultValue: "UNKNOWN"} : prop
 			);
 
+			// Add default value for collective type
+			collectionMetadata.wwcollectives.properties = collectionMetadata.wwcollectives.properties.map((prop) =>
+				prop.name === "type" ? {...prop, defaultValue: "UNKNOWN"} : prop
+			);
+
 			// Add all keyword values as options to the metadata
 			const promises = Object.keys(collectionMetadata)
 				// Make a flat list of all property definitions from metadata (with a back reference* to the collection key)

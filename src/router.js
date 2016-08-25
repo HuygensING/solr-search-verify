@@ -118,6 +118,8 @@ const urls = {
 		`/womenwriters/vre/receptions/authors/${id}/${tab}/edit`
 		: "/womenwriters/vre/receptions/authors/:id/:tab/edit",
 
+	collectiveNew: () => "/womenwriters/vre/collectives/new",
+
 	collectiveIndex: (id = null) => id ?
 		`/womenwriters/vre/collectives/${id}`
 		: "/womenwriters/vre/collectives/:id",
@@ -183,7 +185,7 @@ const router = (
 					</Route>
 				</Route>
 
-
+				<Route path={urls.collectiveNew()} component={makeContainerComponent(CollectiveIndex)} />
 				<Route path={urls.collectiveIndex()} component={makeContainerComponent(CollectiveIndex)} />
 				<Route path={urls.collectiveEdit()} component={makeContainerComponent(CollectiveIndex)} />
 
