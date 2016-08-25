@@ -113,12 +113,12 @@ class CollectiveIndex extends React.Component {
 
 							<li className="list-group-item">
 								<label>Is storage of</label>
-								<Relation values={entity.data["@relations"].isStorageOf} linkTo="documentIndex" />
+								<Relation values={entity.data["@relations"].isStorageOf} linkTo="publicationIndex" />
 							</li>
 
 							<li className="list-group-item">
 								<label>Is publisher of</label>
-								<Relation values={entity.data["@relations"].isPublisherOf} linkTo="documentIndex" />
+								<Relation values={entity.data["@relations"].isPublisherOf} linkTo="publicationIndex" />
 							</li>
 
 							<li className="list-group-item">
