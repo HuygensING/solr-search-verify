@@ -132,6 +132,40 @@ export default function actionsMaker(navigateTo, dispatch) {
 			));
 		},
 
+		/** COLLECTIVES **/
+		onFetchCollective: (id) => {
+			dispatch(selectEntity("wwcollectives", id));
+		},
+
+		onNewCollective: () => {
+			dispatch(makeNewEntity("wwcollectives", null, () => navigateTo("collectiveNew")));
+		},
+
+		onSaveCollective: () => {
+			dispatch(saveEntity((savedId) =>
+					navigateTo("collectiveIndex", [savedId])
+				), (savedId) =>
+					navigateTo("collectiveIndex", [savedId])
+			);
+		},
+
+		onCancelCollective: (id) => {
+			if (id) {
+				dispatch(selectEntity("wwcollectives", id));
+				navigateTo("collectiveIndex", [id]);
+			} else {
+				navigateTo("collectiveSearch");
+			}
+		},
+
+		onDeleteCollective: (id) => {
+			dispatch(deleteEntity(
+				() => { navigateTo("collectiveSearch"); },
+				() => { navigateTo("collectiveIndex", [id]); }
+			));
+		},
+
+
 		/** D3 graph **/
 		onFetchGraph: (collection, id) => {
 			dispatch(fetchGraph(collection, id));

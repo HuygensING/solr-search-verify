@@ -19,6 +19,9 @@ import PublicationIndex from "./components/publications/publication-index";
 import PublicationTabs from "./components/publications/tabs";
 import PublicationEditTabs from "./components/publications/edit-tabs";
 
+import CollectiveSearch from "./components/search/collectives";
+import CollectiveIndex from "./components/collectives/collective-index";
+
 import D3Graph from "./components/d3-graph/d3-graph";
 
 const grabQuery = (search) => ({
@@ -58,6 +61,8 @@ const urls = {
 	publicationReceptionSearch: (useBase = false) => useBase ?
 		"/womenwriters/vre/receptions/publications" :
 		`/womenwriters/vre/receptions/publications#q=${serializeSearch()}`,
+
+	collectiveSearch: () => "/womenwriters/vre/collectives",
 
 	modifiedSearch: () => "/womenwriters/vre/modified",
 
@@ -117,6 +122,10 @@ const urls = {
 		`/womenwriters/vre/collectives/${id}`
 		: "/womenwriters/vre/collectives/:id",
 
+	collectiveEdit: (id = null) => id ?
+		`/womenwriters/vre/collectives/${id}/edit`
+		: "/womenwriters/vre/collectives/:id/edit",
+
 	graph: (collection, id) => id && collection ?
 		`/womenwriters/vre/graph/${collection}/${id}`
 		: "/womenwriters/vre/graph/:collection/:id"
@@ -144,7 +153,10 @@ const router = (
 				<Route path={urls.publicationSearch(true)} component={makeContainerComponent(PublicationSearch)} />
 				<Route path={urls.authorReceptionSearch(true)} component={makeContainerComponent(AuthorReceptionSearch)} />
 				<Route path={urls.publicationReceptionSearch(true)} component={makeContainerComponent(PublicationReceptionSearch)} />
+				<Route path={urls.collectiveSearch()} component={makeContainerComponent(CollectiveSearch)} onEnter={filterAuthorized(urls.authorSearch())} />
 				<Route path={urls.modifiedSearch()} component={makeContainerComponent(ModifiedSearch)} onEnter={filterAuthorized(urls.authorSearch())} />
+
+
 				<Route path={urls.authorNew()} component={makeContainerComponent(AuthorIndex)} />
 				<Route path={urls.authorIndex()} component={makeContainerComponent(AuthorIndex)}>
 					<Route path={urls.authorTab()} component={makeContainerComponent(AuthorTabs)}>
@@ -170,6 +182,10 @@ const router = (
 						<Route path={urls.authorReceptionEdit()} component={makeContainerComponent(PublicationEditTabs)} />
 					</Route>
 				</Route>
+
+
+				<Route path={urls.collectiveIndex()} component={makeContainerComponent(CollectiveIndex)} />
+				<Route path={urls.collectiveEdit()} component={makeContainerComponent(CollectiveIndex)} />
 
 				<Route path={urls.graph()} component={makeContainerComponent(D3Graph)} />
 			</Route>

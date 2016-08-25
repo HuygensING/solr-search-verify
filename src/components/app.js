@@ -14,6 +14,7 @@ class App extends React.Component {
 
 		const loggedIn = user && user.token;
 		const authorsIsActive = pathname.match(/^\/womenwriters\/vre\/persons/);
+		const collectivesIsActive = pathname.match(/^\/womenwriters\/vre\/collectives/);
 		const publicationsIsActive = pathname.match(/^\/womenwriters\/vre\/documents/);
 		const receptionsIsActive = pathname.match(/receptions\/(authors|publications)\/?/);
 		const authorReceptionsIsActive = pathname === urls.authorReceptionSearch(true);
@@ -59,6 +60,12 @@ class App extends React.Component {
 							<li className={cx({active: receptionsIsActive})}>
 								{receptionLink}
 							</li>
+							{ loggedIn ? (
+								<li className={cx({active: collectivesIsActive})}>
+									<Link to={urls.collectiveSearch()}>Collectives</Link>
+								</li>
+							) : null
+							}
 							{ loggedIn ? (
 								<li className={cx({active: modifiedIsActive})}>
 									<Link to={urls.modifiedSearch()}>Last modifications</Link>
