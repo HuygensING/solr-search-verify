@@ -242,6 +242,55 @@
 		.messages .alert {
 			margin-bottom: 0;
 		}
+		.hire-force-directed-graph svg text {
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+		}
+
+		.hire-force-directed-graph svg text.label:first-of-type {
+			fill: #000;
+			font: 18px sans-serif;
+			margin-left: 12px
+		}
+		.hire-force-directed-graph svg text.label {
+			font: 14px sans-serif
+			margin-left: 10px
+		}
+
+		.hide-relation-labels .hire-force-directed-graph svg text[text-anchor='middle'] {
+			display: none
+		}
+
+		.hire-force-directed-graph svg .node.person {
+			fill: #f0bfff
+		}
+
+		.hire-force-directed-graph svg .link {
+			fill: none;
+			stroke: #e0e0e0;
+			stroke-width: 1.5px;
+		}
+
+		.hire-force-directed-graph svg circle {
+			fill: #009688;
+			stroke: #333;
+			stroke-width: 0;
+		}
+
+		.hire-force-directed-graph svg text {
+			font: 10px sans-serif;
+			fill: #666;
+		}
+
+		.hire-force-directed-graph svg text.label.document {
+			fill: #000;
+			cursor: pointer;
+		}
+
 	</style>
 </head>
 <body>

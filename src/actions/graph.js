@@ -4,7 +4,7 @@ import server from "./server";
 import authorReceptionDefinitions from "../definitions/author-receptions";
 import publicationReceptionDefinitions from "../definitions/publication-receptions";
 
-const allTypes = authorReceptionDefinitions.outBound.concat(publicationReceptionDefinitions.outBound).concat("isCreatedBy")
+const allTypes = authorReceptionDefinitions.outBound.concat(publicationReceptionDefinitions.outBound).concat("isCreatedBy");
 
 /*
 let fetchDomainMetadata = function(domain, id, dispatch) {
@@ -31,7 +31,7 @@ const parseIncomingGraph = function(data) {
 };
 
 const fetchGraph = (collection, id, types = null) => (dispatch) =>
-	server.fastXhr(`${config.graphUrl}/ww${collection}/${id}?depth=1&types=${(types || allTypes).join("&types=")}`,(err, resp, body) =>
+	server.fastXhr(`${config.graphUrl}/ww${collection}/${id}?depth=2&types=${(types || allTypes).join("&types=")}`, (err, resp, body) =>
 		dispatch({
 			type: "RECEIVE_GRAPH",
 			response: parseIncomingGraph(JSON.parse(body)),

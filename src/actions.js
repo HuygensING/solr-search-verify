@@ -135,7 +135,10 @@ export default function actionsMaker(navigateTo, dispatch) {
 		/** D3 graph **/
 		onFetchGraph: (collection, id) => {
 			dispatch(fetchGraph(collection, id));
-/*			console.log(`go fetch graph ${collection}/${id}`);*/
+		},
+
+		onSelectGraph: (collection, id) => {
+			navigateTo("graph", [collection, id]);
 		}
 	};
 	return actions;
