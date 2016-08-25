@@ -6,21 +6,19 @@ import publicationReceptionDefinitions from "../definitions/publication-receptio
 
 const allTypes = authorReceptionDefinitions.outBound.concat(publicationReceptionDefinitions.outBound).concat("isCreatedBy");
 
-/*
-let fetchDomainMetadata = function(domain, id, dispatch) {
-	fetch(`${config.domainUrl}/${domain}/${id}`, (response) => {
-		if(domain === "persons" && response["@variationRefs"].map((v) => v.type).indexOf("wwperson") > -1) {
-			fetchDomainMetadata("wwpersons", id, dispatch);
-		} else {
+
+
+const fetchDomainMetadata = (collection, id, dispatch) => {
+	server.fastXhr(`${config.apiUrl["v2.1"]}/domain/ww${collection}/${id}`, (err, resp, body) => {
 			dispatch({
 				type: "RECEIVE_GRAPH_TABLE",
-				response: response,
-				id: `${domain}/${id}`
+				response: JSON.parse(body),
+				id: id,
+				collection: collection
 			});
-		}
 	});
 };
-*/
+
 
 const parseIncomingGraph = function(data) {
 	for(let i in data.links) {
@@ -30,7 +28,7 @@ const parseIncomingGraph = function(data) {
 	return data;
 };
 
-const fetchGraph = (collection, id, types = null) => (dispatch) =>
+const fetchGraph = (collection, id, types = null) => (dispatch) => {
 	server.fastXhr(`${config.graphUrl}/ww${collection}/${id}?depth=2&types=${(types || allTypes).join("&types=")}`, (err, resp, body) =>
 		dispatch({
 			type: "RECEIVE_GRAPH",
@@ -39,7 +37,8 @@ const fetchGraph = (collection, id, types = null) => (dispatch) =>
 			id: id
 		})
 	);
-/*		fetchDomainMetadata(collection, id, dispatch);*/
+	fetchDomainMetadata(collection, id, dispatch);
+};
 
 
 /*

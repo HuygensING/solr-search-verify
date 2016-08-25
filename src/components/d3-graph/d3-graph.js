@@ -1,5 +1,7 @@
 import React from "react";
 import ForceDirectedGraph from "hire-force-directed-graph";
+import GraphTable from "./table"
+
 
 class D3Graph extends React.Component {
 	componentDidMount() {
@@ -21,7 +23,7 @@ class D3Graph extends React.Component {
 	}
 
 	render() {
-		const { graph: { data }, onSelectGraph } = this.props;
+		const { graph: { data, table }, onSelectGraph } = this.props;
 
 		console.log(data);
 
@@ -29,6 +31,7 @@ class D3Graph extends React.Component {
 
 		return (
 			<div style={{height: window.innerHeight}}>
+				<GraphTable data={table} />
 				<ForceDirectedGraph data={data}
 									onEntityClick={(...args) => console.log("ENT", args)}
 									onNodeClick={(node) => onSelectGraph(node.type + "s", node.key.replace(/.*\//, ""))}/>
