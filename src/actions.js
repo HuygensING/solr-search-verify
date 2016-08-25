@@ -143,6 +143,13 @@ export default function actionsMaker(navigateTo, dispatch) {
 
 		onFetchGraphTable: (collection, id) => {
 			fetchGraphTable(collection, id, dispatch);
+		},
+
+		onGraphRelationTypeChange: (newRelationTypes) => {
+			dispatch((redispatch, getState) => {
+				const { collection, id } = getState().graph;
+				redispatch(fetchGraph(collection, id, newRelationTypes));
+			});
 		}
 	};
 	return actions;

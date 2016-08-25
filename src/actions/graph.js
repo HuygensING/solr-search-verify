@@ -28,14 +28,18 @@ const parseIncomingGraph = function(data) {
 	return data;
 };
 
-const fetchGraph = (collection, id, types = null) => (dispatch) => {
-	dispatch({type: "REQUEST_GRAPH"});
-	server.fastXhr(`${config.graphUrl}/ww${collection}/${id}?depth=2&types=${(types || allTypes).join("&types=")}`, (err, resp, body) =>
+const fetchGraph = (collection, id, requestedTypes = null) => (dispatch) => {
+	const types = requestedTypes ?
+		requestedTypes.filter((type) => type.checked).map((type) => type.name)
+		: allTypes;
+
+	server.fastXhr(`${config.graphUrl}/ww${collection}/${id}?depth=2&types=${types.join("&types=")}`, (err, resp, body) =>
 		dispatch({
 			type: "RECEIVE_GRAPH",
 			response: parseIncomingGraph(JSON.parse(body)),
 			collection: collection,
-			id: id
+			id: id,
+			currentTypes: requestedTypes
 		})
 	);
 	fetchGraphTable(collection, id, dispatch);
