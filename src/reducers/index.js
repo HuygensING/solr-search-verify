@@ -9,13 +9,15 @@ import messages from "./messages";
 import pagination from "./pagination";
 import modifiedSearch from "./modified-search";
 import graph from "./graph";
+import collectiveSearch from "./collective-search";
 
 export default {
 	personSearch: personSearch,
 	documentSearch: documentSearch,
 	documentReceptionSearch: documentReceptionSearch,
-	messages: messages,
 	personReceptionSearch: personReceptionSearch,
+	collectiveSearch: collectiveSearch,
+	messages: messages,
 	pagination: pagination,
 	entity: entity,
 	modifiedSearch: modifiedSearch,

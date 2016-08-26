@@ -5,7 +5,8 @@ const initialState = {
 	publicationReceptionPages: {
 		documentIds: [],
 		receptionIds: []
-	}
+	},
+	collectivePages: []
 };
 
 
@@ -25,6 +26,8 @@ export default function(state=initialState, action) {
 					receptionIds: action.receptionIds
 				}
 			};
+		case "SET_COLLECTIVE_PAGES":
+			return {...state, collectivePages: action.ids};
 	}
 	return state;
 }

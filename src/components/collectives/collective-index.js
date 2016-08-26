@@ -40,7 +40,8 @@ class CollectiveIndex extends React.Component {
 			entity,
 			user,
 			location: { pathname },
-			onChange
+			onChange,
+			pagination: { collectivePages }
 		} = this.props;
 
 		if (!entity.data || entity.data["@type"] !== "wwcollective") { return null; }
@@ -52,6 +53,12 @@ class CollectiveIndex extends React.Component {
 		const metadata = this.props.vre.collections.wwcollectives;
 		const id = entity.data._id || null;
 
+		const pageIndex = collectivePages.indexOf(entity.data._id);
+		const nextCollective = pageIndex > -1 && pageIndex < collectivePages.length - 1 ?
+			<Link className="btn btn-default pull-right" to={urls.collectiveIndex(collectivePages[pageIndex + 1])}>Next ▸</Link> : null;
+
+		const prevCollective = pageIndex > -1 && pageIndex > 0 ?
+			<Link className="btn btn-default pull-right" to={urls.collectiveIndex(collectivePages[pageIndex - 1])}>◂ Previous</Link> : null;
 
 		const saveFooter = editing ?
 			(pathname.match(/\/new$/)
@@ -81,7 +88,8 @@ class CollectiveIndex extends React.Component {
 						</header>
 					</div>
 					<div className="col-md-3">
-
+						{nextCollective}
+						{prevCollective}
 					</div>
 				</div>
 				<div className="col-md-12 row">

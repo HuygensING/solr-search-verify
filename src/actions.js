@@ -4,6 +4,7 @@ import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/pers
 import { selectEntity, makeNewEntity, saveEntity, deleteEntity } from "./actions/entity";
 import { setAuthorPages, setPublicationPages, setPublicationReceptionPages, setAuthorReceptionPages } from "./actions/pagination";
 import { fetchGraph, fetchGraphTable } from "./actions/graph";
+import {setCollectivePages} from "./actions/pagination";
 
 const setUser = (response) => {
 	return {
@@ -49,6 +50,12 @@ export default function actionsMaker(navigateTo, dispatch) {
 			dispatch(setPublicationReceptionPages(state));
 			dispatch({type: "SET_DOCUMENT_RECEPTION_SEARCH_STATE", state: state});
 		},
+
+		onCollectiveSearchChange: (state) => {
+			dispatch(setCollectivePages(state));
+			dispatch({type: "SET_COLLECTIVE_SEARCH_STATE", state: state});
+		},
+
 
 		/** AUTHORS **/
 		onFetchAuthor: (id) => {

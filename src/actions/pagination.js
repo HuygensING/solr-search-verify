@@ -2,12 +2,28 @@ import server from "./server";
 
 import solrPaginationQuery from "../util/solr-pagination-query";
 
+const setCollectivePages = (state) => (redispatch, getState) => {
+	const { query } = state;
+	const newQuery = solrPaginationQuery(query);
+	const lastQuery = solrPaginationQuery(getState().collectiveSearch.query);
+	if (getState().pagination.collectivePages.length > 0 && newQuery === lastQuery) { return; }
+
+	server.fastXhr({
+		url: "/repositorysolr/wwcollectives",
+		method: "POST",
+		data: newQuery,
+		headers: {
+			"Content-type": "application/x-www-form-urlencoded"
+		}
+	}, (err, resp, body) => {
+		redispatch({type: "SET_COLLECTIVE_PAGES", ids: JSON.parse(body).response.docs.map((doc) => doc.id)});
+	});
+};
 
 const setAuthorPages = (state) => (redispatch, getState) => {
 	const { query } = state;
 	const newQuery = solrPaginationQuery(query);
 	const lastQuery = solrPaginationQuery(getState().personSearch.query);
-	if (query.searchFields.length === 0) { return; }
 	if (newQuery === lastQuery) { return; }
 
 	server.fastXhr({
@@ -83,4 +99,4 @@ const setAuthorReceptionPages = (state) => (redispatch, getState) => {
 	});
 };
 
-export { setAuthorPages, setPublicationPages, setPublicationReceptionPages, setAuthorReceptionPages };
+export { setAuthorPages, setPublicationPages, setPublicationReceptionPages, setAuthorReceptionPages, setCollectivePages };

@@ -34,6 +34,9 @@ wwpersonreceptionsOptions.route = "/repositorysolr/wwpersonreceptions";
 var wwdocumentreceptionsOptions = url.parse(localSolr + "/wwdocumentreceptions/select");
 wwdocumentreceptionsOptions.route = "/repositorysolr/wwdocumentreceptions";
 
+var wwcollectivesOptions = url.parse(localSolr + "/wwcollectives/select");
+wwcollectivesOptions.route = "/repositorysolr/wwcollectives";
+
 browserSync.init({
 	server: {
 		baseDir: baseDir,
@@ -42,6 +45,7 @@ browserSync.init({
 			proxy(wwpersonsOptions),
 			proxy(wwdocumentreceptionsOptions),
 			proxy(wwpersonreceptionsOptions),
+			proxy(wwcollectivesOptions),
 			modRewrite([
 				"^/womenwriters/vre/css/(.*)$ /css/$1 [L]",
 				"^/womenwriters/vre/js/(.*).js$ /js/$1.js [L]",
