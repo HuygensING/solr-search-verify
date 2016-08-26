@@ -55,7 +55,7 @@ class D3Graph extends React.Component {
 		));
 
 		return (
-			<div className={cx("graph", {"hide-relation-labels": this.state.hideRelationLabels})} style={{height: window.innerHeight}}>
+			<div className={cx("graph", {"hide-relation-labels": this.state.hideRelationLabels})} style={{height: window.innerHeight - 180}}>
 				<GraphTable data={table} />
 				<ul className="checkboxes list-group">
 					<li className="list-group-item"><h4>Relation types</h4></li>
