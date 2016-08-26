@@ -21,7 +21,11 @@ const documentComponents = {
 				null;
 			return (
 				<li className="list-group-item">
-					<div style={{width: "42%", display: "inline-block", verticalAlign: "top"}}>
+					<span style={{textAlign: "right", display: "inline-block", width: "50px", paddingRight: "10px"}}>
+						{props.start / props.rows * props.rows + props.resultIndex + 1}.
+					</span>
+
+					<div style={{width: "calc(42% - 25px)", display: "inline-block", verticalAlign: "top", paddingRight: "20px"}}>
 						<Link to={urls.authorIndex(props.doc.person_id_s)}>
 							{props.doc.person_displayName_s}
 						</Link>
@@ -40,7 +44,7 @@ const documentComponents = {
 						{invert(props.doc.relationType_s)}
 					</div>
 
-					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
+					<div style={{width: "calc(42% - 25px)", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
 						{authorName}
 						<Link to={urls.authorReceptionIndex(props.doc.reception_id_s)}>
 							{props.doc.displayName_s}
