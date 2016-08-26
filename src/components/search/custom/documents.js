@@ -14,20 +14,21 @@ const documentComponents = {
 				null;
 
 			return (
-				<li className="list-group-item">
-					<span style={{display: "flex"}}>
+				<li className="list-group-item" style={{display: "flex"}}>
+					<span style={{flexShrink: 1, textAlign: "right", display: "inline-block", width: "50px", paddingRight: "10px"}}>
+						{props.start / props.rows * props.rows + props.resultIndex + 1}.
+					</span>
 					<span style={{flexGrow: 1}}>
 						{authorName}
 						<Link to={urls.publicationIndex(props.doc.id)}>
 							{props.doc.displayName_s}
 						</Link>
 					</span>
-						<span style={{"flexShrink": 1, color: "#888", whiteSpace: "nowrap"}}>
+					<span style={{"flexShrink": 1, color: "#888", whiteSpace: "nowrap"}}>
 						{(props.doc.publishLocation_ss || []).join()}{" "}
 						{props.doc.date_i}
 					</span>
-					</span>
-				</li>
+			</li>
 			);
 		}
 	},
