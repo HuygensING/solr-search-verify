@@ -1,5 +1,6 @@
 import React from "react";
 import DocumentReceptionCurrentQuery from "./current-query/document-receptions";
+import PublicationReceptionListFacet from "./list-facet/publication-receptions";
 import {defaultComponentPack} from "solr-faceted-search-react";
 import { Link } from "react-router";
 import { urls } from "../../../router";
@@ -49,7 +50,8 @@ const documentComponents = {
 	},
 	searchFields: {
 		...defaultComponentPack.searchFields,
-		currentQuery: DocumentReceptionCurrentQuery
+		currentQuery: DocumentReceptionCurrentQuery,
+		"list-facet": PublicationReceptionListFacet
 	}
 };
 

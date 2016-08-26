@@ -83,9 +83,26 @@ export default {
 		"mentionsWork": "Mentions (briefly)",
 		"isParodyOf": "Parodies",
 		"quotesWork": "Quotes"
-/*
-		"referencesWork"
-		"isWorkReferencedIn"
-*/
+	},
+	facetLabels: {
+		"isEditionOf": "Issuing",
+		"isSequelOf": "Sequel",
+		"isTranslationOf": "Translation",
+		"isAdaptationOf": "Adaptation",
+		"isPlagiarismOf": "Plagiarism",
+		"hasAnnotationsOn": "Hand-written annotations",
+		"isBibliographyOf": "Mention in BBC",
+		"isCensoringOf": "Censorship",
+		"commentsOnWork": "Comments",
+		"isAnthologyContaining": "Inclusion in anthology",
+		"isCopyOf": "Reissuing",
+		"isAwardForWork": "Award",
+		"isPrefaceOf": "Preface (allograph)",
+		"isIntertextualTo": "Intertextuality",
+		"listsWork": "Listing",
+		"mentionsWork": "Mention",
+		"isParodyOf": "Parody",
+		"quotesWork": "Quoting",
+		"referencesWork": "Reference"
 	}
 };
