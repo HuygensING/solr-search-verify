@@ -14,7 +14,7 @@ const personComponents = {
 					{props.doc.birthDate_i || props.doc.deathDate_i
 						? <span style={{color: "#666", whiteSpace: "nowrap", paddingRight: "1em"}}>
 								{props.doc.birthDate_i || "?"}
-								&mdash;
+								{" "}&mdash;{" "}
 								{props.doc.deathDate_i || "?"}
 							</span>
 						: null}
