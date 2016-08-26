@@ -21,6 +21,28 @@ export default {
 		"quotesPerson",
 		"referencesPerson"
 	],
+	inversions: {
+		"isBiographyOf": "hasBiography",
+		"commentsOnPerson": "isPersonCommentedOnIn",
+		"isDedicatedTo": "isDedicatedPersonOf",
+		"isAwardForPerson": "isPersonAwarded",
+		"listsPerson": "isPersonListedOn",
+		"mentionsPerson": "isPersonMentionedIn",
+		"isObituaryOf": "hasObituary",
+		"quotesPerson": "isPersonQuotedIn",
+		"referencesPerson": "isPersonReferencedIn"
+	},
+	resultLabels: {
+		"hasBiography": "Has biography",
+		"isPersonCommentedOnIn": "Was commented on in",
+		"isDedicatedPersonOf": "Has dedications in",
+		"isPersonAwarded": "Awards",
+		"isPersonListedOn": "Listed on",
+		"isPersonMentionedIn": "Mentioned in",
+		"hasObituary": "Has obituary",
+		"isPersonQuotedIn": "Was quoted in",
+		"isPersonReferencedIn": "Was referenced in"
+	},
 	overviewLabels: {
 		"hasBiography": "Biography",
 		"isPersonCommentedOnIn": "Commented on in",

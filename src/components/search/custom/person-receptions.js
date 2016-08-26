@@ -1,9 +1,14 @@
 import React from "react";
 import PersonReceptionCurrentQuery from "./current-query/person-receptions";
 import receptionListFacetMaker from "./list-facet/receptions";
+import authorReceptionDefinitions from "../../../definitions/author-receptions";
+
 import {defaultComponentPack} from "solr-faceted-search-react";
 import { Link } from "react-router";
 import { urls } from "../../../router";
+
+const { inversions, resultLabels } = authorReceptionDefinitions;
+const invert = (key) => resultLabels[inversions[key]];
 
 
 const documentComponents = {
@@ -16,20 +21,6 @@ const documentComponents = {
 				null;
 			return (
 				<li className="list-group-item">
-					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
-						{authorName}
-						<Link to={urls.authorReceptionIndex(props.doc.reception_id_s)}>
-							{props.doc.displayName_s}
-						</Link>
-						<br />
-						<span style={{color: "#888"}}>
-							<span style={{float: "right"}}>{props.doc.date_i}</span>
-							{(props.doc.publishLocation_ss || []).join("; ")}
-						</span>
-					</div>
-					<div style={{width: "16%", display: "inline-block", verticalAlign: "top", color: "#666"}}>
-						{props.doc.relationType_s}
-					</div>
 					<div style={{width: "42%", display: "inline-block", verticalAlign: "top"}}>
 						<Link to={urls.authorIndex(props.doc.person_id_s)}>
 							{props.doc.person_displayName_s}
@@ -42,6 +33,22 @@ const documentComponents = {
 						<span style={{color: "#888"}}>
 							<span style={{float: "right"}}>{(props.doc.person_relatedLocations_ss || []).join("; ")}</span>
 							{props.doc.person_gender_s}
+						</span>
+					</div>
+
+					<div style={{width: "16%", display: "inline-block", verticalAlign: "top", color: "#666"}}>
+						{invert(props.doc.relationType_s)}
+					</div>
+
+					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
+						{authorName}
+						<Link to={urls.authorReceptionIndex(props.doc.reception_id_s)}>
+							{props.doc.displayName_s}
+						</Link>
+						<br />
+						<span style={{color: "#888"}}>
+							<span style={{float: "right"}}>{props.doc.date_i}</span>
+							{(props.doc.publishLocation_ss || []).join("; ")}
 						</span>
 					</div>
 				</li>
