@@ -11,16 +11,17 @@ const documentFilters = [
 const documentSortFields = [
 	{label: "Publication title", field: "document_displayName_s"},
 	{label: "Publication author", field: "document_authorNameSort_s"},
+	{label: "Publication year", field: "document_date_i"},
 	{label: "Reception author", field: "authorNameSort_s"},
 	{label: "Reception title", field: "displayName_s"},
-	{label: "Reception date", field: "date_i"}
+	{label: "Reception year", field: "date_i"}
 ];
 
 const documentFields = [
-	{label: "Title", field: "title_t", type: "text"},
+	{label: "Reception title", field: "title_t", type: "text"},
 	{label: "Reception type", field: "relationType_s", type: "list-facet"},
 	{label: "Reception gender", field: "authorGender_ss", type: "list-facet"},
-	{label: "Date", field: "date_i", type: "range-facet"},
+	{label: "Reception year", field: "date_i", type: "range-facet"},
 	{label: "Country of first publication", field: "publishLocation_ss", type: "list-facet"},
 	{label: "Language", field: "language_ss", type: "list-facet"},
 	{label: "Genre", field: "genre_ss", type: "list-facet"},

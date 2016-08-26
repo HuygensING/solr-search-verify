@@ -12,13 +12,12 @@ const documentFilters = [
 const documentSortFields = [
 	{label: "Author", field: "authorNameSort_s"},
 	{label: "Title", field: "displayName_s"},
-	{label: "Date", field: "date_i"},
-	{label: "Modified", field: "modified_l"}
+	{label: "Publication year", field: "date_i"}
 ];
 
 const documentFields = [
 	{label: "Title", field: "title_t", type: "text"},
-	{label: "Date", field: "date_i", type: "range-facet"},
+	{label: "Publication year", field: "date_i", type: "range-facet"},
 	{label: "Country of first publication", field: "publishLocation_ss", type: "list-facet"},
 	{label: "Language", field: "language_ss", type: "list-facet"},
 	{label: "Genre", field: "genre_ss", type: "list-facet"},
