@@ -76,7 +76,7 @@ class AuthorIndex extends React.Component {
 					Publications of this author
 				</Link>
 				<Link className={cx("list-group-item", {active: tab === "receptions"})} to={tabRoute("receptions")}>
-					Receptions
+					Receptions of this author
 				</Link>
 				<Link className={cx("list-group-item", {active: tab === "links"})} to={tabRoute("links")}>
 					Links to relevant projects and sites
