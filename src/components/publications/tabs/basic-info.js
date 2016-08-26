@@ -59,7 +59,7 @@ class BasicInfo extends React.Component {
 						<label>Genres</label>
 						{ editable
 							? <KeywordField name="hasGenre" onChange={onChange}
-											 options={metadata.properties.find((p) => p.name === "hasGenre").options}
+											 options={metadata.properties.find((p) => p.name === "hasGenre").options.sort((a,b) => a.value.localeCompare(b.value))}
 											 entity={this.props.entity} />
 							: <Relation values={model["@relations"].hasGenre}/>
 						}
