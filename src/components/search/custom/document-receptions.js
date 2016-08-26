@@ -1,10 +1,13 @@
 import React from "react";
 import DocumentReceptionCurrentQuery from "./current-query/document-receptions";
 import receptionListFacetMaker from "./list-facet/receptions";
+import publicationReceptionDefinitions from "../../../definitions/publication-receptions";
 import {defaultComponentPack} from "solr-faceted-search-react";
 import { Link } from "react-router";
 import { urls } from "../../../router";
 
+const { inversions, overviewLabels } = publicationReceptionDefinitions;
+const invert = (key) => overviewLabels[inversions[key]];
 
 const documentComponents = {
 	...defaultComponentPack,
@@ -19,20 +22,6 @@ const documentComponents = {
 				null;
 			return (
 				<li className="list-group-item">
-					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
-						{authorName}
-						<Link to={urls.publicationReceptionIndex(props.doc.reception_id_s)}>
-							{props.doc.displayName_s}
-						</Link>
-						<br />
-						<span style={{color: "#888"}}>
-							<span style={{float: "right"}}>{props.doc.date_i}</span>
-							{(props.doc.publishLocation_ss || []).join("; ")}
-						</span>
-					</div>
-					<div style={{width: "16%", display: "inline-block", verticalAlign: "top", color: "#666"}}>
-						{props.doc.relationType_s}
-					</div>
 					<div style={{width: "42%", display: "inline-block", verticalAlign: "top"}}>
 						{authorName1}
 						<Link to={urls.publicationReceptionIndex(props.doc.document_id_s)}>
@@ -42,6 +31,23 @@ const documentComponents = {
 						<span style={{color: "#888"}}>
 							<span style={{float: "right"}}>{props.doc.document_date_i}</span>
 							{(props.doc.document_publishLocation_ss || []).join("; ")}
+						</span>
+					</div>
+
+					<div style={{width: "16%", display: "inline-block", verticalAlign: "top", color: "#666"}}>
+						{invert(props.doc.relationType_s)}
+					</div>
+
+
+					<div style={{width: "42%", display: "inline-block", verticalAlign: "top", paddingRight: "1em"}}>
+						{authorName}
+						<Link to={urls.publicationReceptionIndex(props.doc.reception_id_s)}>
+							{props.doc.displayName_s}
+						</Link>
+						<br />
+						<span style={{color: "#888"}}>
+							<span style={{float: "right"}}>{props.doc.date_i}</span>
+							{(props.doc.publishLocation_ss || []).join("; ")}
 						</span>
 					</div>
 				</li>

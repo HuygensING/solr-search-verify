@@ -45,6 +45,27 @@ export default {
 		"isWorkReferencedIn"
 */
 	],
+	inversions: {
+		"isEditionOf": "hasEdition",
+		"isSequelOf": "hasSequel",
+		"isTranslationOf": "hasTranslation",
+		"isAdaptationOf": "hasAdaptation",
+		"isPlagiarismOf": "hasPlagiarismBy",
+		"hasAnnotationsOn": "isAnnotatedIn",
+		"isBibliographyOf": "hasBibliography",
+		"isCensoringOf": "isCensoredBy",
+		"commentsOnWork": "isWorkCommentedOnIn",
+		"isAnthologyContaining": "containedInAnthology",
+		"isCopyOf": "isCopiedBy",
+		"isAwardForWork": "isWorkAwarded",
+		"isPrefaceOf": "hasPreface",
+		"isIntertextualTo": "isIntertextualOf",
+		"listsWork": "isWorkListedOn",
+		"mentionsWork": "isWorkMentionedIn",
+		"isParodyOf": "isParodiedBy",
+		"quotesWork": "isWorkQuotedIn",
+		"referencesWork": "isWorkReferencedIn"
+	},
 	overviewLabels: {
 		"hasEdition": "Was issued as",
 		"hasSequel": "Was continued as",
@@ -64,7 +85,7 @@ export default {
 		"isWorkMentionedIn": "Was mentioned in",
 		"isParodiedBy": "Was parodied in",
 		"isWorkQuotedIn": "Was quoted in",
-
+		"isWorkReferencedIn": "Was referenced in",
 		"isEditionOf": "Is an edition of",
 		"isSequelOf": "Is a sequel of",
 		"isTranslationOf": "Is a translation of",
