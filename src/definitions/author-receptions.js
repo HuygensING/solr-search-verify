@@ -41,5 +41,17 @@ export default {
 		"isObituaryOf": "Is an obituary of",
 		"quotesPerson": "Quotes",
 		"referencesPerson": "References"
+	},
+
+	facetLabels: {
+		"isBiographyOf": "Biography",
+		"commentsOnPerson": "Comments",
+		"isDedicatedTo": "Dedication",
+		"isAwardForPerson": "Award",
+		"listsPerson": "Listing",
+		"mentionsPerson": "Mention",
+		"isObituaryOf": "Obituary",
+		"quotesPerson": "Quoting",
+		"referencesPerson": "Referencing"
 	}
 };

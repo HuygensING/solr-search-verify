@@ -103,6 +103,6 @@ export default {
 		"mentionsWork": "Mention",
 		"isParodyOf": "Parody",
 		"quotesWork": "Quoting",
-		"referencesWork": "Reference"
+		"referencesWork": "Referencing"
 	}
 };

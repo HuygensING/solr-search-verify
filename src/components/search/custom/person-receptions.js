@@ -1,5 +1,6 @@
 import React from "react";
 import PersonReceptionCurrentQuery from "./current-query/person-receptions";
+import receptionListFacetMaker from "./list-facet/receptions";
 import {defaultComponentPack} from "solr-faceted-search-react";
 import { Link } from "react-router";
 import { urls } from "../../../router";
@@ -49,6 +50,7 @@ const documentComponents = {
 	},
 	searchFields: {
 		...defaultComponentPack.searchFields,
+		"list-facet": receptionListFacetMaker("authors"),
 		currentQuery: PersonReceptionCurrentQuery
 	}
 };
