@@ -45,20 +45,4 @@ const fetchGraph = (collection, id, requestedTypes = null) => (dispatch) => {
 	fetchGraphTable(collection, id, dispatch);
 };
 
-
-/*
-
-export function setGraphRelationTypes(types) {
-	return function(dispatch, getState) {
-		let [domain, id] = getState().graphs.current.id.split("/");
-		dispatch(fetchGraph(domain, id, types));
-	};
-}
-
-export function fetchGraphTable(domain, id) {
-	return function (dispatch) {
-		fetchDomainMetadata(domain, id, dispatch);
-	};
-}*/
-
 export { fetchGraph, fetchGraphTable }
