@@ -4,8 +4,6 @@ mkdir -p build/development
 mkdir build/development/js
 cp -R src/index.html build/development/
 
-export NODE_ENV=development
-
 node_modules/.bin/browserify \
 	--require react \
 	--require react-dom \
@@ -18,4 +16,5 @@ node_modules/.bin/watchify src/index.js \
 	--external classnames \
 	--standalone WwPersonSearchVerify \
 	--transform [ babelify ] \
+	--transform [ envify --SERVER="${SERVER}" ]
 	--verbose

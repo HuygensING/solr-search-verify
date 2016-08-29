@@ -42,6 +42,7 @@
     "browser-sync": "^2.9.6",
     "browserify": "^11.2.0",
     "connect-modrewrite": "^0.8.5",
+    "envify": "^3.4.1",
     "eslint": "^1.5.1",
     "eslint-plugin-react": "^3.16.1",
     "lodash.debounce": "^3.1.1",
