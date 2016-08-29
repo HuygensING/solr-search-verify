@@ -51,6 +51,8 @@ class PublicationEditTabs extends React.Component {
 					}
 					onChange={this.props.onChange}
 					metadata={this.props.vre.collections.wwdocuments}
+					otherData={this.props.otherData}
+
 				/>
 				{ user && user.token
 					? <SaveFooter onSave={onSave} onDelete={onDelete} onCancel={onCancel}/>

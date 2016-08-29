@@ -14,6 +14,8 @@ import StringField from "../../form-fields/string";
 class BasicInfo extends React.Component {
 	render() {
 		const model = this.props.entity.data;
+		const { otherData } = this.props;
+		const otherRelations = otherData["@relations"] || {};
 
 		const pid = model["^pid"] ? <a className="link" href={model["^pid"]} target="_blank">{model["^pid"]}</a> : "-";
 
@@ -30,21 +32,21 @@ class BasicInfo extends React.Component {
 											 path={metadata.properties.find((p) => p.name === "isCreatedBy").quicksearch}
 											 onChange={onChange}
 											 entity={this.props.entity} />
-							: <Relation values={model["@relations"].isCreatedBy} linkTo="authorIndex"/>
+							: <Relation values={model["@relations"].isCreatedBy} otherValues={otherRelations.isCreatedBy} linkTo="authorIndex"/>
 						}
 					</li>
 					<li className="list-group-item">
 						<label>Title</label>
 						{ editable
 							? <StringField name="title" entity={this.props.entity} onChange={onChange} />
-							: <StringComponent value={model.title}/>
+							: <StringComponent value={model.title} otherValue={otherData.title} />
 						}
 					</li>
 					<li className="list-group-item">
 						<label>English Title</label>
 						{ editable
 							? <StringField name="englishTitle" entity={this.props.entity} onChange={onChange} />
-							: <StringComponent value={model.englishTitle}/>
+							: <StringComponent value={model.englishTitle} otherValue={otherData.englishTitle} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -52,7 +54,7 @@ class BasicInfo extends React.Component {
 						{ editable
 							? <SelectField name="documentType" options={metadata.properties.find((p) => p.name === "documentType").options}
 										   onChange={onChange} entity={this.props.entity} />
-							: <StringComponent value={model.documentType}/>
+							: <StringComponent value={model.documentType} otherValue={otherData.documentType} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -61,7 +63,7 @@ class BasicInfo extends React.Component {
 							? <KeywordField name="hasGenre" onChange={onChange}
 											 options={metadata.properties.find((p) => p.name === "hasGenre").options.sort((a,b) => a.value.localeCompare(b.value))}
 											 entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasGenre}/>
+							: <Relation values={model["@relations"].hasGenre} otherValues={otherRelations.hasGenre} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -71,7 +73,7 @@ class BasicInfo extends React.Component {
 											 path={metadata.properties.find((p) => p.name === "hasWorkLanguage").quicksearch}
 											 onChange={onChange}
 											 entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasWorkLanguage}/>
+							: <Relation values={model["@relations"].hasWorkLanguage} otherValues={otherRelations.hasWorkLanguage} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -81,28 +83,28 @@ class BasicInfo extends React.Component {
 											path={metadata.properties.find((p) => p.name === "hasPublishLocation").quicksearch}
 											onChange={onChange}
 											entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasPublishLocation}/>
+							: <Relation values={model["@relations"].hasPublishLocation} otherValues={otherRelations.hasPublishLocation} />
 						}
 					</li>
 					<li className="list-group-item">
 						<label>Date</label>
 						{ editable
 							? <DatableField name="date" entity={this.props.entity} onChange={onChange} />
-							: <StringComponent value={model.date}/>
+							: <StringComponent value={model.date} otherValue={otherData.date} />
 						}
 					</li>
 					<li className="list-group-item">
 						<label>Reference</label>
 						{ editable
 							? <StringField name="reference" onChange={onChange} entity={this.props.entity} />
-							: <StringComponent value={model.reference}/>
+							: <StringComponent value={model.reference} otherValue={otherData.reference} />
 						}
 					</li>
 					<li className="list-group-item">
 						<label>Notes</label>
 						{ editable
 							? <TextField name="notes" onChange={onChange} entity={this.props.entity} />
-							: <TextComponent value={model.notes}/>
+							: <TextComponent value={model.notes} otherValue={otherData.notes} />
 						}
 					</li>
 					<li className="list-group-item">

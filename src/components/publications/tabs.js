@@ -43,6 +43,8 @@ class PublicationTabs extends React.Component {
 						}
 						onChange={this.props.onChange}
 						metadata={this.props.vre.collections.wwdocuments}
+						otherData={this.props.otherData}
+
 					/>
 					{saveFooter}
 				</div>

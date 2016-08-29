@@ -8,7 +8,7 @@ import PublicationPageLinks from "./pagelinks/publication";
 import PublicationReceptionPageLinks from "./pagelinks/publication-reception"
 import AuthorReceptionPageLinks from "./pagelinks/author-reception";
 import ModifiedBy from "../values/modified-by";
-
+import Select from "hire-forms-select";
 
 class PublicationIndex extends React.Component {
 
@@ -38,7 +38,9 @@ class PublicationIndex extends React.Component {
 			location: { pathname },
 			params: { tab },
 			user,
-			pagination: { publicationPages, publicationReceptionPages, authorReceptionPages }
+			pagination: { publicationPages, publicationReceptionPages, authorReceptionPages },
+			onSelectVariationData,
+			otherData
 		} = this.props;
 
 
@@ -105,6 +107,18 @@ class PublicationIndex extends React.Component {
 			</div>
 		) : null;
 
+		const variations = entity.data["@variationRefs"].filter((v) => v.type !== "document" && v.type !== "wwdocument");
+
+		const variationSelect = variations.length > 0 ? (
+			<div className="variation-select">
+				<Select placeholder="- Show other data -"
+						options={variations.map((v) => v.type)}
+						onChange={onSelectVariationData}
+						value={otherData["@type"]}
+				/>
+			</div>
+		) : null;
+
 		return (
 			<div className={cx("publication", "overview", {"transaction-pending": entity.transactionPending})}>
 
@@ -133,6 +147,7 @@ class PublicationIndex extends React.Component {
 						{editButton}
 					</div>
 					<div className="col-md-9">
+						{variationSelect}
 						{!tab ? <PublicationTabs {...this.props} editable={editing ? true : false} /> : this.props.children}
 					</div>
 				</div>
