@@ -32,6 +32,7 @@ const makeSkeleton = function (vre, domain) {
 		return vre.collections[domain].properties
 			.map((fieldDef) => [nameForType(fieldDef), initialDataForType(fieldDef)])
 			.concat([["@type", domain.replace(/s$/, "")]])
+			.concat([["@variationRefs", []]])
 			.reduce((obj, cur) => {
 				obj[cur[0]] = cur[1];
 				return obj;
