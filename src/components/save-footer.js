@@ -10,9 +10,9 @@ class SaveFooter extends React.Component {
 	render() {
 		return (
 			<footer>
-				<button className="cancel" onClick={this.props.onCancel}>Cancel</button>
-				<button className="delete" onClick={this.confirmDelete.bind(this)}>Delete</button>
-				<button className="save" onClick={this.props.onSave}>Save</button>
+				<button className="btn btn-default" onClick={this.props.onCancel}>Cancel</button>
+				<button className="btn btn-default pull-right" onClick={this.props.onSave}>Save</button>
+				<button className="btn btn-danger pull-right" onClick={this.confirmDelete.bind(this)}>Delete</button>
 			</footer>
 		);
 	}
