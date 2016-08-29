@@ -3,6 +3,7 @@
 mkdir -p build/development
 mkdir build/development/js
 cp -R src/index.html build/development/
+cp -R src/static/css build/development/
 
 node_modules/.bin/browserify \
 	--require react \
