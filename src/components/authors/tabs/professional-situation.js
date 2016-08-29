@@ -7,6 +7,8 @@ import RelationField from "../../form-fields/relation";
 class Public extends React.Component {
 	render() {
 		let model = this.props.entity.data;
+		const { otherData } = this.props;
+		const otherRelations = otherData["@relations"] || {};
 
 		const { editable, onChange, metadata, authorized } = this.props;
 
@@ -19,7 +21,7 @@ class Public extends React.Component {
 							? <KeywordField name="hasProfession" onChange={onChange}
 											options={metadata.properties.find((p) => p.name === "hasProfession").options}
 											entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasProfession}/>
+							: <Relation values={model["@relations"].hasProfession} otherValues={otherRelations.hasProfession} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -28,7 +30,7 @@ class Public extends React.Component {
 							? <KeywordField name="hasFinancialSituation" onChange={onChange}
 											options={metadata.properties.find((p) => p.name === "hasFinancialSituation").options}
 											entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasFinancialSituation}/>
+							: <Relation values={model["@relations"].hasFinancialSituation} otherValues={otherRelations.hasFinancialSituation} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -37,7 +39,7 @@ class Public extends React.Component {
 							? <RelationField name="isCollaboratorOf"
 								path={metadata.properties.find((p) => p.name === "isCollaboratorOf").quicksearch}
 								onChange={onChange} entity={this.props.entity} />
-							: <Relation values={model["@relations"].isCollaboratorOf} linkTo="authorIndex" />
+							: <Relation values={model["@relations"].isCollaboratorOf} otherValues={otherRelations.isCollaboratorOf} linkTo="authorIndex" />
 						}
 					</li>
 					<li className="list-group-item">
@@ -46,7 +48,8 @@ class Public extends React.Component {
 							? <RelationField name="isMemberOf"
 								path={metadata.properties.find((p) => p.name === "isMemberOf").quicksearch}
 								onChange={onChange} entity={this.props.entity} />
-							: <Relation values={model["@relations"].isMemberOf} linkTo={authorized ? "collectiveIndex" : null} />
+							: <Relation values={model["@relations"].isMemberOf} otherValues={otherRelations.isMemberOf}
+										linkTo={authorized ? "collectiveIndex" : null} />
 						}
 					</li>
 				</ul>
