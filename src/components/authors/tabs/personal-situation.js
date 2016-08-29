@@ -8,6 +8,8 @@ import SelectField from "../../form-fields/select";
 class Personal extends React.Component {
 	render() {
 		let model = this.props.entity.data;
+		const { otherData } = this.props;
+		const otherRelations = otherData["@relations"] || {};
 
 		const { editable, onChange, metadata } = this.props;
 
@@ -20,7 +22,7 @@ class Personal extends React.Component {
 							? <KeywordField name="hasMaritalStatus" onChange={onChange}
 								options={metadata.properties.find((p) => p.name === "hasMaritalStatus").options}
 								entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasMaritalStatus}/>
+							: <Relation values={model["@relations"].hasMaritalStatus} otherValues={otherRelations.hasMaritalStatus} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -29,7 +31,7 @@ class Personal extends React.Component {
 							? <SelectField
 								name="children" options={metadata.properties.find((p) => p.name === "children").options}
 								onChange={onChange} entity={this.props.entity} />
-							: <StringComponent value={model.children}/>
+							: <StringComponent value={model.children} otherValue={otherData.children} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -38,7 +40,7 @@ class Personal extends React.Component {
 							? <KeywordField name="hasSocialClass" onChange={onChange}
 											options={metadata.properties.find((p) => p.name === "hasSocialClass").options}
 											entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasSocialClass}/>
+							: <Relation values={model["@relations"].hasSocialClass} otherValues={otherRelations.hasSocialClass} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -47,7 +49,7 @@ class Personal extends React.Component {
 							? <KeywordField name="hasEducation" onChange={onChange}
 											options={metadata.properties.find((p) => p.name === "hasEducation").options}
 											entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasEducation}/>
+							: <Relation values={model["@relations"].hasEducation} otherValues={otherRelations.hasEducation} />
 						}
 					</li>
 					<li className="list-group-item">
@@ -56,7 +58,7 @@ class Personal extends React.Component {
 							? <KeywordField name="hasReligion" onChange={onChange}
 											options={metadata.properties.find((p) => p.name === "hasReligion").options}
 											entity={this.props.entity} />
-							: <Relation values={model["@relations"].hasReligion}/>
+							: <Relation values={model["@relations"].hasReligion} otherValues={otherRelations.hasReligion} />
 						}
 					</li>
 				</ul>
