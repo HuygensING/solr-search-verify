@@ -164,13 +164,24 @@
 			position: absolute;
 			background-color: white;
 			z-index: 100;
-			width: 200px;
+			width: 226px;
+			max-height: 140px;
+			overflow-y: auto;
+			border: 1px solid #aaaaaa;
+			border-top: none;
+			margin-left: -1px;
+
 		}
-		.hire-select .hire-options li {
+		.hire-options li,
+		.hire-list-item {
 			cursor: pointer
 		}
-		.hire-select .hire-options li:hover {
+		.hire-options li:hover {
 			background-color: #ddd
+		}
+
+		.hire-list-item:hover > .value {
+			text-decoration: underline;
 		}
 
 		.names-form > ul > li {
@@ -226,9 +237,28 @@
 			border-color: #ebccd1;
 			color: #a94442;
 		}
-		.hire-forms-autocomplete-list .hire-list-item,
-		.hire-select-list .hire-list-item {
-			width: 350px;
+
+		.hire-forms-autocomplete-list .hire-list-item > button.remove,
+		.hire-select-list .hire-list-item > button.remove {
+			max-width: 25px;
+			float: right;
+		}
+
+		.hire-forms-autocomplete-list .hire-list-item {
+			margin-bottom: 6px;
+		}
+		.hire-list {
+			width: 100%;
+			max-width: 600px;
+		}
+
+		.hire-forms-autocomplete .hire-options{
+			width: 100%;
+			max-width: 600px;
+			border: 1px solid #aaa;
+			border-top: none;
+			max-height: 150px;
+			overflow-y: auto;
 		}
 
 		.hire-options .highlight {
