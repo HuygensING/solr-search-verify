@@ -22,7 +22,7 @@ class App extends React.Component {
 		const modifiedIsActive = pathname === urls.modifiedSearch();
 
 		const receptionToggle = authorReceptionsIsActive || publicationReceptionsIsActive ? (
-			<div className="btn-group">
+			<div className="btn-group" style={{marginLeft: "30px", marginBottom: "15px"}}>
 				<Link className={cx("btn", "btn-default", {active: authorReceptionsIsActive})} to={urls.authorReceptionSearch()}>Authors</Link>
 				<Link className={cx("btn", "btn-default", {active: publicationReceptionsIsActive})} to={urls.publicationReceptionSearch()}>Publications</Link>
 			</div>) : null;
