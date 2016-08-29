@@ -42,6 +42,7 @@ class AuthorTabs extends React.Component {
 						editable={this.props.editable}
 						onChange={this.props.onChange}
 						metadata={this.props.vre.collections.wwpersons}
+						otherData={this.props.otherData}
 					/>
 					{saveFooter}
 			</div>

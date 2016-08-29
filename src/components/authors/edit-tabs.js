@@ -31,6 +31,7 @@ class AuthorEditTabs extends React.Component {
 					editable={user && user.token}
 					onChange={this.props.onChange}
 					metadata={this.props.vre.collections.wwpersons}
+					otherData={this.props.otherData}
 				/>
 				{ user && user.token
 					? <SaveFooter onSave={() => this.props.onSaveAuthor(id, componentId)}

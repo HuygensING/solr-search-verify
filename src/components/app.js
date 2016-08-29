@@ -52,7 +52,7 @@ class App extends React.Component {
 							<Federated url={config.federatedAuthenticateUrl} />
 							<Basic url={config.basicAuthenticateUrl} />
 						</Login>
-						<div>
+						<div className="btn-group">
 							{newAuthorButton}
 							{newPublicationButton}
 							{newCollectiveButton}

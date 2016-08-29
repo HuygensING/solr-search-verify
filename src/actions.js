@@ -4,7 +4,9 @@ import { setPersonReceptionsFiltersFromPersonQuery } from "./search-clients/pers
 import { selectEntity, makeNewEntity, saveEntity, deleteEntity } from "./actions/entity";
 import { setAuthorPages, setPublicationPages, setPublicationReceptionPages, setAuthorReceptionPages } from "./actions/pagination";
 import { fetchGraph, fetchGraphTable } from "./actions/graph";
-import {setCollectivePages} from "./actions/pagination";
+import { setCollectivePages } from "./actions/pagination";
+import { crud } from "./actions/crud";
+import config from "./config";
 
 const setUser = (response) => {
 	return {
@@ -26,6 +28,15 @@ export default function actionsMaker(navigateTo, dispatch) {
 
 		onDismissMessage: (messageIndex) => dispatch({type: "DISMISS_MESSAGE", messageIndex: messageIndex}),
 
+		onSelectVariationData: (variationType) => {
+			dispatch({type: "TRANSACTION_PENDING"});
+			dispatch((redispatch, getState) => {
+				crud.fetchEntity(`${config.apiUrl.v4}/domain/${variationType}s/${getState().entity.data._id}`, (data) => {
+					redispatch({type: "SET_OTHER_DATA", data: data});
+					redispatch({type: "TRANSACTION_COMPLETE"});
+				}, () => redispatch({type: "TRANSACTION_COMPLETE"}));
+			});
+		},
 
 		/** SEARCHES **/
 		onAuthorSearchChange: (state) => {

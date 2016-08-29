@@ -6,6 +6,7 @@ import AuthorTabs from "./tabs";
 import AuthorHeader from "./header";
 import ModifiedBy from "../values/modified-by";
 
+import Select from "hire-forms-select";
 
 class AuthorIndex extends React.Component {
 
@@ -37,17 +38,19 @@ class AuthorIndex extends React.Component {
 			location: { pathname },
 			params: { tab },
 			user,
-			pagination: { authorPages }
+			pagination: { authorPages },
+			onSelectVariationData,
+			otherData
 		} = this.props;
 
 		if (!entity.data || entity.data["@type"] !== "wwperson") { return null; }
 
 		const pageIndex = authorPages.indexOf(entity.data._id);
 		const nextAuthor = pageIndex > -1 && pageIndex < authorPages.length - 1 ?
-			<Link className="btn btn-default pull-right" to={urls.authorIndex(authorPages[pageIndex + 1])}>Next ▸</Link> : null;
+			<Link className="btn btn-default" to={urls.authorIndex(authorPages[pageIndex + 1])}>Next ▸</Link> : null;
 
 		const prevAuthor = pageIndex > -1 && pageIndex > 0 ?
-			<Link className="btn btn-default pull-right" to={urls.authorIndex(authorPages[pageIndex - 1])}>◂ Previous</Link> : null;
+			<Link className="btn btn-default" to={urls.authorIndex(authorPages[pageIndex - 1])}>◂ Previous</Link> : null;
 
 		const loggedIn = user && user.token;
 		const id = entity.data._id || null;
@@ -60,6 +63,18 @@ class AuthorIndex extends React.Component {
 			</Link> : null;
 
 		const tabRoute = (toTab) => editing ? urls.authorEdit(id, toTab) : urls.authorTab(id, toTab);
+
+		const variations = entity.data["@variationRefs"].filter((v) => v.type !== "person" && v.type !== "wwperson");
+
+		const variationSelect = variations.length > 0 ? (
+			<div className="variation-select">
+				<Select placeholder="- Show other data -"
+						options={variations.map((v) => v.type)}
+						onChange={onSelectVariationData}
+						value={otherData["@type"]}
+				/>
+			</div>
+		) : null;
 
 		const tabLinks = id ? (
 			<div className="list-group">
@@ -103,8 +118,10 @@ class AuthorIndex extends React.Component {
 						<AuthorHeader author={entity.data} />
 					</div>
 					<div className="col-md-3">
-						{nextAuthor}
-						{prevAuthor}
+						<div className="btn-group pull-right">
+							{prevAuthor}
+							{nextAuthor}
+						</div>
 					</div>
 				</div>
 				<div className="col-md-12 row">
@@ -115,6 +132,7 @@ class AuthorIndex extends React.Component {
 						{editButton}
 					</div>
 					<div className="col-md-9">
+						{variationSelect}
 						{!tab ? <AuthorTabs {...this.props} editable={editing ? true : false} /> : this.props.children}
 					</div>
 				</div>

@@ -10,6 +10,7 @@ import pagination from "./pagination";
 import modifiedSearch from "./modified-search";
 import graph from "./graph";
 import collectiveSearch from "./collective-search";
+import otherData from "./other-data";
 
 export default {
 	personSearch: personSearch,
@@ -20,6 +21,7 @@ export default {
 	messages: messages,
 	pagination: pagination,
 	entity: entity,
+	otherData: otherData,
 	modifiedSearch: modifiedSearch,
 	graph: graph,
 	user: user,
