@@ -40,7 +40,7 @@ class Names extends React.Component {
 
 	render() {
 		return (
-			<span>
+			<span className="names-form-wrap">
 				<MultiForm
 					attr={this.props.name}
 					component={NameForm}
