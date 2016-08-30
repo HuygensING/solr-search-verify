@@ -3,6 +3,7 @@ import React from "react";
 import Relation from "../../values/relation";
 import KeywordField from "../../form-fields/keyword";
 import RelationField from "../../form-fields/relation";
+import StringComponent from "../../values/string";
 
 class Public extends React.Component {
 	render() {
@@ -51,6 +52,10 @@ class Public extends React.Component {
 							: <Relation values={model["@relations"].isMemberOf} otherValues={otherRelations.isMemberOf}
 										linkTo={authorized ? "collectiveIndex" : null} />
 						}
+					</li>
+					<li className="list-group-item">
+						<label>Publication languages</label>
+						<StringComponent value={model["@authorLanguages"].join(", ")} />
 					</li>
 				</ul>
 				<div className="temp-data panel panel-default">
