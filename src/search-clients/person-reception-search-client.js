@@ -18,14 +18,14 @@ const documentSortFields = [
 const documentFields = [
 	{label: "Title", field: "title_t", type: "text"},
 	{label: "Reception type", field: "relationType_s", type: "list-facet"},
-	{label: "Reception gender", field: "authorGender_ss", type: "list-facet"},
-	{label: "Date", field: "date_i", type: "range-facet"},
-	{label: "Country of first publication", field: "publishLocation_ss", type: "list-facet"},
-	{label: "Language", field: "language_ss", type: "list-facet"},
-	{label: "Genre", field: "genre_ss", type: "list-facet"},
-	{label: "Sources", field: "source_ss", type: "list-facet"},
-	{label: "Document type", field: "documentType_s", type: "list-facet"},
-	{label: "Provisional notes", field: "notes_t", type: "text"}
+	{label: "Reception gender", field: "authorGender_ss", type: "list-facet", collapse: true},
+	{label: "Date", field: "date_i", type: "range-facet", collapse: true},
+	{label: "Country of first publication", field: "publishLocation_ss", type: "list-facet", collapse: true},
+	{label: "Language", field: "language_ss", type: "list-facet", collapse: true},
+	{label: "Genre", field: "genre_ss", type: "list-facet", collapse: true},
+	{label: "Sources", field: "source_ss", type: "list-facet", collapse: true},
+	{label: "Document type", field: "documentType_s", type: "list-facet", collapse: true},
+	{label: "Provisional notes", field: "notes_t", type: "text", collapse: true}
 ];
 
 

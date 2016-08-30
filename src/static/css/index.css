@@ -15,6 +15,11 @@ small.receptions > a {
     margin-left: 0.2em;
 }
 
+label {
+    font-weight: 500;
+    color: #666;
+}
+
 .overview > div:nth-of-type(2) {
     margin-bottom: 60px;
 }

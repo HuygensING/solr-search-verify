@@ -88,6 +88,15 @@ svg.search-icon {
 
 }
 
+.solr-search-fields > li > header > h5 {
+	cursor: pointer;
+	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #666;
+}
+
+.solr-search-fields > li > header > h5:hover {
+	text-decoration: underline;
+}
 	/* new Bas */
 .facet-item-amount {
 	display:inline-block;

@@ -7,8 +7,8 @@ import store from "../reducers/store";
 
 const personFields = [
 	{label: "Name", field: "name_t", type: "text"},
-	{label: "Person Type", field: "types_ss", type: "list-facet", collapse: true},
-	{label: "Gender", field: "gender_s", type: "list-facet", collapse: true},
+	{label: "Person Type", field: "types_ss", type: "list-facet"},
+	{label: "Gender", field: "gender_s", type: "list-facet"},
 	{label: "Country", field: "relatedLocations_ss", type: "list-facet", collapse: true},
 	{label: "Language", field: "language_ss", type: "list-facet", collapse: true},
 	{label: "Year of birth", field: "birthDate_i", type: "range-facet", collapse: true},
