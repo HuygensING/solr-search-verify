@@ -35,16 +35,17 @@ export default function(receptionType) {
 		}
 
 		toggleExpand() {
-			this.setState({expanded: !this.state.expanded});
+			this.props.onSetCollapse(this.props.field, !(this.props.collapse || false));
 		}
 
 		render() {
-			const {query, label, facets, field, value, bootstrapCss, facetSort} = this.props;
+			const {query, label, facets, field, value, bootstrapCss, facetSort, collapse} = this.props;
 			const {truncateFacetListsAt} = this.state;
 
 			const facetCounts = facets.filter((facet, i) => i % 2 === 1);
 			const facetValues = facets.filter((facet, i) => i % 2 === 0);
 
+			const expanded = !(collapse || false)
 			const facetSortValue = facetSort ? facetSort :
 				query.facetSort ? query.facetSort :
 					(query.facetLimit && query.facetLimit > -1 ? "count" : "index");
@@ -61,14 +62,15 @@ export default function(receptionType) {
 						<h5>
 							{bootstrapCss ? (<span>
 							<span className={cx("glyphicon", {
-								"glyphicon-collapse-down": this.state.expanded,
-								"glyphicon-collapse-up": !this.state.expanded
+								"glyphicon-collapse-down": expanded,
+								"glyphicon-collapse-up": !expanded
 							})} />{" "}
 						</span>) : null }
 							{label}
 						</h5>
 					</header>
-					<div style={{display: this.state.expanded ? "block" : "none"}}>
+					{expanded ? (
+					<div>
 						<ul className={cx({"list-group": bootstrapCss})}>
 							{facetValues.filter((facetValue, i) => truncateFacetListsAt < 0 || i < truncateFacetListsAt).map((facetValue, i) =>
 								this.state.filter.length === 0 || facetValue.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1 ? (
@@ -100,7 +102,7 @@ export default function(receptionType) {
 								</span>
 							</div>
 						) : null }
-					</div>
+					</div>) : null }
 				</li>
 			);
 		}
