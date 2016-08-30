@@ -5,6 +5,7 @@ const valueIsPresentIn = (current, other) => other
 
 const valuesAreEqual = (valA, valB) => {
 	if (valA === valB) { return true; }
+	if (typeof valA === "string" && typeof valB === "string") { return false; }
 	if (valA.length !== valB.length) { return false; }
 
 	for (let i = 0; i < valA.length; i++) {
