@@ -16,10 +16,10 @@ const documentSortFields = [
 ];
 
 const documentFields = [
-	{label: "Title", field: "title_t", type: "text"},
+	{label: "Reception Title", field: "title_t", type: "text"},
 	{label: "Reception type", field: "relationType_s", type: "list-facet"},
 	{label: "Reception gender", field: "authorGender_ss", type: "list-facet", collapse: true},
-	{label: "Date", field: "date_i", type: "range-facet", collapse: true},
+	{label: "Reception Date", field: "date_i", type: "range-facet", collapse: true},
 	{label: "Country of first publication", field: "publishLocation_ss", type: "list-facet", collapse: true},
 	{label: "Language", field: "language_ss", type: "list-facet", collapse: true},
 	{label: "Genre", field: "genre_ss", type: "list-facet", collapse: true},
