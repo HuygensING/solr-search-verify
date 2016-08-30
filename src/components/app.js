@@ -63,9 +63,9 @@ class App extends React.Component {
 					<nav className="navbar navbar-default">
 						<ul className="nav navbar-nav">
 							<li>
-								<Link to="/womenwriters">
+								<a href="/womenwriters">
 									Home
-								</Link>
+								</a>
 							</li>
 							<li className={cx({active: authorsIsActive})}>
 								<Link to={urls.authorSearch()}>Authors</Link>
@@ -83,14 +83,14 @@ class App extends React.Component {
 								) : null
 							}
 							<li>
-								<Link to="/womenwriters/?page_id=8">
+								<a href="/womenwriters/?page_id=8">
 									About this project
-								</Link>
+								</a>
 							</li>
 							<li>
-								<Link to="/womenwriters/?page_id=10">
+								<a href="/womenwriters/?page_id=10">
 									Getting started
-								</Link>
+								</a>
 							</li>
 							{ loggedIn ? (
 								<li className={cx({active: modifiedIsActive})}>
