@@ -31,7 +31,8 @@
     "react-router": "^2.6.1",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
-    "solr-faceted-search-react": "^0.8.1"
+    "solr-faceted-search-react": "^0.8.1",
+    "xhr": "^2.2.2"
   },
   "devDependencies": {
     "babel": "^5.8.23",
