@@ -12,7 +12,9 @@ const documentFilters = [
 const documentSortFields = [
 	{label: "Author", field: "authorNameSort_s"},
 	{label: "Title", field: "displayName_s"},
-	{label: "Publication year", field: "date_i"}
+	{label: "Publication year", field: "date_i"},
+	{label: "Country of first publication", field: "locationSort_s"},
+	{label: "Language", field: "languageSort_s"}
 ];
 
 const documentFields = [

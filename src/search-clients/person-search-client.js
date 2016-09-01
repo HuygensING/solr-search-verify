@@ -30,7 +30,9 @@ const personSortFields = [
 	{label: "Name", field: "nameSort_s"},
 	{label: "Date of birth", field: "birthDate_i"},
 	{label: "Modified", field: "modified_l"},
-	{label: "Date of death", field: "deathDate_i"}
+	{label: "Date of death", field: "deathDate_i"},
+	{label: "Country", field: "locationSort_s"},
+	{label: "Language", field: "languageSort_s"}
 ];
 
 const personFilters = [

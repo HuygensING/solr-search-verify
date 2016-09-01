@@ -18,7 +18,7 @@ class AuthorResult extends React.Component {
 					{doc.deathDate_i || "?"}
 						</span>
 					: null}
-				<span title={doc.relatedLocations_ss ? doc.relatedLocations_ss.join(", ") : null} style={{"flexShrink": 1, color: "#aaa", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>
+				<span title={doc.relatedLocations_ss ? doc.relatedLocations_ss.sort((a, b) => a.localeCompare(b)).join(", ") : null} style={{"flexShrink": 1, color: "#aaa", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis"}}>
 					{doc.relatedLocations_ss ? doc.relatedLocations_ss.join(", ") : null}
 				</span>
 			</li>
