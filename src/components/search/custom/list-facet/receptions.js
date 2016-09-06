@@ -65,7 +65,7 @@ export default function(receptionType) {
 								"glyphicon-collapse-down": expanded,
 								"glyphicon-collapse-up": !expanded
 							})} />{" "}
-						</span>) : null }
+							</span>) : null }
 							{label}
 						</h5>
 					</header>

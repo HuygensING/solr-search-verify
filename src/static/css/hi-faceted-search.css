@@ -88,13 +88,15 @@ svg.search-icon {
 
 }
 
-.solr-search-fields > li > header > h5 {
+.solr-search-fields > li > header > h5,
+.solr-search-fields > li > header > h4 {
 	cursor: pointer;
 	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: #666;
 }
 
-.solr-search-fields > li > header > h5:hover {
+.solr-search-fields > li > header > h5:hover,
+.solr-search-fields > li > header > h4:hover {
 	text-decoration: underline;
 }
 	/* new Bas */
