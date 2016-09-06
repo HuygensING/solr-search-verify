@@ -13,21 +13,51 @@ const initialState = {
 export default function(state=initialState, action) {
 	switch (action.type) {
 		case "SET_AUTHOR_PAGES":
-			return {...state, authorPages: action.ids};
+			if (!state.authorRequestTime || state.authorRequestTime < action.requestTime) {
+				return {...state, authorPages: action.ids, authorRequestTime: action.requestTime };
+			}
+			console.log("Ignoring expired request author pagination");
+			console.log(`Most recent request time: ${state.authorRequestTime}, delayed response's request time ${action.requestTime}`);
+			break;
+
 		case "SET_PUBLICATION_PAGES":
-			return {...state, publicationPages: action.ids};
+			if (!state.publicationRequestTime || state.publicationRequestTime < action.requestTime) {
+				return {...state, publicationPages: action.ids, publicationRequestTime: action.requestTime };
+			}
+			console.log("Ignoring expired request publication pagination");
+			console.log(`Most recent request time: ${state.publicationRequestTime}, delayed response's request time ${action.requestTime}`);
+			break;
+
 		case "SET_AUTHOR_RECEPTION_PAGES":
-			return {...state, authorReceptionPages: action.ids};
+			if (!state.authorReceptionRequestTime || state.authorReceptionRequestTime < action.requestTime) {
+				return {...state, authorReceptionPages: action.ids, authorReceptionRequestTime: action.requestTime };
+			}
+			console.log("Ignoring expired request author-reception pagination");
+			console.log(`Most recent request time: ${state.authorReceptionRequestTime}, delayed response's request time ${action.requestTime}`);
+			break;
+
 		case "SET_PUBLICATION_RECEPTION_PAGES":
-			return {
-				...state,
-				publicationReceptionPages: {
-					documentIds: action.documentIds,
-					receptionIds: action.receptionIds
-				}
-			};
+			if (!state.publicationReceptionRequestTime || state.publicationReceptionRequestTime < action.requestTime) {
+				return {
+					...state,
+					publicationReceptionPages: {
+						documentIds: action.documentIds,
+						receptionIds: action.receptionIds
+					},
+					publicationReceptionRequestTime: action.requestTime
+				};
+			}
+			console.log("Ignoring expired request publication-reception pagination");
+			console.log(`Most recent request time: ${state.publicationReceptionRequestTime}, delayed response's request time ${action.requestTime}`);
+			break;
+
 		case "SET_COLLECTIVE_PAGES":
-			return {...state, collectivePages: action.ids};
+			if (!state.collectiveRequestTime || state.collectiveRequestTime < action.requestTime) {
+				return {...state, collectivePages: action.ids, collectiveRequestTime: action.requestTime };
+			}
+			console.log("Ignoring expired request collective pagination");
+			console.log(`Most recent request time: ${state.collectiveRequestTime}, delayed response's request time ${action.requestTime}`);
+			break;
 	}
 	return state;
 }
