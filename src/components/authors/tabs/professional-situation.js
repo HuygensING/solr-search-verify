@@ -20,7 +20,7 @@ class Public extends React.Component {
 						<label>Profession(s) and other activities</label>
 						{ editable
 							? <KeywordField name="hasProfession" onChange={onChange}
-											options={metadata.properties.find((p) => p.name === "hasProfession").options}
+											options={metadata.properties.find((p) => p.name === "hasProfession").options.sort((a, b) => a.value.localeCompare(b.value)) }
 											entity={this.props.entity} />
 							: <Relation values={model["@relations"].hasProfession} otherValues={otherRelations.hasProfession} />
 						}
